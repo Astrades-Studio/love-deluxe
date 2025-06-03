@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://clfnuss8on3nr"
+path="res://.godot/imported/Shoe Step Wood Hard D.ogg-cf4bca68d8f79e3b17ab139bdf8ffd3b.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Wood/Shoe Step Wood Hard D.ogg"
+dest_files=["res://.godot/imported/Shoe Step Wood Hard D.ogg-cf4bca68d8f79e3b17ab139bdf8ffd3b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ceum7pnqsgvcx"
+path="res://.godot/imported/Bare Step Sand Soft A.ogg-c41002cadc9ad0a9067154604366938d.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Sand/Bare Step Sand Soft A.ogg"
+dest_files=["res://.godot/imported/Bare Step Sand Soft A.ogg-c41002cadc9ad0a9067154604366938d.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

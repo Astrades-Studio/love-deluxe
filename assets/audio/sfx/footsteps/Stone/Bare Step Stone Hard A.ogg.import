@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bstlr3v6o8wdn"
+path="res://.godot/imported/Bare Step Stone Hard A.ogg-e997f565d76a452b76a8d989e55cf41e.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Stone/Bare Step Stone Hard A.ogg"
+dest_files=["res://.godot/imported/Bare Step Stone Hard A.ogg-e997f565d76a452b76a8d989e55cf41e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

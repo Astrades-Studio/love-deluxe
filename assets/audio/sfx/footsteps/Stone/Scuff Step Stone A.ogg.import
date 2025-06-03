@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ddg7i8xy1imew"
+path="res://.godot/imported/Scuff Step Stone A.ogg-5099234b59d1ec08ea7c6cf4b460ca83.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Stone/Scuff Step Stone A.ogg"
+dest_files=["res://.godot/imported/Scuff Step Stone A.ogg-5099234b59d1ec08ea7c6cf4b460ca83.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

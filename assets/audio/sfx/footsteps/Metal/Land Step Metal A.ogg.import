@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bipdp52j4otu7"
+path="res://.godot/imported/Land Step Metal A.ogg-0246579c2304b1cbdd9be820f2263806.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Metal/Land Step Metal A.ogg"
+dest_files=["res://.godot/imported/Land Step Metal A.ogg-0246579c2304b1cbdd9be820f2263806.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

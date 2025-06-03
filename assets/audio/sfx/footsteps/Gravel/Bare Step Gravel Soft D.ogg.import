@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://buors0iab7d3y"
+path="res://.godot/imported/Bare Step Gravel Soft D.ogg-0322bce4fd5835dd543126ff03fa7f60.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Gravel/Bare Step Gravel Soft D.ogg"
+dest_files=["res://.godot/imported/Bare Step Gravel Soft D.ogg-0322bce4fd5835dd543126ff03fa7f60.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

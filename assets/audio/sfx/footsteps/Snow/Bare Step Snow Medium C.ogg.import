@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bc2fwjdbq2dwj"
+path="res://.godot/imported/Bare Step Snow Medium C.ogg-3b39ee6aa06b1a220c0b163b0ee1c093.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Snow/Bare Step Snow Medium C.ogg"
+dest_files=["res://.godot/imported/Bare Step Snow Medium C.ogg-3b39ee6aa06b1a220c0b163b0ee1c093.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

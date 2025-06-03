@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b2tyny84bi2cj"
+path="res://.godot/imported/Scuff Step Wood B.ogg-bb461ac50d7a33dc6ce5f1ecc03fca78.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Wood/Scuff Step Wood B.ogg"
+dest_files=["res://.godot/imported/Scuff Step Wood B.ogg-bb461ac50d7a33dc6ce5f1ecc03fca78.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

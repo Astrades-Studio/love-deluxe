@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dhxuc45ra0a4d"
+path="res://.godot/imported/Shoe Step Sand Medium B.ogg-c2ab535bf9f1bbb3f7ea1c37bbb4a284.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Sand/Shoe Step Sand Medium B.ogg"
+dest_files=["res://.godot/imported/Shoe Step Sand Medium B.ogg-c2ab535bf9f1bbb3f7ea1c37bbb4a284.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

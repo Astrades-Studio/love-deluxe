@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c74b0l4gur8s6"
+path="res://.godot/imported/Land Step Gravel B.ogg-cdf456174bd3339312c916fd0cff757e.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Gravel/Land Step Gravel B.ogg"
+dest_files=["res://.godot/imported/Land Step Gravel B.ogg-cdf456174bd3339312c916fd0cff757e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

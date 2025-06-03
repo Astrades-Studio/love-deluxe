@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://j44u72tke86i"
+path="res://.godot/imported/Jump Step Metal A.ogg-489483da8fd6ac5559ca2425b750ee31.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Metal/Jump Step Metal A.ogg"
+dest_files=["res://.godot/imported/Jump Step Metal A.ogg-489483da8fd6ac5559ca2425b750ee31.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

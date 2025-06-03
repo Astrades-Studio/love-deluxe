@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ixkmds1p4vfa"
+path="res://.godot/imported/Shoe Step Rug Soft D.ogg-9ed178f364fa22e502344fd32fd8b920.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Rug/Shoe Step Rug Soft D.ogg"
+dest_files=["res://.godot/imported/Shoe Step Rug Soft D.ogg-9ed178f364fa22e502344fd32fd8b920.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

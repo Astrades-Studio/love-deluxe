@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cedr1ci1fknbm"
+path="res://.godot/imported/Land Step Wood A.ogg-1d14c9d45d87907a5b9b6380aa7fa63a.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Wood/Land Step Wood A.ogg"
+dest_files=["res://.godot/imported/Land Step Wood A.ogg-1d14c9d45d87907a5b9b6380aa7fa63a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

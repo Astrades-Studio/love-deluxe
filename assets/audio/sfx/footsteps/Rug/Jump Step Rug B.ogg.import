@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://xj7x6fiqyt84"
+path="res://.godot/imported/Jump Step Rug B.ogg-1fccad6d6b6033762b8513d31cef5ddb.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Rug/Jump Step Rug B.ogg"
+dest_files=["res://.godot/imported/Jump Step Rug B.ogg-1fccad6d6b6033762b8513d31cef5ddb.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

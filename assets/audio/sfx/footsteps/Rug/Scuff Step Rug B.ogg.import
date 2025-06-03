@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c5x6taiwcmqy5"
+path="res://.godot/imported/Scuff Step Rug B.ogg-dff7f601f406c124455915ab0fd6615a.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Rug/Scuff Step Rug B.ogg"
+dest_files=["res://.godot/imported/Scuff Step Rug B.ogg-dff7f601f406c124455915ab0fd6615a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

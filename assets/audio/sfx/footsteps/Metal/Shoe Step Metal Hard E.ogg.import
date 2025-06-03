@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d56ilbmd2wtw"
+path="res://.godot/imported/Shoe Step Metal Hard E.ogg-24ce36404474124d9239f49d7c615b9c.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Metal/Shoe Step Metal Hard E.ogg"
+dest_files=["res://.godot/imported/Shoe Step Metal Hard E.ogg-24ce36404474124d9239f49d7c615b9c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

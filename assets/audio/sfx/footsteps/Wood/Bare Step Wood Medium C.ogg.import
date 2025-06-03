@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bval7o122dbmn"
+path="res://.godot/imported/Bare Step Wood Medium C.ogg-d2842e0b5b924a501dbcba0538d1bfba.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Wood/Bare Step Wood Medium C.ogg"
+dest_files=["res://.godot/imported/Bare Step Wood Medium C.ogg-d2842e0b5b924a501dbcba0538d1bfba.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

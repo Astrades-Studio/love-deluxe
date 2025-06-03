@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cxcjfdino1tph"
+path="res://.godot/imported/Bare Step Rug Hard E.ogg-7425d2701d9bee83eb94e10c40edfebc.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Rug/Bare Step Rug Hard E.ogg"
+dest_files=["res://.godot/imported/Bare Step Rug Hard E.ogg-7425d2701d9bee83eb94e10c40edfebc.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dpluxsho2kcd0"
+path="res://.godot/imported/Land Step Sand B.ogg-6184be5c6b5cd81e5617f0d3dcac6a68.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Sand/Land Step Sand B.ogg"
+dest_files=["res://.godot/imported/Land Step Sand B.ogg-6184be5c6b5cd81e5617f0d3dcac6a68.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

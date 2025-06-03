@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dangy4asb5svv"
+path="res://.godot/imported/Shoe Step Grass Medium E.ogg-99e3c8b7b28b479216cc8bc9e9807d45.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Grass/Shoe Step Grass Medium E.ogg"
+dest_files=["res://.godot/imported/Shoe Step Grass Medium E.ogg-99e3c8b7b28b479216cc8bc9e9807d45.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

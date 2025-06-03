@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c5u3twspmpx8t"
+path="res://.godot/imported/Land Step Rug A.ogg-b79501138289eedc7dccdfc0160b5d2d.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Rug/Land Step Rug A.ogg"
+dest_files=["res://.godot/imported/Land Step Rug A.ogg-b79501138289eedc7dccdfc0160b5d2d.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

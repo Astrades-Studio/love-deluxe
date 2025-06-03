@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c4c7gwa32odwi"
+path="res://.godot/imported/Bare Step Metal Medium C.ogg-171001b308169ebbce5e794ec0fea052.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Metal/Bare Step Metal Medium C.ogg"
+dest_files=["res://.godot/imported/Bare Step Metal Medium C.ogg-171001b308169ebbce5e794ec0fea052.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

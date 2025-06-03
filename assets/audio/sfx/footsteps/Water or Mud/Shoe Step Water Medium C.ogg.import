@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bl100xatmys3k"
+path="res://.godot/imported/Shoe Step Water Medium C.ogg-930b9c5ec4a2896f7bb3225a97c2b064.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Water or Mud/Shoe Step Water Medium C.ogg"
+dest_files=["res://.godot/imported/Shoe Step Water Medium C.ogg-930b9c5ec4a2896f7bb3225a97c2b064.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

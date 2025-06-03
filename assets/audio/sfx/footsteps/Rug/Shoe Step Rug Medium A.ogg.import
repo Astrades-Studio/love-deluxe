@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://kvmdl3so3eta"
+path="res://.godot/imported/Shoe Step Rug Medium A.ogg-0eff09c220980c9aab067b8f8e705fdf.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Rug/Shoe Step Rug Medium A.ogg"
+dest_files=["res://.godot/imported/Shoe Step Rug Medium A.ogg-0eff09c220980c9aab067b8f8e705fdf.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
