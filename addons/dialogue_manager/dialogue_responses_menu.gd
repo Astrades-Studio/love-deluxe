@@ -73,6 +73,11 @@ func _ready() -> void:
 		response_template.hide()
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_VISIBILITY_CHANGED:
+		get_parent().visible = visible
+
+
 ## Get the selectable items in the menu.
 func get_menu_items() -> Array:
 	var items: Array = []

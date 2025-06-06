@@ -18,4 +18,3 @@ void fragment() {
 	ALBEDO = texture(color_gradient, vec2(_sample)).rgb;
 	ALPHA = 1.0;
 }
-

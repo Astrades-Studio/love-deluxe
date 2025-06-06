@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://jtsrok2xct5h"]
+
+[ext_resource type="Script" uid="uid://dl1xiar4exvqq" path="res://scenes/actors/player_spaceship.gd" id="1_fjeb7"]
+[ext_resource type="Texture2D" uid="uid://cyidl12lhbqel" path="res://assets/sprites/spritesheet_spaceships.png" id="1_tnfqc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vogc1"]
+atlas = ExtResource("1_tnfqc")
+region = Rect2(-1, 294, 125, 127)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fjeb7"]
+radius = 6.08276
+
+[node name="PlayerSpaceship" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_fjeb7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -3)
+scale = Vector2(0.2, 0.2)
+texture = SubResource("AtlasTexture_vogc1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fjeb7")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

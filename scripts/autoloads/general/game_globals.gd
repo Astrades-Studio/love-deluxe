@@ -1,5 +1,8 @@
 extends Node
 
+#@onready var SCREEN_SIZE_Y := get_viewport().get_visible_rect().size.y
+@onready var BOTTOM_RIGHT := get_viewport().get_visible_rect().size
+@onready var BOTTOM_LEFT := Vector2(0.0, BOTTOM_RIGHT.y)
 
 #region Physics layers
 const world_collision_layer: int = 1

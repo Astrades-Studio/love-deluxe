@@ -418,7 +418,12 @@ func show_example_dialogue_balloon(resource: DialogueResource, title: String = "
 	var balloon: Node = load(_get_example_balloon_path()).instantiate()
 	_start_balloon.call_deferred(balloon, resource, title, extra_game_states)
 	return balloon
-
+	
+## Show the example balloon
+func show_shop_dialogue_balloon(balloon: Node, resource: DialogueResource, title: String = "", extra_game_states: Array = []) -> Control:
+	#var balloon: Node = load(_get_example_balloon_path()).instantiate()
+	_start_balloon.call_deferred(balloon, resource, title, extra_game_states)
+	return balloon
 
 ## Show the configured dialogue balloon
 func show_dialogue_balloon(resource: DialogueResource, title: String = "", extra_game_states: Array = []) -> Node:

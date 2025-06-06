@@ -1,0 +1,96 @@
+[gd_scene load_steps=5 format=3 uid="uid://dm3mfwda0mp06"]
+
+[ext_resource type="Theme" uid="uid://2jjo8bo40ctc" path="res://resources/dialog_box_theme.tres" id="1_xovei"]
+[ext_resource type="Script" uid="uid://chmkkd8anaamf" path="res://scenes/ui/dialog_box.gd" id="2_rm1mb"]
+[ext_resource type="Script" uid="uid://g32um0mltv5d" path="res://addons/dialogue_manager/dialogue_label.gd" id="3_hhmjc"]
+[ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="5_xovei"]
+
+[node name="DialogBox" type="Control"]
+custom_minimum_size = Vector2(208, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_xovei")
+script = ExtResource("2_rm1mb")
+
+[node name="DialogContainer" type="PanelContainer" parent="."]
+texture_filter = 1
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 5.24
+
+[node name="NinePatchRect" type="NinePatchRect" parent="DialogContainer"]
+visible = false
+layout_mode = 2
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="Balloon" type="MarginContainer" parent="DialogContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DialogContainer/Balloon"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="CharacterLabel" type="RichTextLabel" parent="DialogContainer/Balloon/VBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.501961)
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("1_xovei")
+bbcode_enabled = true
+text = "Character"
+fit_content = true
+scroll_active = false
+
+[node name="DialogueLabel" type="RichTextLabel" parent="DialogContainer/Balloon/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+theme_override_font_sizes/bold_italics_font_size = 10
+theme_override_font_sizes/italics_font_size = 10
+theme_override_font_sizes/mono_font_size = 10
+theme_override_font_sizes/normal_font_size = 10
+theme_override_font_sizes/bold_font_size = 10
+text = "This is a pixel font."
+script = ExtResource("3_hhmjc")
+skip_pause_at_abbreviations = PackedStringArray("Mr", "Mrs", "Ms", "Dr", "etc", "eg", "ex")
+metadata/_custom_type_script = "uid://g32um0mltv5d"
+
+[node name="ResponseContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+offset_left = 155.0
+offset_right = 213.0
+offset_bottom = 22.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_xovei")
+
+[node name="ResponsesMenu" type="VBoxContainer" parent="ResponseContainer" node_paths=PackedStringArray("response_template")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+script = ExtResource("5_xovei")
+response_template = NodePath("ResponseTemplate")
+
+[node name="ResponseTemplate" type="Button" parent="ResponseContainer/ResponsesMenu"]
+layout_mode = 2
+text = "Yes"
+
+[connection signal="gui_input" from="DialogContainer/Balloon" to="." method="_on_balloon_gui_input"]
+[connection signal="response_selected" from="ResponseContainer/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]

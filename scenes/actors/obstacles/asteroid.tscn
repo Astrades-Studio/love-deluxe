@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0grvql6f6hgt"]
+
+[ext_resource type="Script" uid="uid://qpqacb74xe18" path="res://scenes/actors/obstacles/obstacle.gd" id="1_y8kyf"]
+[ext_resource type="Texture2D" uid="uid://bfny3ygk7m5on" path="res://scenes/actors/obstacles/t_obstacle_asteroid_small.png" id="2_3fp3t"]
+[ext_resource type="Texture2D" uid="uid://brjn5qgrdvl6x" path="res://scenes/actors/obstacles/t_obstacle_asteroid_large.png" id="2_mhy03"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rbo2c"]
+radius = 6.0
+
+[node name="Obstacle" type="Area2D"]
+collision_layer = 6
+script = ExtResource("1_y8kyf")
+
+[node name="ObstacleSmall" type="Sprite2D" parent="."]
+texture = ExtResource("2_3fp3t")
+
+[node name="ObstacleLarge" type="Sprite2D" parent="."]
+texture = ExtResource("2_mhy03")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rbo2c")
+
+[node name="Asteroid" type="Node2D" parent="."]
+visible = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Asteroid"]
+visible = false
+
+[node name="Polygon2D" type="Polygon2D" parent="Asteroid"]
+visible = false
+color = Color(0.29348, 0.211093, 0.119082, 1)
+polygon = PackedVector2Array(1, -5, -5, -4, -7, 2, -4, 4, 6, 4, 6, -1)

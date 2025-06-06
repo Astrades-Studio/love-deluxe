@@ -1,0 +1,35 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://2jjo8bo40ctc"]
+
+[ext_resource type="Texture2D" uid="uid://d0ugt5eslubh4" path="res://assets/UI/t_dialog_panel_9patch.png" id="1_st5vj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjihm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_st5vj"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5315t"]
+content_margin_left = 4.0
+content_margin_top = 6.0
+content_margin_right = 4.0
+content_margin_bottom = 6.0
+texture = ExtResource("1_st5vj")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+expand_margin_top = 1.0
+region_rect = Rect2(0, 0, 16, 16)
+
+[resource]
+Button/constants/h_separation = 0
+Button/constants/icon_max_width = 8
+Button/font_sizes/font_size = 10
+Button/styles/focus = SubResource("StyleBoxFlat_jjihm")
+Button/styles/normal = SubResource("StyleBoxFlat_st5vj")
+Label/font_sizes/font_size = 10
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_5315t")
+RichTextLabel/font_sizes/bold_font_size = 10
+RichTextLabel/font_sizes/bold_italics_font_size = 10
+RichTextLabel/font_sizes/italics_font_size = 10
+RichTextLabel/font_sizes/mono_font_size = 10
+RichTextLabel/font_sizes/normal_font_size = 10

@@ -1,0 +1,200 @@
+[gd_scene load_steps=20 format=3 uid="uid://beikff07mbo6f"]
+
+[ext_resource type="Script" uid="uid://cfcwfjgqxgqjt" path="res://scenes/ui/shop_menu.gd" id="1_idpb1"]
+[ext_resource type="Texture2D" uid="uid://droxhii1v5kuq" path="res://assets/UI/t_shop_mockup_small.png" id="1_krthd"]
+[ext_resource type="Script" uid="uid://b1pp52nkegx8x" path="res://scenes/ui/text_scroll_container.gd" id="2_idpb1"]
+[ext_resource type="PackedScene" uid="uid://dm3mfwda0mp06" path="res://scenes/ui/dialog_box.tscn" id="3_khejc"]
+[ext_resource type="Script" uid="uid://q6x43xyiehyj" path="res://scenes/ui/portrait_texture.gd" id="4_p856s"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wgqcq"]
+texture = ExtResource("1_krthd")
+texture_margin_left = 11.0
+texture_margin_top = 7.0
+texture_margin_right = 14.0
+texture_margin_bottom = 9.0
+axis_stretch_horizontal = 1
+region_rect = Rect2(0, 0, 96, 32)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qjlns"]
+font_size = 10
+
+[sub_resource type="Animation" id="Animation_5315t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scroll_horizontal")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_wgqcq"]
+resource_name = "text_scroll"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scroll_horizontal")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 70]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kef68"]
+_data = {
+&"RESET": SubResource("Animation_5315t"),
+&"text_scroll": SubResource("Animation_wgqcq")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kesql"]
+atlas = ExtResource("1_krthd")
+region = Rect2(96, 0, 95, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hg2b3"]
+texture = SubResource("AtlasTexture_kesql")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7yihk"]
+texture = SubResource("AtlasTexture_kesql")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efuiy"]
+atlas = ExtResource("1_krthd")
+region = Rect2(0, 33, 256, 158)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2hv2y"]
+texture = SubResource("AtlasTexture_efuiy")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wgqcq"]
+atlas = ExtResource("1_krthd")
+region = Rect2(208, 192, 48, 48)
+filter_clip = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kef68"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = SubResource("AtlasTexture_wgqcq")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+draw_center = false
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5315t"]
+noise_type = 5
+seed = 4
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kef68"]
+width = 48
+height = 48
+noise = SubResource("FastNoiseLite_5315t")
+
+[node name="ShopMenu" type="CanvasLayer"]
+script = ExtResource("1_idpb1")
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -9
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.172549, 0.117647, 0.192157, 1)
+
+[node name="ShopMenu" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="TopPanel" type="HBoxContainer" parent="ShopMenu"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="StationName" type="PanelContainer" parent="ShopMenu/TopPanel"]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_wgqcq")
+
+[node name="MarginContainer" type="MarginContainer" parent="ShopMenu/TopPanel/StationName"]
+layout_mode = 2
+theme_override_constants/margin_top = 3
+
+[node name="TextScrollContainer" type="ScrollContainer" parent="ShopMenu/TopPanel/StationName/MarginContainer"]
+layout_mode = 2
+follow_focus = true
+scroll_horizontal_custom_step = 1.0
+horizontal_scroll_mode = 3
+script = ExtResource("2_idpb1")
+
+[node name="StationLabel" type="Label" parent="ShopMenu/TopPanel/StationName/MarginContainer/TextScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "              DEIMOS STATION                 "
+label_settings = SubResource("LabelSettings_qjlns")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ShopMenu/TopPanel/StationName/MarginContainer/TextScrollContainer"]
+libraries = {
+&"": SubResource("AnimationLibrary_kef68")
+}
+
+[node name="PanelContainer2" type="PanelContainer" parent="ShopMenu/TopPanel"]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_hg2b3")
+
+[node name="PanelContainer3" type="PanelContainer" parent="ShopMenu/TopPanel"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_7yihk")
+
+[node name="MiddlePanel" type="PanelContainer" parent="ShopMenu"]
+custom_minimum_size = Vector2(0, 158)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_2hv2y")
+
+[node name="BottomPanel" type="HBoxContainer" parent="ShopMenu"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="DialogBox" parent="ShopMenu/BottomPanel" instance=ExtResource("3_khejc")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PortraitPanel" type="PanelContainer" parent="ShopMenu/BottomPanel"]
+z_index = -1
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 8.88
+theme_override_styles/panel = SubResource("StyleBoxTexture_kef68")
+
+[node name="PortraitTexture" type="TextureRect" parent="ShopMenu/BottomPanel/PortraitPanel"]
+z_index = -1
+layout_mode = 2
+texture = SubResource("NoiseTexture2D_kef68")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("4_p856s")
