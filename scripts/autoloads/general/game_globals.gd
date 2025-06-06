@@ -1,8 +1,17 @@
 extends Node
 
+#region Viewport
 #@onready var SCREEN_SIZE_Y := get_viewport().get_visible_rect().size.y
 @onready var BOTTOM_RIGHT := get_viewport().get_visible_rect().size
 @onready var BOTTOM_LEFT := Vector2(0.0, BOTTOM_RIGHT.y)
+#endregion
+
+#region Run
+var score := 0.0
+var cash := 0.0
+var bullet := 0.0
+
+#endregion
 
 #region Physics layers
 const world_collision_layer: int = 1

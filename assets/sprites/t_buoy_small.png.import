@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4mnfm63hxemi"
-path="res://.godot/imported/t_shop_mockup.png-cae27723b3edd10bcccd4e96ed183e64.ctex"
+uid="uid://dme3iytobin2v"
+path="res://.godot/imported/t_buoy_small.png-b44478947f36b78d8dbc945ab20cadf8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/t_shop_mockup.png"
-dest_files=["res://.godot/imported/t_shop_mockup.png-cae27723b3edd10bcccd4e96ed183e64.ctex"]
+source_file="res://assets/sprites/t_buoy_small.png"
+dest_files=["res://.godot/imported/t_buoy_small.png-b44478947f36b78d8dbc945ab20cadf8.ctex"]
 
 [params]
 

@@ -1,7 +1,8 @@
 extends Area2D
+class_name PlayerSpaceship
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
-
+@onready var current_level : Level = get_tree().get_first_node_in_group("Level")
 @export var horizontal_speed := 2.0
 
 func _process(delta: float) -> void:
@@ -11,9 +12,9 @@ func _process(delta: float) -> void:
 	elif Input.is_action_pressed("move_right"):
 		position.x += horizontal_speed
 	if Input.is_action_pressed("accelerate"):
-		Level.accelerate()
+		current_level.accelerate()
 	elif Input.is_action_pressed("decelerate"):
-		Level.decelerate()
+		current_level.decelerate()
 
 
 

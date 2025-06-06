@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://bfqb614bysg2o"]
+[gd_scene load_steps=83 format=3 uid="uid://bfqb614bysg2o"]
 
 [ext_resource type="Script" uid="uid://cq2c3o2650s8s" path="res://scenes/level.gd" id="1_yvmk3"]
 [ext_resource type="Texture2D" uid="uid://dwj5fcylywix0" path="res://assets/sprites/sun_spritesheet.png" id="2_yvmk3"]
@@ -9,8 +9,6 @@
 [ext_resource type="Script" uid="uid://b07olaybly8h2" path="res://scenes/path_2d.gd" id="6_r2no1"]
 [ext_resource type="Script" uid="uid://diufp0i5brd70" path="res://scenes/hud.gd" id="8_6g5uf"]
 [ext_resource type="Theme" uid="uid://cn52mtnyoe77w" path="res://resources/hud_theme.tres" id="8_7dxvt"]
-[ext_resource type="Texture2D" uid="uid://dme3iytobin2v" path="res://assets/sprites/t_buoy_small.png" id="10_tdoqa"]
-[ext_resource type="Texture2D" uid="uid://c341sh1veq45m" path="res://assets/UI/shapes/triangle/pixel/triangle-8-empty.png" id="11_ddr63"]
 
 [sub_resource type="Gradient" id="Gradient_vbogn"]
 interpolation_mode = 2
@@ -499,13 +497,6 @@ bg_color = Color(0.213029, 0.00844094, 0.282238, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_6g5uf"]
 font_size = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0dj0t"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w0l5l"]
-bg_color = Color(1, 1, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e0wnd"]
-
 [node name="LevelTest" type="Node2D" groups=["Level"]]
 script = ExtResource("1_yvmk3")
 
@@ -562,30 +553,30 @@ curve = SubResource("Curve2D_6g5uf")
 script = ExtResource("6_r2no1")
 speed = 0.0166445
 corner = Vector2(1, 240)
-running = false
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
-position = Vector2(-2, 195)
+position = Vector2(93.6165, 87.6569)
 rotation = -0.843112
+progress = 143.749
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D"]
-rotation = 0.853466
-texture = ExtResource("6_7dxvt")
-
-[node name="PathFollow2D2" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
-position = Vector2(81.092, 101.717)
-rotation = -0.843112
-progress = 124.916
-
-[node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D2"]
 visible = false
 rotation = 0.853466
 texture = ExtResource("6_7dxvt")
 
-[node name="PathFollow2D3" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
-position = Vector2(1.52628, 191.041)
+[node name="PathFollow2D2" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
+position = Vector2(14.1063, 176.918)
 rotation = -0.843112
-progress = 5.39273
+progress = 24.2258
+
+[node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D2"]
+rotation = 0.853466
+texture = ExtResource("6_7dxvt")
+
+[node name="PathFollow2D3" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
+position = Vector2(40.6119, 147.162)
+rotation = -0.843112
+progress = 64.0668
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D3"]
 visible = false
@@ -593,12 +584,11 @@ rotation = 0.853466
 texture = ExtResource("6_7dxvt")
 
 [node name="PathFollow2D4" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
-position = Vector2(28.0812, 161.23)
+position = Vector2(67.1175, 117.406)
 rotation = -0.843112
-progress = 45.2338
+progress = 103.908
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D4"]
-visible = false
 rotation = 0.853466
 texture = ExtResource("6_7dxvt")
 
@@ -608,20 +598,20 @@ curve = SubResource("Curve2D_r2no1")
 script = ExtResource("6_r2no1")
 speed = 0.0166445
 corner = Vector2(256, 240)
-running = false
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
-position = Vector2(252, 195)
+position = Vector2(172.873, 100.839)
 rotation = -2.26965
+progress = 122.987
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D"]
 rotation = 2.3178
 texture = ExtResource("6_7dxvt")
 
 [node name="PathFollow2D2" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
-position = Vector2(185.716, 116.122)
+position = Vector2(248.619, 190.976)
 rotation = -2.26965
-progress = 103.029
+progress = 5.24763
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D2"]
 visible = false
@@ -629,19 +619,18 @@ rotation = 2.3178
 texture = ExtResource("6_7dxvt")
 
 [node name="PathFollow2D3" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
-position = Vector2(159.926, 85.4314)
+position = Vector2(222.883, 160.35)
 rotation = -2.26965
-progress = 143.044
+progress = 45.2639
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D3"]
-visible = false
 rotation = 2.3178
 texture = ExtResource("6_7dxvt")
 
 [node name="PathFollow2D4" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
-position = Vector2(235.013, 174.785)
+position = Vector2(197.912, 130.636)
 rotation = -2.26965
-progress = 26.4142
+progress = 84.0717
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D4"]
 visible = false
@@ -675,83 +664,65 @@ grow_horizontal = 2
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7dxvt")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Control/PanelContainer/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control/PanelContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Control/PanelContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="ScoreLabel" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="ScoreLabel" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Score: 7777"
 label_settings = SubResource("LabelSettings_6g5uf")
 
-[node name="FuelLabel" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="FuelLabel" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Fuel: 100"
 label_settings = SubResource("LabelSettings_6g5uf")
 
-[node name="SpeedLabel" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="SpeedLabel" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Speed: 100"
 label_settings = SubResource("LabelSettings_6g5uf")
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="HUD/Control/PanelContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="CashLabel" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+[node name="CashLabel" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/HBoxContainer/VBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Cash: 0"
 label_settings = SubResource("LabelSettings_6g5uf")
 
-[node name="BulletLabel" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+[node name="BulletLabel" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/HBoxContainer/VBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Bullets: 3"
 label_settings = SubResource("LabelSettings_6g5uf")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="HUD/Control/PanelContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Label5" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Label5" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Destination: DEIMOS"
 label_settings = SubResource("LabelSettings_6g5uf")
 
-[node name="DistanceTravelledLabel" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="DistanceTravelledLabel" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Distance travelled: 0"
 label_settings = SubResource("LabelSettings_6g5uf")
 
-[node name="DistanceRemainingLabel" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="DistanceRemainingLabel" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Distance remaining: 0"
 label_settings = SubResource("LabelSettings_6g5uf")
-
-[node name="ProgressMarker" type="HSlider" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/center_grabber = 1
-theme_override_constants/grabber_offset = -15
-theme_override_icons/grabber_disabled = ExtResource("10_tdoqa")
-theme_override_icons/tick = ExtResource("11_ddr63")
-theme_override_styles/slider = SubResource("StyleBoxFlat_0dj0t")
-theme_override_styles/grabber_area = SubResource("StyleBoxFlat_w0l5l")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_e0wnd")
-editable = false
-scrollable = false
-tick_count = 20
-ticks_on_borders = true
 
 [node name="WinOverlay" type="CanvasLayer" parent="."]
 visible = false

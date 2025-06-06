@@ -47,13 +47,3 @@ func spawn_obstacle():
 	obstacle.direction = (destination - spawn_pos).normalized()
 
 	add_child(obstacle)
-
-func spawn_road():
-	var left_road_edge = load("res://scenes/road.tscn").instantiate()
-	var right_road_edge = left_road_edge.duplicate()
-	left_road_edge.position = horizon_position - SPAWN_OFFSET_WIDTH
-	right_road_edge.position = horizon_position + SPAWN_OFFSET_WIDTH
-	
-	add_child(left_road_edge)
-	add_child(right_road_edge)
-	

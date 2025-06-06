@@ -1,30 +1,23 @@
 extends Node
 
-
-#region Interactables
-@warning_ignore("unused_signal")
-signal interactable_focused(interactable: Interactable3D)
-@warning_ignore("unused_signal")
-signal interactable_unfocused(interactable: Interactable3D)
-@warning_ignore("unused_signal")
-signal interactable_interacted(interactable: Interactable3D)
-@warning_ignore("unused_signal")
-signal interactable_canceled_interaction(interactable: Interactable3D)
-@warning_ignore("unused_signal")
-signal interactable_interaction_limit_reached(interactable: Interactable3D)
-@warning_ignore("unused_signal")
-signal canceled_interactable_scan(interactable: Interactable3D)
-
-
+@warning_ignore_start("unused_signal")
+#region Driving
+signal destination_reached
+signal fuel_depleted
 #endregion
 
-#region Picking
-@warning_ignore("unused_signal")
-signal grabbable_focused(grabbable: Grabbable3D)
-@warning_ignore("unused_signal")
-signal grabbable_unfocused(grabbable: Grabbable3D)
-#endregion
+#region Game State
+signal game_started
+signal game_paused
+signal game_resumed
+signal game_over
+# endregion
 
+#region Run
+signal score_changed(score: int)
+signal cash_changed(cash: int)
+signal bullet_changed(bullet: int)
+# endregion
 
 
 #region Narrative
