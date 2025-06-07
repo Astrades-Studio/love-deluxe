@@ -1,25 +1,114 @@
-[gd_scene load_steps=5 format=3 uid="uid://jtsrok2xct5h"]
+[gd_scene load_steps=11 format=3 uid="uid://jtsrok2xct5h"]
 
 [ext_resource type="Script" uid="uid://dl1xiar4exvqq" path="res://scenes/actors/player_spaceship.gd" id="1_fjeb7"]
 [ext_resource type="Texture2D" uid="uid://cyidl12lhbqel" path="res://assets/sprites/spritesheet_spaceships.png" id="1_tnfqc"]
+[ext_resource type="Texture2D" uid="uid://bf4lk54wk2e7b" path="res://assets/sprites/spritesheet_lasers.png" id="3_kr3ia"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vogc1"]
 atlas = ExtResource("1_tnfqc")
 region = Rect2(-1, 294, 125, 127)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_3d216"]
+atlas = ExtResource("3_kr3ia")
+region = Rect2(375, 2, 189, 186)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_fjeb7"]
 radius = 6.08276
+
+[sub_resource type="Animation" id="Animation_fjeb7"]
+resource_name = "dodge"
+capture_included = true
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 2,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_kr3ia"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/CrashSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_5bdv4"]
+resource_name = "crash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/CrashSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3d216"]
+_data = {
+&"RESET": SubResource("Animation_kr3ia"),
+&"crash": SubResource("Animation_5bdv4"),
+&"dodge": SubResource("Animation_fjeb7")
+}
 
 [node name="PlayerSpaceship" type="Area2D"]
 collision_mask = 2
 script = ExtResource("1_fjeb7")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -3)
+[node name="Pivot" type="Node2D" parent="."]
+position = Vector2(0, -20)
 scale = Vector2(0.2, 0.2)
+
+[node name="ShipSprite" type="Sprite2D" parent="Pivot"]
+unique_name_in_owner = true
+position = Vector2(0, 85)
+scale = Vector2(1, 1)
 texture = SubResource("AtlasTexture_vogc1")
+
+[node name="CrashSprite" type="Sprite2D" parent="Pivot"]
+unique_name_in_owner = true
+modulate = Color(0.749096, 0.455143, 0.238295, 1)
+position = Vector2(-9.99998, 90)
+scale = Vector2(1.86, 1.86)
+texture = SubResource("AtlasTexture_3d216")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_fjeb7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_3d216")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

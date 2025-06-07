@@ -560,22 +560,22 @@ position = Vector2(1, 0)
 position = Vector2(-130, -77)
 curve = SubResource("Curve2D_6g5uf")
 script = ExtResource("6_r2no1")
-speed = 0.0166445
+speed = 0.0
 corner = Vector2(1, 240)
-running = false
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
-position = Vector2(-2, 195)
+position = Vector2(91.8728, 89.6145)
 rotation = -0.843112
+progress = 141.276
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D"]
 rotation = 0.853466
 texture = ExtResource("6_7dxvt")
 
 [node name="PathFollow2D2" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
-position = Vector2(81.092, 101.717)
+position = Vector2(42.5541, 144.982)
 rotation = -0.843112
-progress = 124.916
+progress = 66.9873
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D2"]
 visible = false
@@ -583,9 +583,9 @@ rotation = 0.853466
 texture = ExtResource("6_7dxvt")
 
 [node name="PathFollow2D3" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
-position = Vector2(1.52628, 191.041)
+position = Vector2(42.5541, 144.982)
 rotation = -0.843112
-progress = 5.39273
+progress = 66.9873
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D3"]
 visible = false
@@ -593,9 +593,9 @@ rotation = 0.853466
 texture = ExtResource("6_7dxvt")
 
 [node name="PathFollow2D4" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
-position = Vector2(28.0812, 161.23)
+position = Vector2(42.5541, 144.982)
 rotation = -0.843112
-progress = 45.2338
+progress = 66.9873
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D4"]
 visible = false
@@ -606,22 +606,22 @@ texture = ExtResource("6_7dxvt")
 position = Vector2(-129, -77)
 curve = SubResource("Curve2D_r2no1")
 script = ExtResource("6_r2no1")
-speed = 0.0166445
+speed = 0.0
 corner = Vector2(256, 240)
-running = false
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
-position = Vector2(252, 195)
+position = Vector2(163.485, 89.6672)
 rotation = -2.26965
+progress = 137.727
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D"]
 rotation = 2.3178
 texture = ExtResource("6_7dxvt")
 
 [node name="PathFollow2D2" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
-position = Vector2(185.716, 116.122)
+position = Vector2(222.115, 159.436)
 rotation = -2.26965
-progress = 103.029
+progress = 46.4583
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D2"]
 visible = false
@@ -629,9 +629,9 @@ rotation = 2.3178
 texture = ExtResource("6_7dxvt")
 
 [node name="PathFollow2D3" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
-position = Vector2(159.926, 85.4314)
+position = Vector2(221.373, 158.553)
 rotation = -2.26965
-progress = 143.044
+progress = 47.6141
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D3"]
 visible = false
@@ -639,9 +639,9 @@ rotation = 2.3178
 texture = ExtResource("6_7dxvt")
 
 [node name="PathFollow2D4" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
-position = Vector2(235.013, 174.785)
+position = Vector2(221.406, 158.593)
 rotation = -2.26965
-progress = 26.4142
+progress = 47.563
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D4"]
 visible = false

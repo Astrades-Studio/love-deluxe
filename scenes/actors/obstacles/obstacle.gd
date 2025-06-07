@@ -11,6 +11,7 @@ var perspective_speed := 0.0
 
 var time_far_away := 1.2
 var is_far := true
+@export var obstacle_speed_multiplier := 0.3
 
 @onready var obstacle_small: Sprite2D = $ObstacleSmall
 @onready var obstacle_large: Sprite2D = $ObstacleLarge
@@ -28,6 +29,7 @@ func use_close_sprite():
 
 var subpixel_y := 0.0
 var default_speed := 20.
+
 func _process(delta):
 	if is_far:
 		time_far_away -= delta * (current_level.speed / default_speed)
@@ -41,9 +43,10 @@ func _process(delta):
 			use_close_sprite()
 		return
 	
-	perspective_speed += current_level.speed * acceleration
+	perspective_speed += current_level.speed * acceleration * obstacle_speed_multiplier
 	position += direction * perspective_speed * delta
 	#(position - horizon_position).normalized() * speed * delta
 	scale += Vector2(0.5, 0.5) * delta
 	if global_position.y > GameGlobals.BOTTOM_RIGHT.y + 100:
 		queue_free()
+	

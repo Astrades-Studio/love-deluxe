@@ -18,7 +18,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	keep_starts_at_screen_border()
 	if running:
-		speed = -remap(speed, Level.MIN_SPEED, Level.MAX_SPEED, MIN_SPEED, MAX_SPEED)
+		speed = remap(GameGlobals.get_current_speed(), 0.0, Level.MAX_SPEED, 0.0, MAX_SPEED)
 		move_all_paths(speed)
 
 func set_paths_offset():

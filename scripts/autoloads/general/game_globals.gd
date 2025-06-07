@@ -13,6 +13,15 @@ var bullet := 0.0
 
 #endregion
 
+#region Level
+var level : Level
+func get_current_speed() -> float:
+	if !level:
+		return 0.0
+	return level.speed
+#endregion
+
+
 #region Physics layers
 const world_collision_layer: int = 1
 const player_collision_layer: int = 2

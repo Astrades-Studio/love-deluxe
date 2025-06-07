@@ -25,10 +25,10 @@ var current_distance : float:
 # Speed and fuel management
 var speed := 20.:
 	set(new):
-		speed = new
+		speed = clamp(new, 0, 99)
 		speed_changed.emit(int(speed))
 
-var fuel := 1000.0:
+var fuel := 400.0:
 	set(new):
 		fuel = new
 		fuel_changed.emit(int(fuel))
@@ -51,6 +51,7 @@ func _ready() -> void:
 	current_distance = target_distance
 	hud.level = self
 	GlobalGameEvents.destination_reached.connect(on_destination_reached)
+	GameGlobals.level = self
 	start_driving()
 
 
@@ -75,6 +76,9 @@ func _process(delta: float) -> void:
 	current_distance -= speed
 	spend_fuel(delta)
 	
+	if speed < MIN_SPEED:
+		accelerate(0.1)
+	
 	if current_distance < 0:
 		stop_driving()
 		GlobalGameEvents.destination_reached.emit()
@@ -91,18 +95,17 @@ func spend_fuel(delta) -> void:
 func get_speed() -> float:
 	return speed	
 
-func accelerate(amount : float = 0.25) -> void:
+func accelerate(amount : float = 0.1) -> void:
 	speed += amount
-	if speed < MIN_SPEED:
-		speed = MIN_SPEED
+	
 	if speed > MAX_SPEED:
-		speed = MAX_SPEED
+		speed = lerp(speed, MAX_SPEED, 0.1)
 	print(speed)
 
 func decelerate(amount : float = 0.25) -> void:
 	speed -= amount
 	if speed < MIN_SPEED:
-		speed = MIN_SPEED
+		speed = lerp(speed, MIN_SPEED, 0.1)
 	if speed > MAX_SPEED:
-		speed = MAX_SPEED
+		speed = lerp(speed, MAX_SPEED, 0.1)
 	print(speed)
