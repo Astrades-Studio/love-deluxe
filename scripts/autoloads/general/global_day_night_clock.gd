@@ -138,11 +138,11 @@ func is_pm() -> bool:
 func _recalculate_time() -> void:
 	var total_minutes = int(time / InGameToRealMinuteDuration) + initial_minute
 	var current_day_minutes = fmod(total_minutes, MinutesPerDay) + initial_minute
-	
+	@warning_ignore_start("integer_division")
 	current_day = initial_day + int(total_minutes / MinutesPerDay)
 	current_hour = int(current_day_minutes / MinutesPerHour)
 	current_minute = int(fmod(current_day_minutes, MinutesPerHour))
-	
+	@warning_ignore_restore("integer_division")
 	if past_minute != current_minute:
 		past_minute = current_minute
 		

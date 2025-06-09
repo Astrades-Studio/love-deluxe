@@ -32,10 +32,10 @@ Example:
 	var formatted_time_with_ms = format_seconds(123.456, true)
 	# Result: "02:03:45"
 """
-@warning_ignore("narrowing_conversion")
+@warning_ignore_start("narrowing_conversion")
 static func format_seconds(time: float, use_milliseconds: bool = false) -> String:
-	var minutes: int= floori(time / 60)
-	var seconds: int = fmod(time, 60)
+	var minutes: int= floori(time / 60.)
+	var seconds: int = fmod(time, 60.)
 	var milliseconds: int = fmod(time, 1) * 100
 
 	var result: String = "%02d:%02d" % [minutes, seconds]
@@ -44,7 +44,7 @@ static func format_seconds(time: float, use_milliseconds: bool = false) -> Strin
 		result += ":%02d" % milliseconds
 		
 	return result
-
+@warning_ignore_restore("narrowing_conversion")
 
 # Returns the amount of time passed since the engine started
 static func get_ticks(time_unit: TimeUnit = TimeUnit.Seconds) -> float:

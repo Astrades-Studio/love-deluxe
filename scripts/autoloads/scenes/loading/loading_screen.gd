@@ -8,6 +8,7 @@ signal finished
 
 @onready var progress := []
 @onready var scene_load_status := ResourceLoader.THREAD_LOAD_IN_PROGRESS
+@onready var progress_bar: ProgressBar = %ProgressBar
 
 var current_progress_value := 0.0
 var smooth_value := 0.0 ## Use this to update values on progress bar nodes
@@ -33,7 +34,8 @@ func _process(delta):
 		var status = ResourceLoader.load_threaded_get_status(next_scene_path, progress)
 		
 		## This value can be assigned to some progress bar or progress indicator
-		smooth_progress_value(delta)
+		var progress := smooth_progress_value(delta)
+		progress_bar.value = progress
 		
 		if status == ResourceLoader.THREAD_LOAD_LOADED:
 			finished.emit()

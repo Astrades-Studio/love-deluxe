@@ -6,7 +6,7 @@ class_name PauseMenu extends Control
 @onready var settings_button: Button = %SettingsButton
 @onready var quit_game_button: Button = %QuitGameButton
 
-@onready var settings_menu: SettingsMenu = $SettingsMenu
+@onready var settings_menu: = $SettingsMenu
 @onready var save_name_label: Label = %SaveName
 
 

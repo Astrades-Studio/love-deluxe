@@ -1,16 +1,20 @@
-[gd_scene load_steps=88 format=3 uid="uid://bfqb614bysg2o"]
+[gd_scene load_steps=95 format=3 uid="uid://bfqb614bysg2o"]
 
 [ext_resource type="Script" uid="uid://cq2c3o2650s8s" path="res://scenes/level.gd" id="1_yvmk3"]
+[ext_resource type="Texture2D" uid="uid://qxq1idrxyih3" path="res://assets/images/UntitledArtwork2.png" id="2_e0wnd"]
 [ext_resource type="Texture2D" uid="uid://dwj5fcylywix0" path="res://assets/sprites/sun_spritesheet.png" id="2_yvmk3"]
-[ext_resource type="Shader" path="res://scenes/planet.gdshader" id="3_7dxvt"]
+[ext_resource type="Shader" uid="uid://d17y0dhwyp2xx" path="res://scenes/planet.gdshader" id="3_7dxvt"]
 [ext_resource type="Script" uid="uid://dbishapkknvgm" path="res://scenes/obstacle_spawner.gd" id="3_vkcgd"]
 [ext_resource type="PackedScene" uid="uid://jtsrok2xct5h" path="res://scenes/actors/player_spaceship.tscn" id="5_vkcgd"]
 [ext_resource type="Texture2D" uid="uid://gchi4ryinn30" path="res://assets/sprites/t_buoy_large.png" id="6_7dxvt"]
 [ext_resource type="Script" uid="uid://b07olaybly8h2" path="res://scenes/path_2d.gd" id="6_r2no1"]
-[ext_resource type="Script" uid="uid://diufp0i5brd70" path="res://scenes/hud.gd" id="8_6g5uf"]
-[ext_resource type="Theme" uid="uid://cn52mtnyoe77w" path="res://resources/hud_theme.tres" id="8_7dxvt"]
-[ext_resource type="Texture2D" uid="uid://dme3iytobin2v" path="res://assets/sprites/t_buoy_small.png" id="10_tdoqa"]
-[ext_resource type="Texture2D" uid="uid://c341sh1veq45m" path="res://assets/UI/shapes/triangle/pixel/triangle-8-empty.png" id="11_ddr63"]
+[ext_resource type="PackedScene" uid="uid://byoeeeqa5hymq" path="res://scenes/actors/obstacles/cloud.tscn" id="7_w0l5l"]
+[ext_resource type="Texture2D" uid="uid://c7iq4cttq3wsd" path="res://addons/plenticons/icons/16x/2d/spark-full-gray.png" id="11_n44uc"]
+[ext_resource type="PackedScene" uid="uid://bet3dxv15wonf" path="res://scenes/ui/hud.tscn" id="11_tdoqa"]
+[ext_resource type="PackedScene" uid="uid://b0grvql6f6hgt" path="res://scenes/actors/obstacles/asteroid.tscn" id="12_0dj0t"]
+[ext_resource type="Script" uid="uid://dqcyxei45tdkm" path="res://scenes/road_test.gd" id="12_ddr63"]
+[ext_resource type="PackedScene" uid="uid://j71ioyt8gglp" path="res://scenes/ui/pause_layer.tscn" id="13_0dj0t"]
+[ext_resource type="PackedScene" uid="uid://c8lth06eyrfcy" path="res://scenes/actors/obstacles/obstacle_cone.tscn" id="13_w0l5l"]
 
 [sub_resource type="Gradient" id="Gradient_vbogn"]
 interpolation_mode = 2
@@ -21,6 +25,66 @@ colors = PackedColorArray(0, 0, 0, 1)
 gradient = SubResource("Gradient_vbogn")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Curve2D" id="Curve2D_6g5uf"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -54, 258, 0, 0, -1, 0, -4, 198, 1, 0, -1, 0, 88, 76)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_r2no1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 301, 258, 0, 0, 0, 0, 251, 198, 0, 0, 0, 0, 168, 76)
+}
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_nuslc"]
+colors = PackedColorArray(0.807843, 0, 0, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_re6lg"]
+gradient = SubResource("Gradient_nuslc")
+
+[sub_resource type="Curve" id="Curve_1pn8n"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.564202), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vnuhc"]
+curve = SubResource("Curve_1pn8n")
+
+[sub_resource type="Curve" id="Curve_sgyyf"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.284047), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_blca8"]
+curve = SubResource("Curve_sgyyf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dsidl"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 51.96
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 20.72
+radial_accel_max = 22.52
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_blca8")
+color_ramp = SubResource("GradientTexture1D_re6lg")
+emission_curve = SubResource("CurveTexture_vnuhc")
+
+[sub_resource type="GDScript" id="GDScript_e0wnd"]
+script/source = "extends GPUParticles2D
+
+
+var level : Level
+
+#
+#func _ready() -> void:
+	#level = GameGlobals.get_current_level()
+	#level.speed_changed.connect(_on_speed_changed)
+
+
+func _on_speed_changed(value: float) -> void:
+	pass
+"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tdoqa"]
 atlas = ExtResource("2_yvmk3")
@@ -481,40 +545,172 @@ shader_parameter/terrain_colors = SubResource("GradientTexture2D_ddr63")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_n44uc"]
 
-[sub_resource type="Curve2D" id="Curve2D_6g5uf"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -2, 195, 0, 0, 0, 0, 104, 76)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_r2no1"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 252, 195, 0, 0, 0, 0, 152, 76)
-}
-point_count = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dxvt"]
-bg_color = Color(0.213029, 0.00844094, 0.282238, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_6g5uf"]
-font_size = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0dj0t"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w0l5l"]
-bg_color = Color(1, 1, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e0wnd"]
-
 [node name="LevelTest" type="Node2D" groups=["Level"]]
 script = ExtResource("1_yvmk3")
+metadata/_edit_vertical_guides_ = [92.0, 0.0]
+metadata/_edit_horizontal_guides_ = [119.0, 238.0]
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -5
+
+[node name="Background" type="Sprite2D" parent="CanvasLayer"]
 texture_filter = 1
 position = Vector2(128, 114)
 scale = Vector2(13.6809, 10.6585)
 texture = SubResource("GradientTexture2D_d5kir")
 metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_e0wnd")
+
+[node name="Horizon" type="Node2D" parent="."]
+position = Vector2(127, 126)
+script = ExtResource("3_vkcgd")
+obstacle_list = Array[PackedScene]([ExtResource("7_w0l5l"), ExtResource("12_0dj0t"), ExtResource("13_w0l5l")])
+metadata/_edit_group_ = true
+
+[node name="Road" type="Node2D" parent="Horizon"]
+position = Vector2(7, -7)
+
+[node name="LeftRoadEdge" type="Path2D" parent="Horizon/Road"]
+position = Vector2(-130, -77)
+curve = SubResource("Curve2D_6g5uf")
+script = ExtResource("6_r2no1")
+speed = 0.02
+corner = Vector2(-50, 300)
+corner_2 = Vector2(0, 240)
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
+position = Vector2(52.7563, 122.887)
+rotation = -0.91973
+progress = 172.253
+
+[node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D"]
+rotation = 0.853466
+texture = ExtResource("6_7dxvt")
+
+[node name="PathFollow2D2" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
+position = Vector2(52.7563, 122.887)
+rotation = -0.91973
+progress = 172.253
+
+[node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D2"]
+visible = false
+rotation = 0.853466
+texture = ExtResource("6_7dxvt")
+
+[node name="PathFollow2D3" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
+position = Vector2(52.7563, 122.887)
+rotation = -0.91973
+progress = 172.253
+
+[node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D3"]
+visible = false
+rotation = 0.853466
+texture = ExtResource("6_7dxvt")
+
+[node name="PathFollow2D4" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
+position = Vector2(52.7563, 122.887)
+rotation = -0.91973
+progress = 172.253
+
+[node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D4"]
+visible = false
+rotation = 0.853466
+texture = ExtResource("6_7dxvt")
+
+[node name="RightRoadEdge" type="Path2D" parent="Horizon/Road"]
+position = Vector2(-129, -77)
+curve = SubResource("Curve2D_r2no1")
+script = ExtResource("6_r2no1")
+speed = 0.02
+corner = Vector2(306, 300)
+corner_2 = Vector2(256, 240)
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
+position = Vector2(199.738, 122.651)
+rotation = -2.1682
+progress = 169.235
+
+[node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D"]
+rotation = 2.3178
+texture = ExtResource("6_7dxvt")
+
+[node name="PathFollow2D2" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
+position = Vector2(199.738, 122.651)
+rotation = -2.1682
+progress = 169.235
+
+[node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D2"]
+visible = false
+rotation = 2.3178
+texture = ExtResource("6_7dxvt")
+
+[node name="PathFollow2D3" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
+position = Vector2(199.738, 122.651)
+rotation = -2.1682
+progress = 169.235
+
+[node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D3"]
+visible = false
+rotation = 2.3178
+texture = ExtResource("6_7dxvt")
+
+[node name="PathFollow2D4" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
+position = Vector2(199.738, 122.651)
+rotation = -2.1682
+progress = 169.235
+
+[node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D4"]
+visible = false
+rotation = 2.3178
+texture = ExtResource("6_7dxvt")
+
+[node name="ObstacleContainer" type="Node2D" parent="Horizon"]
+
+[node name="MovingStars" type="GPUParticles2D" parent="Horizon"]
+amount = 40
+texture = ExtResource("11_n44uc")
+lifetime = 4.75
+preprocess = 5.0
+process_material = SubResource("ParticleProcessMaterial_dsidl")
+script = SubResource("GDScript_e0wnd")
+
+[node name="PlayerSpaceship" parent="." instance=ExtResource("5_vkcgd")]
+position = Vector2(128, 199)
+
+[node name="RoadTest" type="Marker2D" parent="." node_paths=PackedStringArray("obstacle_container")]
+position = Vector2(129.81, 94.3)
+script = ExtResource("12_ddr63")
+obstacles = Array[PackedScene]([ExtResource("12_0dj0t"), ExtResource("7_w0l5l"), ExtResource("13_w0l5l")])
+obstacle_container = NodePath("ObstacleContainer")
+
+[node name="TopLeft" type="Marker2D" parent="RoadTest"]
+position = Vector2(-40, 0)
+
+[node name="TopRight" type="Marker2D" parent="RoadTest"]
+position = Vector2(47, 1)
+
+[node name="Marker2D3" type="Marker2D" parent="RoadTest"]
+position = Vector2(-129, 118)
+
+[node name="Marker2D4" type="Marker2D" parent="RoadTest"]
+position = Vector2(127, 118)
+
+[node name="Marker2D5" type="Marker2D" parent="RoadTest"]
+
+[node name="ObstacleContainer" type="Node2D" parent="RoadTest"]
+unique_name_in_owner = true
+
+[node name="PauseLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseLayer" parent="PauseLayer" instance=ExtResource("13_0dj0t")]
+visible = false
 
 [node name="Sun" type="AnimatedSprite2D" parent="."]
 position = Vector2(204.363, 26.5551)
@@ -529,229 +725,10 @@ position = Vector2(31, 94)
 scale = Vector2(203, 213.5)
 texture = SubResource("CanvasTexture_n44uc")
 
-[node name="Horizon" type="Node2D" parent="."]
-position = Vector2(132, 122)
-script = ExtResource("3_vkcgd")
-obstacle_list = Array[String](["uid://b0grvql6f6hgt"])
-metadata/_edit_group_ = true
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(179, 122)
 
-[node name="TopLeftEdge" type="Marker2D" parent="Horizon"]
-position = Vector2(-25, -1)
-
-[node name="TopLeftEdge2" type="Marker2D" parent="Horizon"]
-position = Vector2(23, -1)
-
-[node name="TopRightEdge" type="Marker2D" parent="Horizon"]
-visible = false
-position = Vector2(-34, 55)
-
-[node name="LeftMiddle" type="Marker2D" parent="Horizon"]
-visible = false
-position = Vector2(-129, 163)
-
-[node name="RightMiddleRoad" type="Marker2D" parent="Horizon"]
-visible = false
-position = Vector2(-105, 147)
-
-[node name="Road" type="Node2D" parent="Horizon"]
-position = Vector2(1, 0)
-
-[node name="LeftRoadEdge" type="Path2D" parent="Horizon/Road"]
-position = Vector2(-130, -77)
-curve = SubResource("Curve2D_6g5uf")
-script = ExtResource("6_r2no1")
-speed = 0.0
-corner = Vector2(1, 240)
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
-position = Vector2(91.8728, 89.6145)
-rotation = -0.843112
-progress = 141.276
-
-[node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D"]
-rotation = 0.853466
-texture = ExtResource("6_7dxvt")
-
-[node name="PathFollow2D2" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
-position = Vector2(42.5541, 144.982)
-rotation = -0.843112
-progress = 66.9873
-
-[node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D2"]
-visible = false
-rotation = 0.853466
-texture = ExtResource("6_7dxvt")
-
-[node name="PathFollow2D3" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
-position = Vector2(42.5541, 144.982)
-rotation = -0.843112
-progress = 66.9873
-
-[node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D3"]
-visible = false
-rotation = 0.853466
-texture = ExtResource("6_7dxvt")
-
-[node name="PathFollow2D4" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
-position = Vector2(42.5541, 144.982)
-rotation = -0.843112
-progress = 66.9873
-
-[node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D4"]
-visible = false
-rotation = 0.853466
-texture = ExtResource("6_7dxvt")
-
-[node name="RightRoadEdge" type="Path2D" parent="Horizon/Road"]
-position = Vector2(-129, -77)
-curve = SubResource("Curve2D_r2no1")
-script = ExtResource("6_r2no1")
-speed = 0.0
-corner = Vector2(256, 240)
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
-position = Vector2(163.485, 89.6672)
-rotation = -2.26965
-progress = 137.727
-
-[node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D"]
-rotation = 2.3178
-texture = ExtResource("6_7dxvt")
-
-[node name="PathFollow2D2" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
-position = Vector2(222.115, 159.436)
-rotation = -2.26965
-progress = 46.4583
-
-[node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D2"]
-visible = false
-rotation = 2.3178
-texture = ExtResource("6_7dxvt")
-
-[node name="PathFollow2D3" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
-position = Vector2(221.373, 158.553)
-rotation = -2.26965
-progress = 47.6141
-
-[node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D3"]
-visible = false
-rotation = 2.3178
-texture = ExtResource("6_7dxvt")
-
-[node name="PathFollow2D4" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
-position = Vector2(221.406, 158.593)
-rotation = -2.26965
-progress = 47.563
-
-[node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D4"]
-visible = false
-rotation = 2.3178
-texture = ExtResource("6_7dxvt")
-
-[node name="PlayerSpaceship" parent="." instance=ExtResource("5_vkcgd")]
-position = Vector2(128, 199)
-
-[node name="HUD" type="CanvasLayer" parent="."]
-script = ExtResource("8_6g5uf")
-
-[node name="Control" type="Control" parent="HUD"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("8_7dxvt")
-metadata/_edit_lock_ = true
-
-[node name="PanelContainer" type="PanelContainer" parent="HUD/Control"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 53.0
-grow_horizontal = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="HUD/Control/PanelContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_7dxvt")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Control/PanelContainer/PanelContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="ScoreLabel" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Score: 7777"
-label_settings = SubResource("LabelSettings_6g5uf")
-
-[node name="FuelLabel" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Fuel: 100"
-label_settings = SubResource("LabelSettings_6g5uf")
-
-[node name="SpeedLabel" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Speed: 100"
-label_settings = SubResource("LabelSettings_6g5uf")
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="CashLabel" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Cash: 0"
-label_settings = SubResource("LabelSettings_6g5uf")
-
-[node name="BulletLabel" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Bullets: 3"
-label_settings = SubResource("LabelSettings_6g5uf")
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="Label5" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Destination: DEIMOS"
-label_settings = SubResource("LabelSettings_6g5uf")
-
-[node name="DistanceTravelledLabel" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Distance travelled: 0"
-label_settings = SubResource("LabelSettings_6g5uf")
-
-[node name="DistanceRemainingLabel" type="Label" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Distance remaining: 0"
-label_settings = SubResource("LabelSettings_6g5uf")
-
-[node name="ProgressMarker" type="HSlider" parent="HUD/Control/PanelContainer/PanelContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/center_grabber = 1
-theme_override_constants/grabber_offset = -15
-theme_override_icons/grabber_disabled = ExtResource("10_tdoqa")
-theme_override_icons/tick = ExtResource("11_ddr63")
-theme_override_styles/slider = SubResource("StyleBoxFlat_0dj0t")
-theme_override_styles/grabber_area = SubResource("StyleBoxFlat_w0l5l")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_e0wnd")
-editable = false
-scrollable = false
-tick_count = 20
-ticks_on_borders = true
+[node name="HUD" parent="." instance=ExtResource("11_tdoqa")]
 
 [node name="WinOverlay" type="CanvasLayer" parent="."]
 visible = false
@@ -765,8 +742,46 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="WinOverlay"]
-offset_left = 81.0
-offset_top = 143.0
-offset_right = 182.0
-offset_bottom = 160.0
-text = "YOU WINNER"
+offset_left = 64.0
+offset_top = 30.0
+offset_right = 194.0
+offset_bottom = 53.0
+text = "YOU WINNER!!!1!"
+
+[node name="Label2" type="Label" parent="WinOverlay"]
+offset_left = 79.0
+offset_top = 55.0
+offset_right = 209.0
+offset_bottom = 78.0
+text = "Score: ?????"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WinOverlay"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -16.0
+offset_right = 4.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ContinueButton" type="Button" parent="WinOverlay/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Continue"
+
+[node name="MainMenuButton" type="Button" parent="WinOverlay/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Main Menu"
+
+[node name="MovingStars" type="GPUParticles2D" parent="WinOverlay"]
+position = Vector2(130, 117)
+amount = 40
+texture = ExtResource("11_n44uc")
+lifetime = 4.75
+preprocess = 5.0
+process_material = SubResource("ParticleProcessMaterial_dsidl")

@@ -1,0 +1,289 @@
+[gd_scene load_steps=33 format=3 uid="uid://bet3dxv15wonf"]
+
+[ext_resource type="Script" uid="uid://diufp0i5brd70" path="res://scenes/hud.gd" id="1_8qguk"]
+[ext_resource type="Theme" uid="uid://cn52mtnyoe77w" path="res://resources/hud_theme.tres" id="2_136eg"]
+[ext_resource type="Texture2D" uid="uid://bh6yjngrfomjd" path="res://assets/UI/UI - Monitors.png" id="3_1e6lo"]
+[ext_resource type="Texture2D" uid="uid://c16bh0boongi4" path="res://assets/UI/UI - Fuel Panel.png" id="4_4mi7y"]
+[ext_resource type="Texture2D" uid="uid://n2u3itbrbu1c" path="res://assets/UI/UI - Fuel frame.png" id="5_pkwgd"]
+[ext_resource type="Texture2D" uid="uid://7gmpmmehqknr" path="res://assets/UI/UI - Fuel Mark.png" id="6_d5po8"]
+[ext_resource type="Texture2D" uid="uid://cjr7ghmbn8vl3" path="res://assets/UI/UI - Ammo Panel.png" id="7_7yoph"]
+[ext_resource type="Texture2D" uid="uid://ctly2alkq8psk" path="res://assets/UI/UI_bullet_slot.png" id="8_qmm8d"]
+[ext_resource type="Texture2D" uid="uid://7p5xl0m21x4d" path="res://assets/UI/UI - Ammo Lights.png" id="9_t0png"]
+[ext_resource type="Texture2D" uid="uid://c61m4hcynlcqt" path="res://assets/UI/UI_speedometer.png" id="10_kicr4"]
+[ext_resource type="Texture2D" uid="uid://bvvj5kjtb1vbl" path="res://assets/UI/UI_distance_progress.png" id="11_erw67"]
+[ext_resource type="Texture2D" uid="uid://ssuqgt3y4pfv" path="res://assets/UI/UI - Progress panel.png" id="12_b6swc"]
+[ext_resource type="Texture2D" uid="uid://dgb8yjdcervnt" path="res://assets/UI/UI_marker.png" id="13_gonto"]
+[ext_resource type="Texture2D" uid="uid://5ya4v8twf0cv" path="res://assets/UI/UI_background_gradient.png" id="16_4mi7y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vuvg6"]
+atlas = ExtResource("3_1e6lo")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_emer0"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+texture = SubResource("AtlasTexture_vuvg6")
+
+[sub_resource type="Gradient" id="Gradient_kicr4"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mj13f"]
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0h1do"]
+width = 44
+height = 44
+color_ramp = SubResource("Gradient_kicr4")
+noise = SubResource("FastNoiseLite_mj13f")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfdjh"]
+atlas = ExtResource("4_4mi7y")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xdlig"]
+texture = SubResource("AtlasTexture_kfdjh")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lptj4"]
+atlas = ExtResource("5_pkwgd")
+region = Rect2(52, 3, 8, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74gae"]
+atlas = ExtResource("6_d5po8")
+region = Rect2(53, 4, 6, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kwu3u"]
+atlas = ExtResource("12_b6swc")
+region = Rect2(112, 32, 96, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t4m8u"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+texture = SubResource("AtlasTexture_kwu3u")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33vp1"]
+atlas = ExtResource("7_7yoph")
+region = Rect2(192, 0, 16, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jpd3y"]
+texture = SubResource("AtlasTexture_33vp1")
+texture_margin_left = 4.0
+texture_margin_top = 5.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4h7mh"]
+texture = ExtResource("8_qmm8d")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vegw"]
+atlas = ExtResource("9_t0png")
+region = Rect2(197, 15, 6, 3)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_04enw"]
+content_margin_left = 5.0
+content_margin_top = 6.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+texture = SubResource("AtlasTexture_kwu3u")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_we3sy"]
+texture = ExtResource("11_erw67")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_el1dq"]
+content_margin_left = 1.0
+content_margin_right = 2.0
+content_margin_bottom = 6.0
+texture = ExtResource("13_gonto")
+texture_margin_top = 1.0
+expand_margin_top = 3.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+modulate_color = Color(1, 0, 0.717647, 1)
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_8qguk")
+metadata/_edit_horizontal_guides_ = [48.0, 32.0]
+metadata/_edit_vertical_guides_ = [208.0, 193.0]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_136eg")
+metadata/_edit_lock_ = true
+
+[node name="Contents" type="HBoxContainer" parent="Control"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 56.0
+grow_horizontal = 2
+
+[node name="Destination" type="PanelContainer" parent="Control/Contents"]
+clip_contents = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_emer0")
+
+[node name="TextureRect" type="TextureRect" parent="Control/Contents/Destination"]
+layout_mode = 2
+texture = SubResource("NoiseTexture2D_0h1do")
+
+[node name="Label" type="Label" parent="Control/Contents/Destination"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+text = "Destination"
+
+[node name="DestinationContainer" type="VBoxContainer" parent="Control/Contents"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Top" type="HBoxContainer" parent="Control/Contents/DestinationContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="FuelContainer" type="PanelContainer" parent="Control/Contents/DestinationContainer/Top"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_xdlig")
+
+[node name="FuelBar" type="TextureProgressBar" parent="Control/Contents/DestinationContainer/Top/FuelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+value = 73.0
+fill_mode = 3
+nine_patch_stretch = true
+texture_over = SubResource("AtlasTexture_lptj4")
+texture_progress = SubResource("AtlasTexture_74gae")
+
+[node name="MiddlePanel" type="PanelContainer" parent="Control/Contents/DestinationContainer/Top"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_t4m8u")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Contents/DestinationContainer/Top/MiddlePanel"]
+layout_mode = 2
+alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="Control/Contents/DestinationContainer/Top/MiddlePanel/VBoxContainer"]
+layout_mode = 2
+text = "Score: 0000"
+horizontal_alignment = 1
+
+[node name="MessageLabel" type="Label" parent="Control/Contents/DestinationContainer/Top/MiddlePanel/VBoxContainer"]
+layout_mode = 2
+text = "Message "
+horizontal_alignment = 1
+
+[node name="BulletContainer" type="PanelContainer" parent="Control/Contents/DestinationContainer/Top"]
+custom_minimum_size = Vector2(16, 32)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxTexture_jpd3y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Contents/DestinationContainer/Top/BulletContainer"]
+layout_mode = 2
+theme_override_constants/separation = 3
+alignment = 1
+
+[node name="BulletSlot" type="PanelContainer" parent="Control/Contents/DestinationContainer/Top/BulletContainer/VBoxContainer"]
+custom_minimum_size = Vector2(8, 5)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_4h7mh")
+
+[node name="BulletTexture" type="TextureRect" parent="Control/Contents/DestinationContainer/Top/BulletContainer/VBoxContainer/BulletSlot"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_4vegw")
+
+[node name="BulletSlot2" type="PanelContainer" parent="Control/Contents/DestinationContainer/Top/BulletContainer/VBoxContainer"]
+custom_minimum_size = Vector2(8, 5)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_4h7mh")
+
+[node name="BulletTexture" type="TextureRect" parent="Control/Contents/DestinationContainer/Top/BulletContainer/VBoxContainer/BulletSlot2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_4vegw")
+
+[node name="BulletSlot3" type="PanelContainer" parent="Control/Contents/DestinationContainer/Top/BulletContainer/VBoxContainer"]
+custom_minimum_size = Vector2(8, 5)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_4h7mh")
+
+[node name="BulletTexture" type="TextureRect" parent="Control/Contents/DestinationContainer/Top/BulletContainer/VBoxContainer/BulletSlot3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_4vegw")
+
+[node name="Bottom" type="HBoxContainer" parent="Control/Contents/DestinationContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/Contents/DestinationContainer/Bottom"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_t4m8u")
+
+[node name="Speedometer" type="TextureProgressBar" parent="Control/Contents/DestinationContainer/Bottom/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 50.0
+value = 50.0
+texture_progress = ExtResource("10_kicr4")
+
+[node name="DistanceContainer" type="PanelContainer" parent="Control/Contents/DestinationContainer/Bottom"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_04enw")
+
+[node name="ProgressMarker" type="HScrollBar" parent="Control/Contents/DestinationContainer/Bottom/DistanceContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 6
+mouse_filter = 2
+theme_override_styles/scroll = SubResource("StyleBoxTexture_we3sy")
+theme_override_styles/grabber = SubResource("StyleBoxTexture_el1dq")
+
+[node name="Destination2" type="PanelContainer" parent="Control/Contents"]
+clip_contents = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_emer0")
+
+[node name="TextureRect" type="TextureRect" parent="Control/Contents/Destination2"]
+layout_mode = 2
+texture = ExtResource("16_4mi7y")
+
+[node name="Label" type="Label" parent="Control/Contents/Destination2"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+text = "Destination"

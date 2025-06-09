@@ -15,6 +15,10 @@ var bullet := 0.0
 
 #region Level
 var level : Level
+
+func get_current_level() -> Level:
+	return level
+	
 func get_current_speed() -> float:
 	if !level:
 		return 0.0

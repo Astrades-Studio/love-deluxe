@@ -1,18 +1,10 @@
-# Duracion del nivel a velocidad maxima: 2 min
-# Duracion del nivel a velocidad minima: 5 min
-# Duracion del combustible: 4 min
-
-# Velocidad minima: 1 ly / 10y 
-# Velocidad maxima: 2.5 ly / 10y
-
-# Distancia a recorrer: 300 AU
-
-# Distancia entre Tierra y Luna en unidades astronómicas: 384400 km / 0.00256 AU
 extends Node2D
 class_name Level
 
 @onready var hud: CanvasLayer = $HUD
 @onready var win_overlay: CanvasLayer = $WinOverlay
+@onready var continue_button: Button = %ContinueButton
+@onready var main_menu_button: Button = %MainMenuButton
 
 @export var target_distance := 120000.
 
@@ -20,15 +12,16 @@ var current_distance : float:
 	set(new):
 		current_distance = new
 		hud.update_distance_travelled(int(target_distance - current_distance))
-		hud.update_distance_remaining(int(current_distance))
+		#hud.update_distance_remaining(int(current_distance))
 
-# Speed and fuel management
+## Controls how fast everything in the level moves.
 var speed := 20.:
 	set(new):
 		speed = clamp(new, 0, 99)
 		speed_changed.emit(int(speed))
 
-var fuel := 400.0:
+## Consumed by driving
+var fuel := 100.0:
 	set(new):
 		fuel = new
 		fuel_changed.emit(int(fuel))
@@ -41,16 +34,18 @@ var driving := false
 
 const MIN_SPEED := 20.0
 const MAX_SPEED := 50.0
-const FUEL_START := 1000.0
+const FUEL_START := 100.0
 
 
-var fuel_consumption_rate := 0.1  # Fuel consumed per unit of distance
+var fuel_consumption_rate := 0.8  # Fuel consumed per unit of distance
 
 
 func _ready() -> void:
 	current_distance = target_distance
 	hud.level = self
 	GlobalGameEvents.destination_reached.connect(on_destination_reached)
+	continue_button.pressed.connect(go_to_shop_scene)
+	main_menu_button.pressed.connect(back_to_main_menu)
 	GameGlobals.level = self
 	start_driving()
 
@@ -58,18 +53,20 @@ func _ready() -> void:
 func on_destination_reached() -> void:
 	win_overlay.visible = true
 	fuel = FUEL_START
-	
-	# Stop driving and reset speed
 	stop_driving()
+	
 	
 func start_driving():
 	driving = true
 
 func stop_driving():
 	driving = false
-	speed = 0.0
+	#speed = lerp(speed, 0.0, 0.1)
+	var tween := create_tween().set_ease(Tween.EASE_IN)
+	tween.tween_property(self, "speed", 0.0, (speed / 10.))
+	await tween.finished
 
-
+## Increases distance travelled, spends fuel and stops driving when distance is 0
 func _process(delta: float) -> void:
 	if !driving:
 		return
@@ -83,24 +80,33 @@ func _process(delta: float) -> void:
 		stop_driving()
 		GlobalGameEvents.destination_reached.emit()
 
-
+## Called every frame to consume fuel
+var time_accumulator = 0.0
 func spend_fuel(delta) -> void:
-	fuel -= fuel_consumption_rate * speed * delta
+	time_accumulator += delta
+	if time_accumulator >= 1.0:
+		time_accumulator -= 1.0  # Keep the remainder
+		spend_fuel_per_second()  # Call your function
 
+
+func spend_fuel_per_second():
+	fuel -= fuel_consumption_rate
 	if fuel < 0:
 		fuel = 0
 		stop_driving()
 		GlobalGameEvents.fuel_depleted.emit()
 
+
 func get_speed() -> float:
 	return speed	
 
+
+#region Speed controls
 func accelerate(amount : float = 0.1) -> void:
 	speed += amount
 	
 	if speed > MAX_SPEED:
 		speed = lerp(speed, MAX_SPEED, 0.1)
-	print(speed)
 
 func decelerate(amount : float = 0.25) -> void:
 	speed -= amount
@@ -108,4 +114,31 @@ func decelerate(amount : float = 0.25) -> void:
 		speed = lerp(speed, MIN_SPEED, 0.1)
 	if speed > MAX_SPEED:
 		speed = lerp(speed, MAX_SPEED, 0.1)
-	print(speed)
+
+var already_applied_slowdown_this_frame := false
+func apply_slowdown(amount : float):
+	if already_applied_slowdown_this_frame:
+		return
+	speed -= amount
+	already_applied_slowdown_this_frame = true
+	reset_frame_applied_slowdown.call_deferred()
+
+func reset_frame_applied_slowdown():
+	already_applied_slowdown_this_frame = false
+	print("Slowdown applied on " + str(Engine.get_frames_drawn()))
+
+#endregion
+
+
+const SHOP_MENU = preload("res://scenes/ui/shop_menu.tscn")
+func go_to_shop_scene():
+	SceneTransitionManager.transition_to_scene(MAIN_MENU)
+
+
+const MAIN_MENU = preload("res://scenes/ui/main_menu.tscn")
+func back_to_main_menu():
+	SceneTransitionManager.transition_to_scene(MAIN_MENU)
+
+
+func restart_level():
+	get_tree().reload_current_scene()

@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8lth06eyrfcy"]
+
+[ext_resource type="Script" uid="uid://qpqacb74xe18" path="res://scenes/actors/obstacles/obstacle.gd" id="1_qw8oy"]
+[ext_resource type="Texture2D" uid="uid://btjcidxaoac8e" path="res://assets/sprites/sheet.png" id="2_mha26"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qw8oy"]
+atlas = ExtResource("2_mha26")
+region = Rect2(808.709, 444.445, 17.3857, 17.3858)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljo3u"]
+atlas = ExtResource("2_mha26")
+region = Rect2(810.694, 467.032, 18.6603, 31.3832)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rbo2c"]
+radius = 5.0
+
+[node name="Cone" type="Area2D"]
+collision_layer = 6
+script = ExtResource("1_qw8oy")
+deceleration_on_hit = 10.0
+serious_colission = false
+
+[node name="ObstacleSmall" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_qw8oy")
+
+[node name="ObstacleLarge" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_ljo3u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rbo2c")

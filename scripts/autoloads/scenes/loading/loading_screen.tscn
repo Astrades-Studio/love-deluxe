@@ -1,6 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://b22l7txlprnkt"]
+[gd_scene load_steps=9 format=3 uid="uid://b22l7txlprnkt"]
 
 [ext_resource type="Script" uid="uid://c2ky0itgqxqp8" path="res://scripts/autoloads/scenes/loading/loading_screen.gd" id="1_b0kv4"]
+[ext_resource type="Texture2D" uid="uid://diwkslbugmxum" path="res://assets/Love Deluxe Sticker.png" id="2_wwrlf"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_d6bwv"]
+
+[sub_resource type="Gradient" id="Gradient_wwrlf"]
+offsets = PackedFloat32Array(0, 0.29)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_10vbg"]
+frequency = 0.8785
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ohery"]
+width = 15
+height = 15
+color_ramp = SubResource("Gradient_wwrlf")
+noise = SubResource("FastNoiseLite_10vbg")
+
+[sub_resource type="Gradient" id="Gradient_lg0ya"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ra48m"]
+gradient = SubResource("Gradient_lg0ya")
+width = 128
+height = 16
 
 [node name="LoadingScreen" type="CanvasLayer"]
 script = ExtResource("1_b0kv4")
@@ -12,3 +35,47 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.172549, 0.117647, 0.192157, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -20.0
+offset_right = 64.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/ColorRect/MarginContainer"]
+layout_mode = 2
+value = 100.0
+nine_patch_stretch = true
+texture_under = SubResource("PlaceholderTexture2D_d6bwv")
+texture_over = SubResource("NoiseTexture2D_ohery")
+texture_progress = SubResource("GradientTexture2D_ra48m")
+tint_under = Color(0.576912, 0.575394, 0.976935, 1)
+tint_progress = Color(0.252639, 0.386959, 0.460821, 1)
+
+[node name="ProgressBar" type="ProgressBar" parent="Control/ColorRect/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="LoveDeluxeSticker" type="Sprite2D" parent="."]
+position = Vector2(132, 85)
+scale = Vector2(0.0804922, 0.0804922)
+texture = ExtResource("2_wwrlf")

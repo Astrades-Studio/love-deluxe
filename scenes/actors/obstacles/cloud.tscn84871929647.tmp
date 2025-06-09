@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://byoeeeqa5hymq"]
+
+[ext_resource type="Script" uid="uid://jcmxphn8c28t" path="res://scenes/actors/obstacles/cloud.gd" id="1_mw75c"]
+
+[sub_resource type="Gradient" id="Gradient_owcjg"]
+offsets = PackedFloat32Array(0.66087, 0.86087)
+colors = PackedColorArray(0.305746, 0.483191, 0.855205, 0, 0.728141, 0.000406609, 0.728748, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2bk67"]
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4gamk"]
+width = 32
+height = 32
+color_ramp = SubResource("Gradient_owcjg")
+noise = SubResource("FastNoiseLite_2bk67")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rbo2c"]
+radius = 16.2788
+
+[node name="Cloud" type="Area2D"]
+collision_layer = 6
+script = ExtResource("1_mw75c")
+deceleration_on_hit = 0.1
+
+[node name="ObstacleSmall" type="Sprite2D" parent="."]
+visible = false
+
+[node name="ObstacleLarge" type="Sprite2D" parent="."]
+texture = SubResource("NoiseTexture2D_4gamk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rbo2c")

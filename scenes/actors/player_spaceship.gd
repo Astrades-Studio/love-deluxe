@@ -14,23 +14,54 @@ class_name PlayerSpaceship
 
 var last_movement := 0
 
+var tilt := 0.0
+var tilt_speed := 0.1
+var accumulated_x_movement := 0.0
+
+const TOP_TILT := 30.0 # Maximum tilt angle in degrees
+
 func _ready() -> void:
 	crash_sprite.hide()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
+	if !current_level.driving:
+		return
 	global_position.x = clamp(position.x, 0, 256)
-	if Input.is_action_pressed("move_left"):
+	var move_axis = Input.get_action_strength("move_left") - Input.get_action_strength("move_right")
+
+	if move_axis > 0:
+		accumulated_x_movement -= horizontal_speed
 		position.x -= horizontal_speed
-		last_movement = -1
-	elif Input.is_action_pressed("move_right"):
+		
+		if last_movement != -1:
+			accumulated_x_movement = 0.0 # Reset if changing direction
+			last_movement = -1 # Left, tracked for rolling
+	elif move_axis < 0:
+		accumulated_x_movement += horizontal_speed
 		position.x += horizontal_speed
-		last_movement = 1
+		
+		if last_movement != 1:
+			accumulated_x_movement = 0.0 # Reset if changing direction
+			last_movement = 1 # Right, tracked for rolling
+	else:
+		# If no horizontal movement, reset accumulated movement
+		accumulated_x_movement = 0.0
+	
+	# Track how long the player has been moving horizontally
+	# Apply a tilt effect based on the last movement
+	# Rotate the sprite to a maximum of 30 degrees
+	tilt = clamp(lerp(tilt, accumulated_x_movement, tilt_speed), -TOP_TILT, TOP_TILT)
+	# Apply the tilt to the sprite node
+	ship_sprite.rotation_degrees = tilt
+
 	if Input.is_action_pressed("accelerate"):
 		current_level.accelerate()
 	elif Input.is_action_pressed("decelerate"):
 		current_level.decelerate()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if !current_level.driving:
+		return
 	if event.is_action_pressed("action_dodge"):
 		_dodge()
 
@@ -45,12 +76,14 @@ func _dodge() -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is Obstacle:
-		_on_player_hit()
+		_on_player_hit(area, area.deceleration_on_hit)
 
 
-func _on_player_hit():
-	current_level.decelerate(current_level.MAX_SPEED)
+func _on_player_hit(obstacle: Obstacle, deceleration_on_hit: float = current_level.MAX_SPEED):
+	current_level.decelerate(deceleration_on_hit)
 	
+	if !obstacle.serious_colission: ## If the colision is soft (cloud, cone) do not create a crash effect
+		return
 	animation_player.play("crash")
 	var tween := create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(ship_sprite, "modulate", Color.RED, 0.1)

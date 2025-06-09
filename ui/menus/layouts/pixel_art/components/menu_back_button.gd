@@ -10,7 +10,7 @@ var is_enabled: bool = true
 
 
 func _unhandled_input(_event: InputEvent) -> void:
-	if is_enabled and visible and not back_input_action.is_empty() and Input.is_action_just_pressed(back_input_action):
+	if is_enabled and is_visible_in_tree() and not back_input_action.is_empty() and Input.is_action_just_pressed(back_input_action):
 		go_back()
 		
 

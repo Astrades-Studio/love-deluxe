@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Template 2025"
-run/main_scene="uid://bfqb614bysg2o"
+config/name="Love Deluxe"
+run/main_scene="uid://75ohsv3f0df6"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -50,7 +50,7 @@ project/assembly_name="New Template"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/limbo_console/plugin.cfg", "res://addons/plenticons/plugin.cfg", "res://addons/shaker/plugin.cfg", "res://addons/ultimate_character/plugin.cfg")
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/limbo_console/plugin.cfg", "res://addons/plenticons/plugin.cfg", "res://addons/shaker/plugin.cfg")
 
 [file_customization]
 

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl3xv284nkgfl"]
+
+[ext_resource type="Texture2D" uid="uid://dme3iytobin2v" path="res://assets/sprites/t_buoy_small.png" id="1_5qnwb"]
+[ext_resource type="Texture2D" uid="uid://gchi4ryinn30" path="res://assets/sprites/t_buoy_large.png" id="2_8ulr1"]
+
+[node name="Buoy" type="Node2D"]
+
+[node name="ObstacleSmall" type="Sprite2D" parent="."]
+texture = ExtResource("1_5qnwb")
+
+[node name="ObstacleLarge" type="Sprite2D" parent="."]
+texture = ExtResource("2_8ulr1")

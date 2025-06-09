@@ -1,6 +1,15 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://cn52mtnyoe77w"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cn52mtnyoe77w"]
 
+[ext_resource type="FontFile" uid="uid://cxbe1vdxshbyv" path="res://assets/UI/fonts/pixolletta_8px.ttf" id="1_7amdl"]
 [ext_resource type="Texture2D" uid="uid://droxhii1v5kuq" path="res://assets/UI/t_shop_mockup_small.png" id="1_o5cxf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7amdl"]
+bg_color = Color(0.347868, 0.601323, 0.96091, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7amdl"]
 atlas = ExtResource("1_o5cxf")
@@ -14,4 +23,9 @@ texture_margin_right = 4.0
 texture_margin_bottom = 5.0
 
 [resource]
+Button/styles/focus = SubResource("StyleBoxFlat_7amdl")
+HBoxContainer/constants/separation = 0
+Label/font_sizes/font_size = 10
+Label/fonts/font = ExtResource("1_7amdl")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_4e07a")
+VBoxContainer/constants/separation = 0

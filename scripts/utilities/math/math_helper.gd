@@ -136,10 +136,12 @@ static func integer_to_roman_number(number: int) -> String:
 	var hundreds_place = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"]
 	var thousands_place = ["", "M", "MM", "MMM"]
 	
+	@warning_ignore_start("integer_division")
 	var thousands := number / 1000
 	var hundreds := number % 1000 / 100
 	var tens := number % 100 / 10
 	var ones := number % 10
+	@warning_ignore_restore("integer_division")
 	
 	var roman_number = "%s%s%s%s" % [thousands_place[thousands], hundreds_place[hundreds], tens_place[tens], roman_digits[ones]]
 	
