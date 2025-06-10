@@ -43,7 +43,8 @@ class Lane:
 
 
 func _ready() -> void:
-	queue_redraw()
+	if debug_draw:
+		queue_redraw()
 	set_notify_transform(true)
 	
 	lanes = _calculate_lanes()
@@ -147,7 +148,8 @@ func _calculate_lanes() -> Array[Lane]:
 
 #region Debug Drawing
 func _draw() -> void:
-	_draw_lanes(lanes)
+	if debug_draw:
+		_draw_lanes(lanes)
 
 # Called by the _draw() method to draw the lanes
 func _draw_lanes(lanes: Array[Lane]) -> void:

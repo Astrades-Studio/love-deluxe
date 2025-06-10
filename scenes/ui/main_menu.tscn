@@ -1,10 +1,44 @@
-[gd_scene load_steps=6 format=3 uid="uid://75ohsv3f0df6"]
+[gd_scene load_steps=12 format=3 uid="uid://75ohsv3f0df6"]
 
 [ext_resource type="Theme" uid="uid://g8quu7iaq3qw" path="res://addons/limbo_console/res/settings_theme.tres" id="1_sl1te"]
 [ext_resource type="Script" uid="uid://beykxksvgr5am" path="res://scenes/ui/main_menu.gd" id="2_1g8jr"]
-[ext_resource type="Texture2D" uid="uid://diwkslbugmxum" path="res://assets/Love Deluxe Sticker.png" id="2_fe2o3"]
 [ext_resource type="PackedScene" uid="uid://bfqb614bysg2o" path="res://scenes/level_test.tscn" id="3_m1kxf"]
+[ext_resource type="Texture2D" uid="uid://c6u3tuxougig" path="res://assets/love_deluxe_sticker_pixel.png" id="4_x2yvf"]
 [ext_resource type="PackedScene" uid="uid://cs1auqp2g4yn4" path="res://ui/menus/layouts/settings/tabs/settings_menu.tscn" id="5_x2yvf"]
+
+[sub_resource type="Gradient" id="Gradient_uhagc"]
+colors = PackedColorArray(0.26782, 0.179231, 0.225058, 1, 0.670588, 0.54902, 0.643137, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_btxxm"]
+gradient = SubResource("Gradient_uhagc")
+fill_from = Vector2(0.501424, 0.561254)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x2yvf"]
+bg_color = Color(0.6, 0.203922, 0.6, 1)
+skew = Vector2(0.605, 0)
+border_width_left = 8
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.172549, 0.117647, 0.192157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wb0q5"]
+bg_color = Color(0.6, 0.203922, 0.6, 1)
+skew = Vector2(0.605, 0)
+border_width_left = 8
+border_color = Color(0.172549, 0.117647, 0.192157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhagc"]
+bg_color = Color(0.412942, 0.26034, 0.438533, 1)
+skew = Vector2(0.605, 0)
+border_width_left = 8
+border_color = Color(0.172549, 0.117647, 0.192157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btxxm"]
+bg_color = Color(0.233124, 0.0510952, 0.23347, 1)
+skew = Vector2(0.605, 0)
+border_width_left = 8
+border_color = Color(0.172549, 0.117647, 0.192157, 1)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -24,19 +58,34 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.713726, 0.839216, 0.862745, 1)
+color = Color(0.888275, 0.5135, 0.778666, 1)
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect2" type="TextureRect" parent="."]
+visible = false
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -8.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_fe2o3")
+texture = SubResource("GradientTexture2D_btxxm")
 expand_mode = 5
 stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -45.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_x2yvf")
+expand_mode = 3
 
 [node name="Label" type="Label" parent="."]
 visible = false
@@ -58,31 +107,85 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 145
 theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = -30
+theme_override_constants/margin_bottom = 15
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 17
 
 [node name="NewGameButton" type="Button" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 14.63)
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/focus = SubResource("StyleBoxFlat_x2yvf")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_uhagc")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btxxm")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btxxm")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_wb0q5")
 text = "New Game"
 
 [node name="ContinueButton" type="Button" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 14.63)
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/focus = SubResource("StyleBoxFlat_x2yvf")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_uhagc")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btxxm")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btxxm")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_wb0q5")
 text = "Continue"
 
 [node name="SettingsButton" type="Button" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 14.63)
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/focus = SubResource("StyleBoxFlat_x2yvf")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_uhagc")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btxxm")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btxxm")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_wb0q5")
 text = "Settings"
 
 [node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 14.63)
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/focus = SubResource("StyleBoxFlat_x2yvf")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_uhagc")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btxxm")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btxxm")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_wb0q5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_wb0q5")
 text = "Quit"
 
 [node name="GameSettingsUI" parent="." instance=ExtResource("5_x2yvf")]

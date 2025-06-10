@@ -129,7 +129,6 @@ func apply_slowdown(amount : float):
 
 func reset_frame_applied_slowdown():
 	already_applied_slowdown_this_frame = false
-	print("Slowdown applied on " + str(Engine.get_frames_drawn()))
 
 #endregion
 

@@ -1,15 +1,13 @@
-[gd_scene load_steps=98 format=3 uid="uid://bfqb614bysg2o"]
+[gd_scene load_steps=94 format=3 uid="uid://bfqb614bysg2o"]
 
 [ext_resource type="Script" uid="uid://cq2c3o2650s8s" path="res://scenes/level.gd" id="1_yvmk3"]
 [ext_resource type="Texture2D" uid="uid://qxq1idrxyih3" path="res://assets/images/UntitledArtwork2.png" id="2_e0wnd"]
 [ext_resource type="Texture2D" uid="uid://dwj5fcylywix0" path="res://assets/sprites/sun_spritesheet.png" id="2_yvmk3"]
 [ext_resource type="Shader" uid="uid://d17y0dhwyp2xx" path="res://scenes/planet.gdshader" id="3_7dxvt"]
 [ext_resource type="Texture2D" uid="uid://5o241fms1qw4" path="res://assets/sprites/spaceShooter2_spritesheet.png" id="3_n44uc"]
-[ext_resource type="Script" uid="uid://dbishapkknvgm" path="res://scenes/obstacle_spawner.gd" id="3_vkcgd"]
 [ext_resource type="PackedScene" uid="uid://jtsrok2xct5h" path="res://scenes/actors/player_spaceship.tscn" id="5_vkcgd"]
-[ext_resource type="Texture2D" uid="uid://gchi4ryinn30" path="res://assets/sprites/t_buoy_large.png" id="6_7dxvt"]
-[ext_resource type="Script" uid="uid://b07olaybly8h2" path="res://scenes/path_2d.gd" id="6_r2no1"]
 [ext_resource type="PackedScene" uid="uid://byoeeeqa5hymq" path="res://scenes/actors/obstacles/cloud.tscn" id="7_w0l5l"]
+[ext_resource type="PackedScene" uid="uid://bwtrfu7ldwiin" path="res://scenes/actors/obstacles/road_sign.tscn" id="11_e0wnd"]
 [ext_resource type="Texture2D" uid="uid://c7iq4cttq3wsd" path="res://addons/plenticons/icons/16x/2d/spark-full-gray.png" id="11_n44uc"]
 [ext_resource type="PackedScene" uid="uid://bet3dxv15wonf" path="res://scenes/ui/hud.tscn" id="11_tdoqa"]
 [ext_resource type="PackedScene" uid="uid://b0grvql6f6hgt" path="res://scenes/actors/obstacles/asteroid.tscn" id="12_0dj0t"]
@@ -31,18 +29,6 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="AtlasTexture" id="AtlasTexture_fjays"]
 atlas = ExtResource("3_n44uc")
 region = Rect2(562, 290.41, 123, 356.59)
-
-[sub_resource type="Curve2D" id="Curve2D_6g5uf"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -60, 265, 0, 0, -1, 0, -10, 205, 1, 0, -1, 0, 88, 76)
-}
-point_count = 3
-
-[sub_resource type="Curve2D" id="Curve2D_r2no1"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 295, 265, 0, 0, 0, 0, 245, 205, 0, 0, 0, 0, 168, 76)
-}
-point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_nuslc"]
 colors = PackedColorArray(0.807843, 0, 0, 1, 1, 1, 0, 1)
@@ -551,8 +537,6 @@ shader_parameter/terrain_colors = SubResource("GradientTexture2D_ddr63")
 
 [node name="LevelTest" type="Node2D" groups=["Level"]]
 script = ExtResource("1_yvmk3")
-metadata/_edit_vertical_guides_ = [92.0, 0.0]
-metadata/_edit_horizontal_guides_ = [119.0, 238.0]
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -5
@@ -579,116 +563,6 @@ rotation = 0.174533
 scale = Vector2(0.4, 0.4)
 texture = SubResource("AtlasTexture_fjays")
 
-[node name="Horizon" type="Node2D" parent="."]
-process_mode = 4
-visible = false
-position = Vector2(133, 119)
-script = ExtResource("3_vkcgd")
-obstacle_list = Array[PackedScene]([ExtResource("7_w0l5l"), ExtResource("12_0dj0t"), ExtResource("13_w0l5l")])
-metadata/_edit_group_ = true
-
-[node name="Road" type="Node2D" parent="Horizon"]
-position = Vector2(7, -7)
-
-[node name="LeftRoadEdge" type="Path2D" parent="Horizon/Road"]
-position = Vector2(-130, -77)
-curve = SubResource("Curve2D_6g5uf")
-script = ExtResource("6_r2no1")
-speed = 0.02
-corner = Vector2(-50, 300)
-corner_2 = Vector2(0, 240)
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
-position = Vector2(-54.8787, 258.854)
-rotation = -0.876058
-progress = 8.04123
-
-[node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D"]
-rotation = 0.853466
-texture = ExtResource("6_7dxvt")
-
-[node name="PathFollow2D2" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
-position = Vector2(-54.8787, 258.854)
-rotation = -0.876058
-progress = 8.04123
-
-[node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D2"]
-visible = false
-rotation = 0.853466
-texture = ExtResource("6_7dxvt")
-
-[node name="PathFollow2D3" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
-position = Vector2(-54.8787, 258.854)
-rotation = -0.876058
-progress = 8.04123
-
-[node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D3"]
-visible = false
-rotation = 0.853466
-texture = ExtResource("6_7dxvt")
-
-[node name="PathFollow2D4" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
-position = Vector2(-54.8787, 258.854)
-rotation = -0.876058
-progress = 8.04123
-
-[node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D4"]
-visible = false
-rotation = 0.853466
-texture = ExtResource("6_7dxvt")
-
-[node name="RightRoadEdge" type="Path2D" parent="Horizon/Road"]
-position = Vector2(-129, -77)
-curve = SubResource("Curve2D_r2no1")
-script = ExtResource("6_r2no1")
-speed = 0.02
-corner = Vector2(306, 300)
-corner_2 = Vector2(256, 240)
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
-position = Vector2(287.984, 256.581)
-rotation = -2.26553
-progress = 10.8353
-
-[node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D"]
-rotation = 2.3178
-texture = ExtResource("6_7dxvt")
-
-[node name="PathFollow2D2" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
-position = Vector2(287.984, 256.581)
-rotation = -2.26553
-progress = 10.8353
-
-[node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D2"]
-visible = false
-rotation = 2.3178
-texture = ExtResource("6_7dxvt")
-
-[node name="PathFollow2D3" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
-position = Vector2(287.984, 256.581)
-rotation = -2.26553
-progress = 10.8353
-
-[node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D3"]
-visible = false
-rotation = 2.3178
-texture = ExtResource("6_7dxvt")
-
-[node name="PathFollow2D4" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
-position = Vector2(287.984, 256.581)
-rotation = -2.26553
-progress = 10.8353
-
-[node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D4"]
-visible = false
-rotation = 2.3178
-texture = ExtResource("6_7dxvt")
-
-[node name="ObstacleContainer" type="Node2D" parent="Horizon"]
-
-[node name="PlayerSpaceship" parent="." instance=ExtResource("5_vkcgd")]
-position = Vector2(128, 199)
-
 [node name="MovingStars" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(133, 119)
@@ -699,28 +573,6 @@ preprocess = 5.0
 speed_scale = 4.0
 process_material = SubResource("ParticleProcessMaterial_dsidl")
 script = SubResource("GDScript_e0wnd")
-
-[node name="RoadTest" type="Marker2D" parent="." node_paths=PackedStringArray("obstacle_container")]
-position = Vector2(130, 119)
-script = ExtResource("12_ddr63")
-obstacles = Array[PackedScene]([ExtResource("12_0dj0t"), ExtResource("7_w0l5l"), ExtResource("13_w0l5l")])
-obstacle_container = NodePath("ObstacleContainer")
-edge_objects = Array[PackedScene]([ExtResource("13_nuslc")])
-metadata/_edit_group_ = true
-
-[node name="TopLeft" type="Marker2D" parent="RoadTest"]
-position = Vector2(-40, 0)
-
-[node name="TopRight" type="Marker2D" parent="RoadTest"]
-position = Vector2(47, 1)
-
-[node name="ObstacleContainer" type="Node2D" parent="RoadTest"]
-unique_name_in_owner = true
-
-[node name="PauseLayer" type="CanvasLayer" parent="."]
-
-[node name="PauseLayer" parent="PauseLayer" instance=ExtResource("13_0dj0t")]
-visible = false
 
 [node name="Sun" type="AnimatedSprite2D" parent="."]
 position = Vector2(224, 74)
@@ -735,8 +587,31 @@ position = Vector2(31, 94)
 scale = Vector2(203, 213.5)
 texture = SubResource("CanvasTexture_n44uc")
 
-[node name="Node2D" type="Node2D" parent="."]
-position = Vector2(179, 122)
+[node name="PlayerSpaceship" parent="." instance=ExtResource("5_vkcgd")]
+position = Vector2(128, 199)
+
+[node name="Horizon" type="Marker2D" parent="." node_paths=PackedStringArray("obstacle_container")]
+position = Vector2(130, 119)
+script = ExtResource("12_ddr63")
+obstacles = Array[PackedScene]([ExtResource("12_0dj0t"), ExtResource("7_w0l5l"), ExtResource("13_w0l5l")])
+obstacle_container = NodePath("ObstacleContainer")
+debug_draw = false
+edge_objects = Array[PackedScene]([ExtResource("13_nuslc"), ExtResource("11_e0wnd")])
+metadata/_edit_group_ = true
+
+[node name="TopLeft" type="Marker2D" parent="Horizon"]
+position = Vector2(-40, 0)
+
+[node name="TopRight" type="Marker2D" parent="Horizon"]
+position = Vector2(47, 1)
+
+[node name="ObstacleContainer" type="Node2D" parent="Horizon"]
+unique_name_in_owner = true
+
+[node name="PauseLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseLayer" parent="PauseLayer" instance=ExtResource("13_0dj0t")]
+visible = false
 
 [node name="HUD" parent="." instance=ExtResource("11_tdoqa")]
 

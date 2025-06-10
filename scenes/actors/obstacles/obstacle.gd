@@ -9,6 +9,7 @@ var perspective_speed := 0.0
 @export var acceleration := 1.05
 @export var deceleration_on_hit := 50.
 @export var serious_colission := true
+@export var custom_cooldown := 1.
 
 var initial_y_position := 0.0
 var final_y_position := 256.
@@ -47,7 +48,7 @@ func use_close_sprite():
 func _process(delta):
 	if is_zero_approx(current_level.speed):
 		return
-	
+
 	# upon spawning, the obstacle moves up X pixels as the distance to the target keeps decreasing
 	if is_far:
 		# time_far_away -= delta * (current_level.speed / default_speed)
@@ -61,25 +62,15 @@ func _process(delta):
 			_pixels_moved_far_away_count = pixels_moved_far_away
 			is_far = false
 			use_close_sprite()
-		
-		return
-		
-	
-	## The current speed of the ship multiplied by acceleration to make things go faster closer to the screen
-	## Multiplied by the obstacle speed
-	## Multiplied by the target direction and delta
-	# perspective_speed += current_level.speed * acceleration * obstacle_speed_multiplier
-	# var new_position = floor(position + direction * perspective_speed * delta)
-	# position = new_position
 
+		return
+
+
+	# The current speed of the ship multiplied by acceleration to make things go faster closer to the screen
+	# Multiplied by the obstacle speed
+	# Multiplied by the target direction and delta
 	perspective_speed += current_level.speed * acceleration * obstacle_speed_multiplier
 	position += direction * perspective_speed * delta
-	
-	#var _scale : float = remap(scale.x, initial_y_position, final_y_position, 1, final_scale)
-	#scale = Vector2(_scale, _scale)
-	#print("Scale: " + str(scale))
-	#
-	# scale = (global_position.y - initial_y_position) * delta
+
 	if global_position.y > GameGlobals.BOTTOM_RIGHT.y + 100:
 		queue_free()
-	
