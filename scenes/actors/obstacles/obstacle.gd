@@ -10,11 +10,16 @@ var perspective_speed := 0.0
 @export var deceleration_on_hit := 50.
 @export var serious_colission := true
 
+var initial_y_position := 0.0
+var final_y_position := 256.
+var final_scale := 1.3
+
 var time_far_away := 1.2
 var is_far := true
 var obstacle_speed_multiplier := 0.3
 var subpixel_y := 0.0
 var default_speed := 20.
+var speed_from_afar := 0.1
 
 @onready var obstacle_small: Sprite2D = $ObstacleSmall
 @onready var obstacle_large: Sprite2D = $ObstacleLarge
@@ -23,11 +28,14 @@ var default_speed := 20.
 func _ready() -> void:
 	use_far_away_sprite()
 
+
 func use_far_away_sprite():
 	obstacle_large.hide()
 	obstacle_small.show()
 
+
 func use_close_sprite():
+	initial_y_position = global_position.y
 	obstacle_large.show()
 	obstacle_small.hide()
 
@@ -37,8 +45,16 @@ func _process(delta):
 		return
 		
 	if is_far:
+# if curent level distance is decreasing, reduce time far away
+		if current_level.distance < current_level.previous_distance:
+			time_far_away -= delta * 0.5
+		else:
+			time_far_away += delta * 0.5
+
+
+
 		time_far_away -= delta * (current_level.speed / default_speed)
-		subpixel_y -= 0.1
+		subpixel_y -= speed_from_afar
 		var move = int(subpixel_y)
 		if move != 0:
 			position.y += move
@@ -47,14 +63,23 @@ func _process(delta):
 			is_far = false
 			use_close_sprite()
 		return
+		
 	
 	## The current speed of the ship multiplied by acceleration to make things go faster closer to the screen
 	## Multiplied by the obstacle speed
 	## Multiplied by the target direction and delta
+	# perspective_speed += current_level.speed * acceleration * obstacle_speed_multiplier
+	# var new_position = floor(position + direction * perspective_speed * delta)
+	# position = new_position
+
 	perspective_speed += current_level.speed * acceleration * obstacle_speed_multiplier
 	position += direction * perspective_speed * delta
-	#(position - horizon_position).normalized() * speed * delta
-	scale += Vector2(0.5, 0.5) * delta
+	
+	#var _scale : float = remap(scale.x, initial_y_position, final_y_position, 1, final_scale)
+	#scale = Vector2(_scale, _scale)
+	#print("Scale: " + str(scale))
+	#
+	# scale = (global_position.y - initial_y_position) * delta
 	if global_position.y > GameGlobals.BOTTOM_RIGHT.y + 100:
 		queue_free()
 	

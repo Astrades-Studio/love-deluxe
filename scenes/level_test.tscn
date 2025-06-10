@@ -1,9 +1,10 @@
-[gd_scene load_steps=95 format=3 uid="uid://bfqb614bysg2o"]
+[gd_scene load_steps=98 format=3 uid="uid://bfqb614bysg2o"]
 
 [ext_resource type="Script" uid="uid://cq2c3o2650s8s" path="res://scenes/level.gd" id="1_yvmk3"]
 [ext_resource type="Texture2D" uid="uid://qxq1idrxyih3" path="res://assets/images/UntitledArtwork2.png" id="2_e0wnd"]
 [ext_resource type="Texture2D" uid="uid://dwj5fcylywix0" path="res://assets/sprites/sun_spritesheet.png" id="2_yvmk3"]
 [ext_resource type="Shader" uid="uid://d17y0dhwyp2xx" path="res://scenes/planet.gdshader" id="3_7dxvt"]
+[ext_resource type="Texture2D" uid="uid://5o241fms1qw4" path="res://assets/sprites/spaceShooter2_spritesheet.png" id="3_n44uc"]
 [ext_resource type="Script" uid="uid://dbishapkknvgm" path="res://scenes/obstacle_spawner.gd" id="3_vkcgd"]
 [ext_resource type="PackedScene" uid="uid://jtsrok2xct5h" path="res://scenes/actors/player_spaceship.tscn" id="5_vkcgd"]
 [ext_resource type="Texture2D" uid="uid://gchi4ryinn30" path="res://assets/sprites/t_buoy_large.png" id="6_7dxvt"]
@@ -14,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b0grvql6f6hgt" path="res://scenes/actors/obstacles/asteroid.tscn" id="12_0dj0t"]
 [ext_resource type="Script" uid="uid://dqcyxei45tdkm" path="res://scenes/road_test.gd" id="12_ddr63"]
 [ext_resource type="PackedScene" uid="uid://j71ioyt8gglp" path="res://scenes/ui/pause_layer.tscn" id="13_0dj0t"]
+[ext_resource type="PackedScene" uid="uid://cl3xv284nkgfl" path="res://scenes/actors/obstacles/buoy.tscn" id="13_nuslc"]
 [ext_resource type="PackedScene" uid="uid://c8lth06eyrfcy" path="res://scenes/actors/obstacles/obstacle_cone.tscn" id="13_w0l5l"]
 
 [sub_resource type="Gradient" id="Gradient_vbogn"]
@@ -26,15 +28,19 @@ gradient = SubResource("Gradient_vbogn")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjays"]
+atlas = ExtResource("3_n44uc")
+region = Rect2(562, 290.41, 123, 356.59)
+
 [sub_resource type="Curve2D" id="Curve2D_6g5uf"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -54, 258, 0, 0, -1, 0, -4, 198, 1, 0, -1, 0, 88, 76)
+"points": PackedVector2Array(0, 0, 0, 0, -60, 265, 0, 0, -1, 0, -10, 205, 1, 0, -1, 0, 88, 76)
 }
 point_count = 3
 
 [sub_resource type="Curve2D" id="Curve2D_r2no1"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 301, 258, 0, 0, 0, 0, 251, 198, 0, 0, 0, 0, 168, 76)
+"points": PackedVector2Array(0, 0, 0, 0, 295, 265, 0, 0, 0, 0, 245, 205, 0, 0, 0, 0, 168, 76)
 }
 point_count = 3
 
@@ -74,16 +80,14 @@ emission_curve = SubResource("CurveTexture_vnuhc")
 script/source = "extends GPUParticles2D
 
 
-var level : Level
-
-#
-#func _ready() -> void:
-	#level = GameGlobals.get_current_level()
-	#level.speed_changed.connect(_on_speed_changed)
+var level : Level:
+	set(l):
+		level = l
+		level.speed_changed.connect(_on_speed_changed)
 
 
 func _on_speed_changed(value: float) -> void:
-	pass
+	speed_scale = remap(value, 0, 50, 0, 4)
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tdoqa"]
@@ -550,17 +554,17 @@ script = ExtResource("1_yvmk3")
 metadata/_edit_vertical_guides_ = [92.0, 0.0]
 metadata/_edit_horizontal_guides_ = [119.0, 238.0]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -5
 
-[node name="Background" type="Sprite2D" parent="CanvasLayer"]
+[node name="Background" type="Sprite2D" parent="BackgroundLayer"]
 texture_filter = 1
 position = Vector2(128, 114)
 scale = Vector2(13.6809, 10.6585)
 texture = SubResource("GradientTexture2D_d5kir")
 metadata/_edit_lock_ = true
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="TextureRect" type="TextureRect" parent="BackgroundLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -568,8 +572,17 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_e0wnd")
 
+[node name="StationSprite" type="Sprite2D" parent="BackgroundLayer"]
+unique_name_in_owner = true
+position = Vector2(131, 118)
+rotation = 0.174533
+scale = Vector2(0.4, 0.4)
+texture = SubResource("AtlasTexture_fjays")
+
 [node name="Horizon" type="Node2D" parent="."]
-position = Vector2(127, 126)
+process_mode = 4
+visible = false
+position = Vector2(133, 119)
 script = ExtResource("3_vkcgd")
 obstacle_list = Array[PackedScene]([ExtResource("7_w0l5l"), ExtResource("12_0dj0t"), ExtResource("13_w0l5l")])
 metadata/_edit_group_ = true
@@ -586,18 +599,18 @@ corner = Vector2(-50, 300)
 corner_2 = Vector2(0, 240)
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
-position = Vector2(52.7563, 122.887)
-rotation = -0.91973
-progress = 172.253
+position = Vector2(-54.8787, 258.854)
+rotation = -0.876058
+progress = 8.04123
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D"]
 rotation = 0.853466
 texture = ExtResource("6_7dxvt")
 
 [node name="PathFollow2D2" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
-position = Vector2(52.7563, 122.887)
-rotation = -0.91973
-progress = 172.253
+position = Vector2(-54.8787, 258.854)
+rotation = -0.876058
+progress = 8.04123
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D2"]
 visible = false
@@ -605,9 +618,9 @@ rotation = 0.853466
 texture = ExtResource("6_7dxvt")
 
 [node name="PathFollow2D3" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
-position = Vector2(52.7563, 122.887)
-rotation = -0.91973
-progress = 172.253
+position = Vector2(-54.8787, 258.854)
+rotation = -0.876058
+progress = 8.04123
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D3"]
 visible = false
@@ -615,9 +628,9 @@ rotation = 0.853466
 texture = ExtResource("6_7dxvt")
 
 [node name="PathFollow2D4" type="PathFollow2D" parent="Horizon/Road/LeftRoadEdge"]
-position = Vector2(52.7563, 122.887)
-rotation = -0.91973
-progress = 172.253
+position = Vector2(-54.8787, 258.854)
+rotation = -0.876058
+progress = 8.04123
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/LeftRoadEdge/PathFollow2D4"]
 visible = false
@@ -633,18 +646,18 @@ corner = Vector2(306, 300)
 corner_2 = Vector2(256, 240)
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
-position = Vector2(199.738, 122.651)
-rotation = -2.1682
-progress = 169.235
+position = Vector2(287.984, 256.581)
+rotation = -2.26553
+progress = 10.8353
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D"]
 rotation = 2.3178
 texture = ExtResource("6_7dxvt")
 
 [node name="PathFollow2D2" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
-position = Vector2(199.738, 122.651)
-rotation = -2.1682
-progress = 169.235
+position = Vector2(287.984, 256.581)
+rotation = -2.26553
+progress = 10.8353
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D2"]
 visible = false
@@ -652,9 +665,9 @@ rotation = 2.3178
 texture = ExtResource("6_7dxvt")
 
 [node name="PathFollow2D3" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
-position = Vector2(199.738, 122.651)
-rotation = -2.1682
-progress = 169.235
+position = Vector2(287.984, 256.581)
+rotation = -2.26553
+progress = 10.8353
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D3"]
 visible = false
@@ -662,9 +675,9 @@ rotation = 2.3178
 texture = ExtResource("6_7dxvt")
 
 [node name="PathFollow2D4" type="PathFollow2D" parent="Horizon/Road/RightRoadEdge"]
-position = Vector2(199.738, 122.651)
-rotation = -2.1682
-progress = 169.235
+position = Vector2(287.984, 256.581)
+rotation = -2.26553
+progress = 10.8353
 
 [node name="Flecha" type="Sprite2D" parent="Horizon/Road/RightRoadEdge/PathFollow2D4"]
 visible = false
@@ -673,36 +686,33 @@ texture = ExtResource("6_7dxvt")
 
 [node name="ObstacleContainer" type="Node2D" parent="Horizon"]
 
-[node name="MovingStars" type="GPUParticles2D" parent="Horizon"]
+[node name="PlayerSpaceship" parent="." instance=ExtResource("5_vkcgd")]
+position = Vector2(128, 199)
+
+[node name="MovingStars" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(133, 119)
 amount = 40
 texture = ExtResource("11_n44uc")
 lifetime = 4.75
 preprocess = 5.0
+speed_scale = 4.0
 process_material = SubResource("ParticleProcessMaterial_dsidl")
 script = SubResource("GDScript_e0wnd")
 
-[node name="PlayerSpaceship" parent="." instance=ExtResource("5_vkcgd")]
-position = Vector2(128, 199)
-
 [node name="RoadTest" type="Marker2D" parent="." node_paths=PackedStringArray("obstacle_container")]
-position = Vector2(129.81, 94.3)
+position = Vector2(130, 119)
 script = ExtResource("12_ddr63")
 obstacles = Array[PackedScene]([ExtResource("12_0dj0t"), ExtResource("7_w0l5l"), ExtResource("13_w0l5l")])
 obstacle_container = NodePath("ObstacleContainer")
+edge_objects = Array[PackedScene]([ExtResource("13_nuslc")])
+metadata/_edit_group_ = true
 
 [node name="TopLeft" type="Marker2D" parent="RoadTest"]
 position = Vector2(-40, 0)
 
 [node name="TopRight" type="Marker2D" parent="RoadTest"]
 position = Vector2(47, 1)
-
-[node name="Marker2D3" type="Marker2D" parent="RoadTest"]
-position = Vector2(-129, 118)
-
-[node name="Marker2D4" type="Marker2D" parent="RoadTest"]
-position = Vector2(127, 118)
-
-[node name="Marker2D5" type="Marker2D" parent="RoadTest"]
 
 [node name="ObstacleContainer" type="Node2D" parent="RoadTest"]
 unique_name_in_owner = true
@@ -713,7 +723,7 @@ unique_name_in_owner = true
 visible = false
 
 [node name="Sun" type="AnimatedSprite2D" parent="."]
-position = Vector2(204.363, 26.5551)
+position = Vector2(224, 74)
 scale = Vector2(0.664829, 0.682199)
 sprite_frames = SubResource("SpriteFrames_fjays")
 frame_progress = 0.529715

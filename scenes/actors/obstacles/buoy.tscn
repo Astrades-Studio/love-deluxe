@@ -1,12 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://cl3xv284nkgfl"]
+[gd_scene load_steps=5 format=3 uid="uid://cl3xv284nkgfl"]
 
 [ext_resource type="Texture2D" uid="uid://dme3iytobin2v" path="res://assets/sprites/t_buoy_small.png" id="1_5qnwb"]
+[ext_resource type="Script" uid="uid://qpqacb74xe18" path="res://scenes/actors/obstacles/obstacle.gd" id="1_8ulr1"]
 [ext_resource type="Texture2D" uid="uid://gchi4ryinn30" path="res://assets/sprites/t_buoy_large.png" id="2_8ulr1"]
 
-[node name="Buoy" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_5qnwb"]
+radius = 5.38516
+
+[node name="Buoy" type="Area2D"]
+script = ExtResource("1_8ulr1")
+deceleration_on_hit = 5.0
+serious_colission = false
 
 [node name="ObstacleSmall" type="Sprite2D" parent="."]
 texture = ExtResource("1_5qnwb")
 
 [node name="ObstacleLarge" type="Sprite2D" parent="."]
 texture = ExtResource("2_8ulr1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5qnwb")

@@ -6,8 +6,10 @@ class_name RoadTest
 @export var lane_count := 6
 
 @export_category("Obstacles")
+@export var spawn_obstacles := true
 @export var obstacles : Array[PackedScene] = []
 @export var obstacle_container: Node2D
+@export var MAX_DELAY_BETWEEN_OBSTACLES := 2.0
 
 @onready var top_left_marker: Marker2D = $TopLeft
 @onready var top_right_marker: Marker2D = $TopRight
@@ -19,6 +21,11 @@ class_name RoadTest
 @export var bottom_right : Vector2 = Vector2(256, 240)
 @export var bottom_left : Vector2 = Vector2(0, 240)
 @export var debug_draw := true
+
+@export_category("Edges")
+@export var spawn_buoys := true
+@export var edge_objects : Array[PackedScene]
+@export var MAX_DELAY_BETWEEN_BUOYS := 1.27
 
 var buoy_lanes : Array[Lane] = []
 var obstacle_lanes : Array[Lane] = []
@@ -44,10 +51,14 @@ func _ready() -> void:
 	assign_lanes(lanes)
 
 
-var delay_between_obstacles : float = 2.0
-var MAX_DELAY_BETWEEN_OBSTACLES := 2.0
-
 func _process(_delta: float) -> void:
+	if spawn_buoys:
+		_spawn_buoys(_delta)
+	if spawn_obstacles:
+		_spawn_obstacles(_delta)
+
+var delay_between_obstacles : float = MAX_DELAY_BETWEEN_OBSTACLES
+func _spawn_obstacles(_delta: float):
 	delay_between_obstacles -= _delta
 	if delay_between_obstacles <= 0.0:
 		delay_between_obstacles = MAX_DELAY_BETWEEN_OBSTACLES
@@ -55,13 +66,26 @@ func _process(_delta: float) -> void:
 			var lane := obstacle_lanes[randi() % obstacle_lanes.size()]
 			spawn_random_obstacle(lane)
 
+var delay_between_buoys : float = MAX_DELAY_BETWEEN_BUOYS
+func _spawn_buoys(_delta: float):
+	delay_between_buoys -= _delta
+	if delay_between_buoys <= 0.0:
+		delay_between_buoys = MAX_DELAY_BETWEEN_BUOYS
+		
+		for lane in buoy_lanes:
+			var buoy := edge_objects[randi() % edge_objects.size()].instantiate()
+			buoy.global_position = (lane.start)
+			buoy.direction = (lane.end - lane.start).normalized()
+			obstacle_container.add_child(buoy)
+			# print("Spawned buoy at: ", buoy.global_position, " in lane with start: ", to_global(lane.start), " and end: ", to_global(lane.end))
+
 
 func spawn_random_obstacle(lane: Lane) -> void:
 	var obstacle := obstacles[randi() % obstacles.size()].instantiate()
-	obstacle.global_position = to_global(lane.start)
+	obstacle.global_position = (lane.start)
 	obstacle.direction = (lane.end - lane.start).normalized()
 	obstacle_container.add_child(obstacle)
-	print("Spawned obstacle at: ", obstacle.global_position, " in lane with start: ", to_global(lane.start), " and end: ", to_global(lane.end))
+	# print("Spawned obstacle at: ", obstacle.global_position, " in lane with start: ", to_global(lane.start), " and end: ", to_global(lane.end))
 
 
 
@@ -73,7 +97,7 @@ func assign_lanes(_lanes: Array[Lane]) -> void:
 	# The rest are the obstacle lanes
 	for i in range(1, lanes.size() - 1):
 		obstacle_lanes.append(lanes[i])
-		print("Obstacle Lane ", i, " Start: ", to_global(lanes[i].start), " End: ", to_global(lanes[i].end))
+		# print("Obstacle Lane ", i, " Start: ", to_global(lanes[i].start), " End: ", to_global(lanes[i].end))
 
 
 func create_paths(_lanes: Array[Lane]):
@@ -87,14 +111,14 @@ func create_paths(_lanes: Array[Lane]):
 		add_child(path)
 		lane.path = path
 		lane.curve = path.curve
-		print("Created path for lane with start: ", lane.start, " and end: ", lane.end)
+		# print("Created path for lane with start: ", lane.start, " and end: ", lane.end)
 	
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSFORM_CHANGED and debug_draw:
 		top_left = global_position - Vector2(horizon_mid_width, 0)
 		top_right = global_position + Vector2(horizon_mid_width, 0)
-		print("Top Left: ", top_left, " Top Right: ", top_right)
+		# print("Top Left: ", top_left, " Top Right: ", top_right)
 		queue_redraw()
 
 
@@ -108,7 +132,7 @@ func _calculate_lanes() -> Array[Lane]:
 		var lane := Lane.new()
 		lane.start = to_local(Vector2((global_position.x - horizon_mid_width) + i * top_lane_width, global_position.y))
 		lane.end = to_local((bottom_left) + Vector2(i * bottom_lane_width, bottom_padding))
-		print("Lane ", i, " Start: ", to_global(lane.start), " End: ", to_global(lane.end))
+		# print("Lane ", i, " Start: ", to_global(lane.start), " End: ", to_global(lane.end))
 		lane.path = Path2D.new()
 		lane.curve = Curve2D.new()
 		
@@ -131,8 +155,8 @@ func _draw_lanes(lanes: Array[Lane]) -> void:
 		draw_line(lane.start, lane.end, Color(1, 1, 1, 0.3), 2)
 #endregion
 
-# Debug printing
+# Debug printi# ng
 	#print( "Bottom Left: ", bottom_left, " Bottom Right: ", bottom_right)
-	#print("Bottom Width: ", bottom_width)
-	#print("Bottom Lane Width: ", bottom_lane_width)
-	#print("Top Lane Width: ", top_lane_width)
+	## print("Bottom Width: ", bottom_width)
+	## print("Bottom Lane Width: ", bottom_lane_width)
+	## print("Top Lane Width: ", top_lane_width)

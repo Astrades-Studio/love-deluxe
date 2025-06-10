@@ -5,12 +5,15 @@ class_name Level
 @onready var win_overlay: CanvasLayer = $WinOverlay
 @onready var continue_button: Button = %ContinueButton
 @onready var main_menu_button: Button = %MainMenuButton
+@onready var station_sprite: Sprite2D = %StationSprite
+@onready var moving_stars: GPUParticles2D = %MovingStars
 
 @export var target_distance := 120000.
 
 var current_distance : float:
 	set(new):
 		current_distance = new
+		update_station_sprite(current_distance)
 		hud.update_distance_travelled(int(target_distance - current_distance))
 		#hud.update_distance_remaining(int(current_distance))
 
@@ -47,6 +50,7 @@ func _ready() -> void:
 	continue_button.pressed.connect(go_to_shop_scene)
 	main_menu_button.pressed.connect(back_to_main_menu)
 	GameGlobals.level = self
+	moving_stars.level = self
 	start_driving()
 
 
@@ -129,10 +133,14 @@ func reset_frame_applied_slowdown():
 
 #endregion
 
+func update_station_sprite(current_distance):
+	var new_scale : float = remap(current_distance, target_distance, 0.0, 0.01, 0.4)
+	station_sprite.scale = Vector2(new_scale, new_scale)
+
 
 const SHOP_MENU = preload("res://scenes/ui/shop_menu.tscn")
 func go_to_shop_scene():
-	SceneTransitionManager.transition_to_scene(MAIN_MENU)
+	SceneTransitionManager.transition_to_scene(SHOP_MENU)
 
 
 const MAIN_MENU = preload("res://scenes/ui/main_menu.tscn")

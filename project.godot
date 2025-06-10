@@ -50,7 +50,7 @@ project/assembly_name="New Template"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/limbo_console/plugin.cfg", "res://addons/plenticons/plugin.cfg", "res://addons/shaker/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/limbo_console/plugin.cfg", "res://addons/plenticons/plugin.cfg", "res://addons/shaker/plugin.cfg")
 
 [file_customization]
 
