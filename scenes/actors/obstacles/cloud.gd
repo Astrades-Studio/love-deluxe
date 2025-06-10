@@ -5,9 +5,6 @@ var first_cloud := true
 var spawning_clouds := false
 
 
-func use_far_away_sprite():
-	pass
-
 func use_close_sprite():
 	serious_colission = false
 	obstacle_large.show()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://bfqb614bysg2o"]
+[gd_scene load_steps=89 format=3 uid="uid://bfqb614bysg2o"]
 
 [ext_resource type="Script" uid="uid://cq2c3o2650s8s" path="res://scenes/level.gd" id="1_yvmk3"]
 [ext_resource type="Texture2D" uid="uid://qxq1idrxyih3" path="res://assets/images/UntitledArtwork2.png" id="2_e0wnd"]
@@ -6,15 +6,10 @@
 [ext_resource type="Shader" uid="uid://d17y0dhwyp2xx" path="res://scenes/planet.gdshader" id="3_7dxvt"]
 [ext_resource type="Texture2D" uid="uid://5o241fms1qw4" path="res://assets/sprites/spaceShooter2_spritesheet.png" id="3_n44uc"]
 [ext_resource type="PackedScene" uid="uid://jtsrok2xct5h" path="res://scenes/actors/player_spaceship.tscn" id="5_vkcgd"]
-[ext_resource type="PackedScene" uid="uid://byoeeeqa5hymq" path="res://scenes/actors/obstacles/cloud.tscn" id="7_w0l5l"]
-[ext_resource type="PackedScene" uid="uid://bwtrfu7ldwiin" path="res://scenes/actors/obstacles/road_sign.tscn" id="11_e0wnd"]
 [ext_resource type="Texture2D" uid="uid://c7iq4cttq3wsd" path="res://addons/plenticons/icons/16x/2d/spark-full-gray.png" id="11_n44uc"]
 [ext_resource type="PackedScene" uid="uid://bet3dxv15wonf" path="res://scenes/ui/hud.tscn" id="11_tdoqa"]
-[ext_resource type="PackedScene" uid="uid://b0grvql6f6hgt" path="res://scenes/actors/obstacles/asteroid.tscn" id="12_0dj0t"]
-[ext_resource type="Script" uid="uid://dqcyxei45tdkm" path="res://scenes/road_test.gd" id="12_ddr63"]
+[ext_resource type="Script" uid="uid://dqcyxei45tdkm" path="res://scenes/obstacle_spawner.gd" id="12_ddr63"]
 [ext_resource type="PackedScene" uid="uid://j71ioyt8gglp" path="res://scenes/ui/pause_layer.tscn" id="13_0dj0t"]
-[ext_resource type="PackedScene" uid="uid://cl3xv284nkgfl" path="res://scenes/actors/obstacles/buoy.tscn" id="13_nuslc"]
-[ext_resource type="PackedScene" uid="uid://c8lth06eyrfcy" path="res://scenes/actors/obstacles/obstacle_cone.tscn" id="13_w0l5l"]
 
 [sub_resource type="Gradient" id="Gradient_vbogn"]
 interpolation_mode = 2
@@ -66,12 +61,14 @@ emission_curve = SubResource("CurveTexture_vnuhc")
 script/source = "extends GPUParticles2D
 
 
-var level : Level:
-	set(l):
-		level = l
-		level.speed_changed.connect(_on_speed_changed)
-
-
+func _ready() -> void:
+	if !GameGlobals.is_node_ready():
+		await GameGlobals.ready
+	# get_tree().process_frame
+	var callable : Callable = func(): GameGlobals.level.speed_changed.connect(_on_speed_changed)
+	callable.call_deferred()
+	
+	
 func _on_speed_changed(value: float) -> void:
 	speed_scale = remap(value, 0, 50, 0, 4)
 "
@@ -571,6 +568,9 @@ texture = ExtResource("11_n44uc")
 lifetime = 4.75
 preprocess = 5.0
 speed_scale = 4.0
+fixed_fps = 3
+interpolate = false
+fract_delta = false
 process_material = SubResource("ParticleProcessMaterial_dsidl")
 script = SubResource("GDScript_e0wnd")
 
@@ -584,28 +584,29 @@ frame_progress = 0.529715
 texture_filter = 1
 material = SubResource("ShaderMaterial_e0wnd")
 position = Vector2(31, 94)
-scale = Vector2(203, 213.5)
+scale = Vector2(83.192, 87.495)
 texture = SubResource("CanvasTexture_n44uc")
 
 [node name="PlayerSpaceship" parent="." instance=ExtResource("5_vkcgd")]
 position = Vector2(128, 199)
 
-[node name="Horizon" type="Marker2D" parent="." node_paths=PackedStringArray("obstacle_container")]
+[node name="ObstacleSpawner" type="Marker2D" parent="." node_paths=PackedStringArray("obstacle_container")]
+unique_name_in_owner = true
 position = Vector2(130, 119)
 script = ExtResource("12_ddr63")
-obstacles = Array[PackedScene]([ExtResource("12_0dj0t"), ExtResource("7_w0l5l"), ExtResource("13_w0l5l")])
+obstacles = Array[Dictionary]([])
 obstacle_container = NodePath("ObstacleContainer")
 debug_draw = false
-edge_objects = Array[PackedScene]([ExtResource("13_nuslc"), ExtResource("11_e0wnd")])
+MAX_DELAY_BETWEEN_SIGNAGE = 1400
 metadata/_edit_group_ = true
 
-[node name="TopLeft" type="Marker2D" parent="Horizon"]
+[node name="TopLeft" type="Marker2D" parent="ObstacleSpawner"]
 position = Vector2(-40, 0)
 
-[node name="TopRight" type="Marker2D" parent="Horizon"]
+[node name="TopRight" type="Marker2D" parent="ObstacleSpawner"]
 position = Vector2(47, 1)
 
-[node name="ObstacleContainer" type="Node2D" parent="Horizon"]
+[node name="ObstacleContainer" type="Node2D" parent="ObstacleSpawner"]
 unique_name_in_owner = true
 
 [node name="PauseLayer" type="CanvasLayer" parent="."]

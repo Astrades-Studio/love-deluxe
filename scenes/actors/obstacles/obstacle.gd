@@ -35,6 +35,8 @@ func _ready() -> void:
 
 
 func use_far_away_sprite():
+	obstacle_large.z_index = 1
+	obstacle_small.z_index = -1
 	obstacle_large.hide()
 	obstacle_small.show()
 
