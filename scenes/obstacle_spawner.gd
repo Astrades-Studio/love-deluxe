@@ -8,13 +8,10 @@ class_name ObstacleSpawner
 @export_category("Obstacles")
 @export var spawn_obstacles := true
 #@export var obstacles : Array[PackedScene] = []
-@export var obstacles: Array[Dictionary] = [
-	{"scene": preload("uid://b0grvql6f6hgt"), "weight": 12, "name": "Asteroid", "lane": -1},
-	{"scene": preload("uid://byoeeeqa5hymq"), "weight": 3, "name": "Cloud", "lane": -1},
-	{"scene": preload("uid://c8lth06eyrfcy"), "weight": 6, "name": "Traffic Cone", "lane": -1},
-	]
+@export var obstacles: Array[ObstacleData]
 @export var obstacle_container: Node2D
-@export var MAX_DELAY_BETWEEN_OBSTACLES := 50
+@export var delay_between_obstacles : int = 600  # Cada 100 km
+var next_obstacle_spawn_on : float
 var total_obstacle_weight: int = 0
 
 @onready var top_left_marker: Marker2D = $TopLeft
@@ -30,18 +27,22 @@ var total_obstacle_weight: int = 0
 
 @export_category("Edges")
 @export var spawn_signage := true
+@export var delay_between_signage : float = 500
+var next_signage_spawn_on : float
 
-@export var signage_dict: Array[Dictionary] = [
-	{"scene": preload("uid://cl3xv284nkgfl"), "weight": 12, "name": "Buoy", "lane": -1},
-	{"scene": preload("uid://bwtrfu7ldwiin"), "weight": 1, "name": "Road Sign", "lane": 0},
-	]
-@export var MAX_DELAY_BETWEEN_SIGNAGE := 900
+@export var signage_dict: Array[ObstacleData]
 var total_signage_weight: int = 0
 
 var signage_lanes : Array[Lane] = []
 var obstacle_lanes : Array[Lane] = []
 var bottom_padding := 20.0
 var lanes : Array[Lane]
+
+var level : Level:
+	set(new_level):
+		level = new_level
+		next_obstacle_spawn_on = level.target_distance
+		next_signage_spawn_on = level.target_distance
 
 
 class Lane:
@@ -59,11 +60,11 @@ func _ready() -> void:
 	set_notify_transform(true)
 	
 	# Calculate the total weight from our obstacle list
-	for obstacle_data : Dictionary in obstacles:
-		total_obstacle_weight += obstacle_data["weight"]
+	for obstacle_data : ObstacleData in obstacles:
+		total_obstacle_weight += obstacle_data.weight
 	
-	for signage_data : Dictionary in signage_dict:
-		total_signage_weight += signage_data["weight"]
+	for signage_data : ObstacleData in signage_dict:
+		total_signage_weight += signage_data.weight
 
 	lanes = _calculate_lanes()
 	#_create_paths(lanes)
@@ -73,36 +74,33 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if !spawn_obstacles:
 		return
+	var distance := GameGlobals.level.current_distance
 	if spawn_signage:
-		_spawn_signage()
+		_spawn_signage(distance)
 	if spawn_obstacles:
-		_spawn_obstacles(_delta)
+		_spawn_obstacles(distance)
 
 
-var delay_between_obstacles : float = MAX_DELAY_BETWEEN_OBSTACLES
-func _spawn_obstacles(_delta: float):
-	delay_between_obstacles -= _delta
-	if delay_between_obstacles <= 0.0:
-		delay_between_obstacles = MAX_DELAY_BETWEEN_OBSTACLES
+func _spawn_signage(_distance : float):
+	if next_signage_spawn_on >= _distance:
+		next_signage_spawn_on -= delay_between_signage
+	
+		for lane in signage_lanes:
+			var signage_scene : PackedScene = _choose_random_obstacle_based_on_weight(signage_dict, total_signage_weight)
+			#: PackedScene = signage_dict[randi() % signage_dict.size()]["scene"]
+			var signage := signage_scene.instantiate() as Obstacle
+			signage.global_position = (lane.start)
+			signage.direction = (lane.end - lane.start).normalized()
+			obstacle_container.add_child(signage)
+
+
+func _spawn_obstacles(_distance : float):
+	if next_obstacle_spawn_on >= _distance:
+		next_obstacle_spawn_on -= delay_between_obstacles
+		
 		if obstacle_lanes.size() > 0:
 			var lane := obstacle_lanes[randi() % obstacle_lanes.size()]
 			_spawn_random_obstacle(lane)
-
-
-func start_spawning() -> void:
-	spawn_obstacles = true
-	spawn_signage = true
-
-
-func stop_spawning() -> void:
-	spawn_obstacles = false
-	spawn_signage = false
-
-
-func start_spawning_at_interval(interval: float) -> void:
-	MAX_DELAY_BETWEEN_OBSTACLES = int(interval)
-	delay_between_obstacles = interval
-	start_spawning()
 
 
 func _spawn_random_obstacle(lane: Lane) -> void:
@@ -115,38 +113,19 @@ func _spawn_random_obstacle(lane: Lane) -> void:
 	# print("Spawned obstacle at: ", obstacle.global_position, " in lane with start: ", to_global(lane.start), " and end: ", to_global(lane.end))
 
 
-func _choose_random_obstacle_based_on_weight(data: Array[Dictionary], total_weight: int) -> PackedScene:
+func _choose_random_obstacle_based_on_weight(data: Array[ObstacleData], total_weight: int) -> PackedScene:
 	if total_weight == 0:
 		push_warning("Total obstacle weight is zero. Cannot choose an obstacle.")
 		return null
 
 	var random_pick = randi_range(1, total_weight)
 	for obstacle_data in data:
-		random_pick -= obstacle_data["weight"]
+		random_pick -= obstacle_data.weight
 		if random_pick <= 0:
-			return obstacle_data["scene"]
+			return obstacle_data.scene
 	
 	push_warning("No obstacle found for the random pick: " + str(random_pick))
 	return null
-
-
-var delay_between_SIGNAGE : float = MAX_DELAY_BETWEEN_SIGNAGE
-func _spawn_signage():
-	var distance : int = GameGlobals.level.current_distance
-	
-	if distance % (MAX_DELAY_BETWEEN_SIGNAGE) != 0:
-		return
-
-	# if delay_between_SIGNAGE <= 0.0:
-	# 	delay_between_SIGNAGE = MAX_DELAY_BETWEEN_SIGNAGE
-		
-	for lane in signage_lanes:
-		var signage_scene : PackedScene = _choose_random_obstacle_based_on_weight(signage_dict, total_signage_weight)
-		#: PackedScene = signage_dict[randi() % signage_dict.size()]["scene"]
-		var signage := signage_scene.instantiate() as Obstacle
-		signage.global_position = (lane.start)
-		signage.direction = (lane.end - lane.start).normalized()
-		obstacle_container.add_child(signage)
 
 
 ## Sets which lanes are for obstacles and which for SIGNAGE
@@ -158,7 +137,6 @@ func _assign_lanes(_lanes: Array[Lane]) -> void:
 	# The rest are the obstacle lanes
 	for i in range(1, lanes.size() - 1):
 		obstacle_lanes.append(lanes[i])
-
 
 
 func _create_paths(_lanes: Array[Lane]):
@@ -211,8 +189,6 @@ func reset_all_variables() -> void:
 	signage_lanes.clear()
 	total_obstacle_weight = 0
 	total_signage_weight = 0
-	delay_between_obstacles = MAX_DELAY_BETWEEN_OBSTACLES
-	delay_between_SIGNAGE = MAX_DELAY_BETWEEN_SIGNAGE
 	spawn_obstacles = false
 	spawn_signage = false
 
@@ -231,3 +207,13 @@ func _draw_lanes(_lanes: Array[Lane]) -> void:
 	for lane in _lanes:
 		draw_line(lane.start, lane.end, Color(1, 1, 1, 0.3), 2)
 #endregion
+
+
+func start_spawning() -> void:
+	spawn_obstacles = true
+	spawn_signage = true
+
+
+func stop_spawning() -> void:
+	spawn_obstacles = false
+	spawn_signage = false

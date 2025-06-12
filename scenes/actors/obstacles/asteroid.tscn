@@ -10,11 +10,14 @@ radius = 5.0
 [node name="Asteroid" type="Area2D"]
 collision_layer = 6
 script = ExtResource("1_y8kyf")
+crash_type = 2
 
 [node name="ObstacleSmall" type="Sprite2D" parent="."]
+scale = Vector2(1.8, 1.8)
 texture = ExtResource("2_3fp3t")
 
 [node name="ObstacleLarge" type="Sprite2D" parent="."]
+scale = Vector2(1.8, 1.8)
 texture = ExtResource("2_mhy03")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

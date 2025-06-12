@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://bfqb614bysg2o"]
+[gd_scene load_steps=96 format=3 uid="uid://bfqb614bysg2o"]
 
 [ext_resource type="Script" uid="uid://cq2c3o2650s8s" path="res://scenes/level.gd" id="1_yvmk3"]
 [ext_resource type="Texture2D" uid="uid://qxq1idrxyih3" path="res://assets/images/UntitledArtwork2.png" id="2_e0wnd"]
@@ -6,10 +6,17 @@
 [ext_resource type="Shader" uid="uid://d17y0dhwyp2xx" path="res://scenes/planet.gdshader" id="3_7dxvt"]
 [ext_resource type="Texture2D" uid="uid://5o241fms1qw4" path="res://assets/sprites/spaceShooter2_spritesheet.png" id="3_n44uc"]
 [ext_resource type="PackedScene" uid="uid://jtsrok2xct5h" path="res://scenes/actors/player_spaceship.tscn" id="5_vkcgd"]
+[ext_resource type="Script" uid="uid://ca361caruj02a" path="res://resources/obstacle_data/obstacle_data.gd" id="9_nuslc"]
+[ext_resource type="Resource" uid="uid://8fgd7lr36yvu" path="res://resources/obstacle_data/asteroid.tres" id="10_re6lg"]
+[ext_resource type="Resource" uid="uid://poqt83sl3pbr" path="res://resources/obstacle_data/traffic.tres" id="11_1pn8n"]
 [ext_resource type="Texture2D" uid="uid://c7iq4cttq3wsd" path="res://addons/plenticons/icons/16x/2d/spark-full-gray.png" id="11_n44uc"]
 [ext_resource type="PackedScene" uid="uid://bet3dxv15wonf" path="res://scenes/ui/hud.tscn" id="11_tdoqa"]
 [ext_resource type="Script" uid="uid://dqcyxei45tdkm" path="res://scenes/obstacle_spawner.gd" id="12_ddr63"]
+[ext_resource type="Resource" uid="uid://dt27xskbecnju" path="res://resources/obstacle_data/cloud.tres" id="12_vnuhc"]
 [ext_resource type="PackedScene" uid="uid://j71ioyt8gglp" path="res://scenes/ui/pause_layer.tscn" id="13_0dj0t"]
+[ext_resource type="Resource" uid="uid://buqq2miovwlg5" path="res://resources/obstacle_data/cone.tres" id="13_sgyyf"]
+[ext_resource type="Resource" uid="uid://b7qhgg1i55g0m" path="res://resources/obstacle_data/buoy.tres" id="14_blca8"]
+[ext_resource type="Resource" uid="uid://chpa77bpcl2xp" path="res://resources/obstacle_data/road_sign.tres" id="15_dsidl"]
 
 [sub_resource type="Gradient" id="Gradient_vbogn"]
 interpolation_mode = 2
@@ -552,13 +559,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_e0wnd")
+metadata/_edit_lock_ = true
 
 [node name="StationSprite" type="Sprite2D" parent="BackgroundLayer"]
 unique_name_in_owner = true
+texture_filter = 1
 position = Vector2(131, 118)
 rotation = 0.174533
 scale = Vector2(0.4, 0.4)
 texture = SubResource("AtlasTexture_fjays")
+metadata/_edit_lock_ = true
 
 [node name="MovingStars" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
@@ -568,7 +578,7 @@ texture = ExtResource("11_n44uc")
 lifetime = 4.75
 preprocess = 5.0
 speed_scale = 4.0
-fixed_fps = 3
+fixed_fps = 10
 interpolate = false
 fract_delta = false
 process_material = SubResource("ParticleProcessMaterial_dsidl")
@@ -583,8 +593,8 @@ frame_progress = 0.529715
 [node name="Planet" type="Sprite2D" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_e0wnd")
-position = Vector2(31, 94)
-scale = Vector2(83.192, 87.495)
+position = Vector2(34, 78)
+scale = Vector2(104.596, 110.006)
 texture = SubResource("CanvasTexture_n44uc")
 
 [node name="PlayerSpaceship" parent="." instance=ExtResource("5_vkcgd")]
@@ -594,10 +604,11 @@ position = Vector2(128, 199)
 unique_name_in_owner = true
 position = Vector2(130, 119)
 script = ExtResource("12_ddr63")
-obstacles = Array[Dictionary]([])
+obstacles = Array[ExtResource("9_nuslc")]([ExtResource("10_re6lg"), ExtResource("11_1pn8n"), ExtResource("12_vnuhc"), ExtResource("13_sgyyf")])
 obstacle_container = NodePath("ObstacleContainer")
 debug_draw = false
-MAX_DELAY_BETWEEN_SIGNAGE = 1400
+delay_between_signage = 1500.0
+signage_dict = Array[ExtResource("9_nuslc")]([ExtResource("14_blca8"), ExtResource("15_dsidl")])
 metadata/_edit_group_ = true
 
 [node name="TopLeft" type="Marker2D" parent="ObstacleSpawner"]

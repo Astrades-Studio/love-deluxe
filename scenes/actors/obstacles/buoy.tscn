@@ -1,16 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://cl3xv284nkgfl"]
+[gd_scene load_steps=7 format=3 uid="uid://cl3xv284nkgfl"]
 
 [ext_resource type="Texture2D" uid="uid://dme3iytobin2v" path="res://assets/sprites/t_buoy_small.png" id="1_5qnwb"]
 [ext_resource type="Script" uid="uid://qpqacb74xe18" path="res://scenes/actors/obstacles/obstacle.gd" id="1_8ulr1"]
 [ext_resource type="Texture2D" uid="uid://gchi4ryinn30" path="res://assets/sprites/t_buoy_large.png" id="2_8ulr1"]
+[ext_resource type="Script" uid="uid://dwbl1iluandce" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="4_yj34o"]
+[ext_resource type="Script" uid="uid://3bfncbu0xh3e" path="res://addons/shaker/src/Vector2/ShakerReceiver2D.gd" id="5_cfgis"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5qnwb"]
 radius = 5.38516
 
 [node name="Buoy" type="Area2D"]
+collision_layer = 6
 script = ExtResource("1_8ulr1")
 deceleration_on_hit = 5.0
-serious_colission = false
+crash_type = 1
 
 [node name="ObstacleSmall" type="Sprite2D" parent="."]
 texture = ExtResource("1_5qnwb")
@@ -19,4 +22,19 @@ texture = ExtResource("1_5qnwb")
 texture = ExtResource("2_8ulr1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5qnwb")
+
+[node name="ShakerComponent2D" type="Node2D" parent="."]
+script = ExtResource("4_yj34o")
+metadata/_custom_type_script = "uid://dwbl1iluandce"
+
+[node name="ShakerReceiver2D" type="Node2D" parent="ShakerComponent2D"]
+script = ExtResource("5_cfgis")
+metadata/_custom_type_script = "uid://3bfncbu0xh3e"
+
+[node name="Area2D" type="Area2D" parent="ShakerComponent2D/ShakerReceiver2D"]
+collision_layer = 0
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShakerComponent2D/ShakerReceiver2D/Area2D"]
 shape = SubResource("CircleShape2D_5qnwb")

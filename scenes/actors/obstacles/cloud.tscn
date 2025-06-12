@@ -22,6 +22,7 @@ radius = 16.2788
 collision_layer = 6
 script = ExtResource("1_mw75c")
 deceleration_on_hit = 1.0
+crash_type = 0
 
 [node name="ObstacleSmall" type="Sprite2D" parent="."]
 scale = Vector2(0.589819, 0.57067)

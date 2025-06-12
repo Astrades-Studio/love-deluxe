@@ -6,7 +6,7 @@ class_name Level
 @onready var continue_button: Button = %ContinueButton
 @onready var main_menu_button: Button = %MainMenuButton
 @onready var station_sprite: Sprite2D = %StationSprite
-@onready var horizon: ObstacleSpawner = %ObstacleSpawner
+@onready var obstacle_spawner: ObstacleSpawner = %ObstacleSpawner
 
 @export var target_distance := 120000
 
@@ -58,10 +58,11 @@ const FUEL_START := 100.0
 func _ready() -> void:
 	hud.level = self
 	GlobalGameEvents.destination_reached.connect(_on_destination_reached)
-	GlobalGameEvents.game_started.connect(horizon.start_spawning)
+	GlobalGameEvents.game_started.connect(obstacle_spawner.start_spawning)
 	continue_button.pressed.connect(_go_to_shop_scene)
 	main_menu_button.pressed.connect(_back_to_main_menu)
 	GameGlobals.level = self
+	obstacle_spawner.level = self
 	start_driving()
 
 
@@ -84,6 +85,8 @@ func _process(delta: float) -> void:
 func start_driving():
 	current_distance = target_distance
 	driving = true
+	GlobalGameEvents.game_started.emit()
+	
 
 func stop_driving():
 	driving = false

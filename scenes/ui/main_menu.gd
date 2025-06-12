@@ -13,6 +13,7 @@ func _ready() -> void:
 	continue_button.pressed.connect(on_continue_pressed)
 	settings_button.pressed.connect(on_settings_pressed)
 	quit_button.pressed.connect(on_quit_pressed)
+	new_game_button.grab_focus()
 
 
 func on_new_game_pressed() -> void:

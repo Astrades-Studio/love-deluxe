@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://chc2hppix4qdk"
+path="res://.godot/imported/Portal Warp Out.ogg-2c53c86a0a0fee8f1a09759247154237.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Portal Warp Out.ogg"
+dest_files=["res://.godot/imported/Portal Warp Out.ogg-2c53c86a0a0fee8f1a09759247154237.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

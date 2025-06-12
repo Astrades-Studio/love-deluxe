@@ -6,7 +6,6 @@ var spawning_clouds := false
 
 
 func use_close_sprite():
-	serious_colission = false
 	obstacle_large.show()
 	obstacle_small.hide()
 	
@@ -37,6 +36,7 @@ func _process(delta):
 			cloud.first_cloud = false
 			cloud.direction = direction
 			cloud.position = position - direction * DELAY_FRAMES
+			cloud.crash_type = 0
 			cloud.use_close_sprite()
 	
 	var areas := get_overlapping_areas()
