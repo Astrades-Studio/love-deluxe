@@ -8,6 +8,9 @@ const MoveBack: StringName = &"decelerate"
 const DodgeAction: StringName = &"dodge"
 const ShootAction: StringName = &"shoot"
 
+#const LimboConsoleAction: StringName = &"limbo_console_toggle"
+
+const PauseGame: StringName = &"pause"
 #const Interact: StringName = &"interact"
 #const CancelInteraction: StringName = &"cancel_interact"
 #
@@ -44,4 +47,3 @@ const ShootAction: StringName = &"shoot"
 #const StopDrivingBoat: StringName = &"stop_driving_boat"
 #
 #const PerformanceMetrics: StringName = &"performance_metrics"
-const PauseGame: StringName = &"pause"

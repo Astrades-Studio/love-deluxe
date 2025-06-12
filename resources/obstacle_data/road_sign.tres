@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ObstacleData" load_steps=3 format=3 uid="uid://chpa77bpcl2xp"]
+
+[ext_resource type="PackedScene" uid="uid://bwtrfu7ldwiin" path="res://scenes/actors/obstacles/road_sign.tscn" id="1_ulgw3"]
+[ext_resource type="Script" uid="uid://ca361caruj02a" path="res://resources/obstacle_data/obstacle_data.gd" id="2_4gpod"]
+
+[resource]
+script = ExtResource("2_4gpod")
+scene = ExtResource("1_ulgw3")
+weight = 1
+name = "RoadSign"
+lane = 0
+metadata/_custom_type_script = "uid://ca361caruj02a"

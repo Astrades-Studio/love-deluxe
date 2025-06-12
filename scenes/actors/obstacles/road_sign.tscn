@@ -8,9 +8,10 @@ radius = 5.38516
 
 [node name="RoadSign" type="Area2D"]
 script = ExtResource("1_nmcaw")
-deceleration_on_hit = 5.0
-serious_colission = false
+deceleration_on_hit = 0.0
+crash_type = 0
 custom_cooldown = 15.0
+symmetrical = false
 
 [node name="ObstacleSmall" type="Sprite2D" parent="."]
 position = Vector2(0, -52)

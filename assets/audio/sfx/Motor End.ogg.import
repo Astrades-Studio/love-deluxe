@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ll26u4sj1qrf"
+path="res://.godot/imported/Motor End.ogg-dbe0f755a7fad4e7c06059d9030c05aa.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Motor End.ogg"
+dest_files=["res://.godot/imported/Motor End.ogg-dbe0f755a7fad4e7c06059d9030c05aa.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dv5ppt5rxo3id"
+path="res://.godot/imported/Motor Start.ogg-ef1181739580ad6391c6b74666979bbe.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Motor Start.ogg"
+dest_files=["res://.godot/imported/Motor Start.ogg-ef1181739580ad6391c6b74666979bbe.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

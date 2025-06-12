@@ -17,9 +17,15 @@ var level : Level
 
 func _ready() -> void:
 	# Connect to the GameGlobals signals to update the HUD when values change
-	#GlobalGameEvents.score_changed.connect(update_score)
+	
+	if !GameGlobals.is_node_ready():
+		await GameGlobals.ready
+
+	level = GameGlobals.level
+	
 	GlobalGameEvents.cash_changed.connect(update_cash)
 	GlobalGameEvents.bullet_changed.connect(update_bullet)
+	# GlobalGameEvents.score_changed.connect(update_score)
 	# GameGlobals.connect("distance_travelled_changed", self, "update_distance_travelled")
 	# GameGlobals.connect("distance_remaining_changed", self, "update_distance_remaining")
 	level = get_tree().get_first_node_in_group("Level")
@@ -30,7 +36,6 @@ func _ready() -> void:
 	# Initialize the HUD with the current game state
 	update_labels()
 	
-
 
 func update_labels():
 	@warning_ignore_start("narrowing_conversion")

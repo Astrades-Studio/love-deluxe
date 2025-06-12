@@ -22,9 +22,11 @@ radius = 16.2788
 collision_layer = 6
 script = ExtResource("1_mw75c")
 deceleration_on_hit = 1.0
+crash_type = 0
 
 [node name="ObstacleSmall" type="Sprite2D" parent="."]
-visible = false
+scale = Vector2(0.589819, 0.57067)
+texture = SubResource("NoiseTexture2D_4gamk")
 
 [node name="ObstacleLarge" type="Sprite2D" parent="."]
 texture = SubResource("NoiseTexture2D_4gamk")

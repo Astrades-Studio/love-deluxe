@@ -8,8 +8,11 @@ var perspective_speed := 0.0
 
 @export var acceleration := 1.05
 @export var deceleration_on_hit := 50.
-@export var serious_colission := true
+#@export var serious_colission := true
+@export_enum("dust", "mild", "serious") var crash_type
 @export var custom_cooldown := 1.
+
+@export var symmetrical := true
 
 var initial_y_position := 0.0
 var final_y_position := 256.
@@ -35,8 +38,22 @@ func _ready() -> void:
 
 
 func use_far_away_sprite():
+	obstacle_large.z_index = 1
+	obstacle_small.z_index = -1
 	obstacle_large.hide()
 	obstacle_small.show()
+
+# Flip the sprites depending on the side of the screen
+	if global_position.x > GameGlobals.BOTTOM_RIGHT.x / 2.0:
+		obstacle_large.flip_h = true
+		obstacle_small.flip_h = true
+	
+# In case of the road sign and other non-symmetrical assets, center them
+		if !symmetrical:
+			global_position.x - 100
+	else:
+		if !symmetrical:
+			global_position.x + 100
 
 
 func use_close_sprite():
