@@ -117,8 +117,13 @@ func power_up_activation():
 
 var shielded := false
 func _on_area_entered(area: Area2D) -> void:
+	var bump_direction : Vector2 = global_position.direction_to(area.global_position)
+	if area.bumpable:
+			area.bump_obstacle_towards(bump_direction, current_level.speed / 10.0)
+	if area is PickUp:
+		_on_player_hit(area, area.deceleration_on_hit)
+		return
 	if shielded:
-		print("Blocked this crash: " + area.name)
 		return
 	if area is Obstacle:
 		_on_player_hit(area, area.deceleration_on_hit)
@@ -146,8 +151,8 @@ func _on_player_hit(obstacle: Obstacle, deceleration_on_hit: float = current_lev
 
 var inventory : Array[PowerUp]
 func add_powerup(item: PowerUp):
-	if item in inventory:
-		return
+	#if item in inventory:
+		#return
 	
 	inventory.append(item.duplicate())
 

@@ -1,10 +1,12 @@
-[gd_scene load_steps=33 format=3 uid="uid://bet3dxv15wonf"]
+[gd_scene load_steps=37 format=3 uid="uid://bet3dxv15wonf"]
 
 [ext_resource type="Script" uid="uid://diufp0i5brd70" path="res://scenes/hud.gd" id="1_8qguk"]
 [ext_resource type="Theme" uid="uid://cn52mtnyoe77w" path="res://resources/hud_theme.tres" id="2_136eg"]
 [ext_resource type="Texture2D" uid="uid://bh6yjngrfomjd" path="res://assets/UI/UI - Monitors.png" id="3_1e6lo"]
 [ext_resource type="Texture2D" uid="uid://c16bh0boongi4" path="res://assets/UI/UI - Fuel Panel.png" id="4_4mi7y"]
+[ext_resource type="Texture2D" uid="uid://bjhirk2cepwjr" path="res://assets/images/moon_pixel.png" id="4_o6xly"]
 [ext_resource type="Texture2D" uid="uid://n2u3itbrbu1c" path="res://assets/UI/UI - Fuel frame.png" id="5_pkwgd"]
+[ext_resource type="FontFile" uid="uid://cwrq7hfhktuur" path="res://assets/UI/fonts/Tiny5-Regular.ttf" id="5_we3sy"]
 [ext_resource type="Texture2D" uid="uid://7gmpmmehqknr" path="res://assets/UI/UI - Fuel Mark.png" id="6_d5po8"]
 [ext_resource type="Texture2D" uid="uid://cjr7ghmbn8vl3" path="res://assets/UI/UI - Ammo Panel.png" id="7_7yoph"]
 [ext_resource type="Texture2D" uid="uid://ctly2alkq8psk" path="res://assets/UI/UI_bullet_slot.png" id="8_qmm8d"]
@@ -13,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bvvj5kjtb1vbl" path="res://assets/UI/UI_distance_progress.png" id="11_erw67"]
 [ext_resource type="Texture2D" uid="uid://ssuqgt3y4pfv" path="res://assets/UI/UI - Progress panel.png" id="12_b6swc"]
 [ext_resource type="Texture2D" uid="uid://dgb8yjdcervnt" path="res://assets/UI/UI_marker.png" id="13_gonto"]
+[ext_resource type="Texture2D" uid="uid://04156mor5kmo" path="res://assets/images/glorp_portrait.png" id="15_gonto"]
 [ext_resource type="Texture2D" uid="uid://5ya4v8twf0cv" path="res://assets/UI/UI_background_gradient.png" id="16_4mi7y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vuvg6"]
@@ -26,16 +29,21 @@ content_margin_right = 2.0
 content_margin_bottom = 2.0
 texture = SubResource("AtlasTexture_vuvg6")
 
-[sub_resource type="Gradient" id="Gradient_kicr4"]
+[sub_resource type="Gradient" id="Gradient_65nxt"]
+colors = PackedColorArray(0, 0, 0, 1, 0.219501, 0.219501, 0.219501, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_mj13f"]
-frequency = 1.0
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_el1dq"]
+gradient = SubResource("Gradient_65nxt")
+width = 32
+height = 32
+fill_to = Vector2(1, 1)
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0h1do"]
-width = 44
-height = 44
-color_ramp = SubResource("Gradient_kicr4")
-noise = SubResource("FastNoiseLite_mj13f")
+[sub_resource type="FontVariation" id="FontVariation_gmc6u"]
+base_font = ExtResource("5_we3sy")
+
+[sub_resource type="LabelSettings" id="LabelSettings_1e6lo"]
+font = SubResource("FontVariation_gmc6u")
+font_size = 8
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kfdjh"]
 atlas = ExtResource("4_4mi7y")
@@ -147,13 +155,20 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_emer0")
 
 [node name="TextureRect" type="TextureRect" parent="Control/Contents/Destination"]
 layout_mode = 2
-texture = SubResource("NoiseTexture2D_0h1do")
+texture = SubResource("GradientTexture2D_el1dq")
+
+[node name="TextureRect2" type="TextureRect" parent="Control/Contents/Destination"]
+modulate = Color(0.688595, 0.688595, 0.688595, 1)
+layout_mode = 2
+texture = ExtResource("4_o6xly")
+expand_mode = 5
 
 [node name="Label" type="Label" parent="Control/Contents/Destination"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 8
-text = "Destination"
+text = "Moon"
+label_settings = SubResource("LabelSettings_1e6lo")
+horizontal_alignment = 1
 
 [node name="DestinationContainer" type="VBoxContainer" parent="Control/Contents"]
 layout_mode = 2
@@ -270,7 +285,7 @@ mouse_filter = 2
 theme_override_styles/scroll = SubResource("StyleBoxTexture_we3sy")
 theme_override_styles/grabber = SubResource("StyleBoxTexture_el1dq")
 
-[node name="Destination2" type="PanelContainer" parent="Control/Contents"]
+[node name="Portrait" type="PanelContainer" parent="Control/Contents"]
 clip_contents = true
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
@@ -278,11 +293,17 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_emer0")
 
-[node name="TextureRect" type="TextureRect" parent="Control/Contents/Destination2"]
+[node name="TextureRect" type="TextureRect" parent="Control/Contents/Portrait"]
 layout_mode = 2
 texture = ExtResource("16_4mi7y")
 
-[node name="Label" type="Label" parent="Control/Contents/Destination2"]
+[node name="TextureRect2" type="TextureRect" parent="Control/Contents/Portrait"]
+layout_mode = 2
+texture = ExtResource("15_gonto")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Control/Contents/Portrait"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 8

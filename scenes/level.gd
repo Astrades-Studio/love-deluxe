@@ -3,12 +3,21 @@ class_name Level
 
 @onready var hud: CanvasLayer = $HUD
 @onready var win_overlay: CanvasLayer = $WinOverlay
+@onready var game_over_layer: CanvasLayer = $GameOverLayer
+
 @onready var continue_button: Button = %ContinueButton
 @onready var main_menu_button: Button = %MainMenuButton
 @onready var station_sprite: Sprite2D = %StationSprite
 @onready var obstacle_spawner: ObstacleSpawner = %ObstacleSpawner
+@onready var retry_button: Button = %RetryButton
+@onready var main_menu_button_2: Button = %MainMenuButton2
 
+# Settings ----------------------------------------------------------------- #
 @export var target_distance := 120000
+class LevelSettings:
+	var target_distance := 120000
+	var obstacles : Array[ObstacleData]
+	var delay_between_obstacles := 1500
 
 # -------------------------------------------------------------------------- #
 
@@ -57,10 +66,13 @@ const FUEL_START := 100.0
 
 func _ready() -> void:
 	hud.level = self
+	GlobalGameEvents.fuel_depleted.connect(_on_fuel_depleted)
 	GlobalGameEvents.destination_reached.connect(_on_destination_reached)
 	GlobalGameEvents.game_started.connect(obstacle_spawner.start_spawning)
 	continue_button.pressed.connect(_go_to_shop_scene)
 	main_menu_button.pressed.connect(_back_to_main_menu)
+	main_menu_button_2.pressed.connect(_back_to_main_menu)
+	retry_button.pressed.connect(func(): get_tree().reload_current_scene())
 	GameGlobals.level = self
 	obstacle_spawner.level = self
 	start_driving()
@@ -77,7 +89,7 @@ func _process(delta: float) -> void:
 		accelerate(0.1)
 	
 	if current_distance < 0:
-		stop_driving()
+		await stop_driving()
 		GlobalGameEvents.destination_reached.emit()
 
 #region Public ------------------------------------------------------------ #
@@ -145,14 +157,8 @@ func _spend_fuel_per_second():
 	fuel -= fuel_consumption_rate
 	if fuel < 0:
 		fuel = 0
-		stop_driving()
+		await stop_driving()
 		GlobalGameEvents.fuel_depleted.emit()
-
-
-func _on_destination_reached() -> void:
-	win_overlay.visible = true
-	fuel = FUEL_START
-	stop_driving()
 
 
 ## Makes the station in the distance bigger the closer we are
@@ -178,3 +184,12 @@ func restart_level():
 	get_tree().reload_current_scene()
 
 #endregion --------------------------------------------------------------
+
+func _on_destination_reached() -> void:
+	win_overlay.show()
+	fuel = FUEL_START
+
+
+func _on_fuel_depleted():
+	game_over_layer.show()
+	fuel = FUEL_START

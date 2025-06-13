@@ -607,7 +607,6 @@ position = Vector2(130, 119)
 script = ExtResource("12_ddr63")
 obstacles = Array[ExtResource("9_nuslc")]([ExtResource("10_re6lg"), ExtResource("11_1pn8n"), ExtResource("12_vnuhc"), ExtResource("13_nuslc"), ExtResource("14_re6lg")])
 obstacle_container = NodePath("ObstacleContainer")
-delay_between_obstacles = 1500
 debug_draw = false
 delay_between_signage = 1500.0
 signage_dict = Array[ExtResource("9_nuslc")]([ExtResource("14_blca8"), ExtResource("15_dsidl")])
@@ -655,17 +654,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -16.0
-offset_right = 4.0
-offset_bottom = 16.0
+offset_left = -46.5
+offset_top = 42.0
+offset_right = 46.5
+offset_bottom = 94.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ContinueButton" type="Button" parent="WinOverlay/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Continue"
+text = "Next Level"
 
 [node name="MainMenuButton" type="Button" parent="WinOverlay/VBoxContainer"]
 unique_name_in_owner = true
@@ -679,6 +678,75 @@ texture = ExtResource("11_n44uc")
 lifetime = 4.75
 preprocess = 5.0
 process_material = SubResource("ParticleProcessMaterial_dsidl")
+
+[node name="GameOverLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="GameOverLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="GameOverLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -91.0
+offset_right = 80.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Your spaceship 
+ran out of fuel :(
+
+You didn't make it 
+on time to the date"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="GameOverLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.0
+offset_top = 14.0
+offset_right = 65.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Final Score:"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.5
+offset_top = 42.0
+offset_right = 46.5
+offset_bottom = 94.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RetryButton" type="Button" parent="GameOverLayer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Retry Level
+"
+
+[node name="MainMenuButton2" type="Button" parent="GameOverLayer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Main Menu"
 
 [node name="PauseLayer" type="CanvasLayer" parent="."]
 

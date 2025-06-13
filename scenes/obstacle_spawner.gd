@@ -10,7 +10,7 @@ class_name ObstacleSpawner
 #@export var obstacles : Array[PackedScene] = []
 @export var obstacles: Array[ObstacleData]
 @export var obstacle_container: Node2D
-@export var delay_between_obstacles : int = 600  # Cada 100 km
+@export var delay_between_obstacles : int = 1500  # Cada 100 km
 var next_obstacle_spawn_on : float
 var total_obstacle_weight: int = 0
 

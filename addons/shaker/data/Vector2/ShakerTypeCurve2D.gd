@@ -45,7 +45,8 @@ func set_curve_y(value: Curve) -> void:
 		curve_y.changed.disconnect(_curve_changed)
 	curve_y = value
 	if curve_y:
-		curve_y.changed.connect(_curve_changed)
+		if !curve_y.changed.is_connected(_curve_changed):
+			curve_y.changed.connect(_curve_changed)
 	else:
 		_curve_changed()
 
