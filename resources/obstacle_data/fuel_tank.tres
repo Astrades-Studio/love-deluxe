@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ObstacleData" load_steps=3 format=3 uid="uid://bg6jvilmmbb23"]
+
+[ext_resource type="PackedScene" uid="uid://c84kdy57j4if6" path="res://scenes/actors/obstacles/fuel_pickup.tscn" id="1_5oamv"]
+[ext_resource type="Script" uid="uid://ca361caruj02a" path="res://resources/obstacle_data/obstacle_data.gd" id="2_tbhji"]
+
+[resource]
+script = ExtResource("2_tbhji")
+scene = ExtResource("1_5oamv")
+weight = 3
+name = "Fuel"
+lane = -1
+metadata/_custom_type_script = "uid://ca361caruj02a"

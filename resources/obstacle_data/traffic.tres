@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_1m20l")
 scene = ExtResource("1_qgr0b")
-weight = 3
+weight = 2
 name = "Traffic"
 lane = -1
 metadata/_custom_type_script = "uid://ca361caruj02a"

@@ -1,0 +1,15 @@
+
+~ initial_cutscene
+It’s been a long week of work, but the weekend is finally here!
+Glorp has been looking forward to his date with Glorpina tonight.
+She has invited him to a picnic at Kuiper Garden.
+The drive there takes several hours, but it’s always worth it to see lovely Glorpina.
+=> END
+
+~ shop
+Dude: Welcome to my shop!
+- Yes!
+	Dude: That's what I'm here for.
+- No \:(
+	Dude: Don't worry. Here's something on the house.
+=> END

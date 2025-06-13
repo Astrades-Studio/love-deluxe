@@ -35,7 +35,7 @@ var fuel := 100.0:
 		fuel = new
 		fuel_changed.emit(int(fuel))
 ## Fuel consumed per unit of distance
-var fuel_consumption_rate := 0.8
+var fuel_consumption_rate := 1.5
 
 # Signals ------------------------------------------------------------------ #
 
@@ -167,6 +167,11 @@ func _go_to_shop_scene():
 
 func _back_to_main_menu():
 	SceneTransitionManager.transition_to_scene(Preloader.MainMenuScene)
+
+func add_fuel(amount : float):
+	fuel += amount
+	print(fuel)
+	fuel_changed.emit()
 
 
 func restart_level():

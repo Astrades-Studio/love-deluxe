@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://75ohsv3f0df6"]
 
 [ext_resource type="Script" uid="uid://beykxksvgr5am" path="res://scenes/ui/main_menu.gd" id="2_1g8jr"]
-[ext_resource type="PackedScene" uid="uid://bfqb614bysg2o" path="res://scenes/level_test.tscn" id="3_m1kxf"]
+[ext_resource type="PackedScene" uid="uid://vvxfwyok47jp" path="res://scenes/cutscenes/initial_cutscene.tscn" id="2_m1kxf"]
 [ext_resource type="Texture2D" uid="uid://c6u3tuxougig" path="res://assets/love_deluxe_sticker_pixel.png" id="4_x2yvf"]
 [ext_resource type="PackedScene" uid="uid://cs1auqp2g4yn4" path="res://ui/menus/layouts/settings/tabs/settings_menu.tscn" id="5_x2yvf"]
 
@@ -47,7 +47,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_1g8jr")
-initial_game_scene = ExtResource("3_m1kxf")
+initial_game_scene = ExtResource("2_m1kxf")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -189,3 +189,4 @@ text = "Quit"
 [node name="GameSettingsUI" parent="." instance=ExtResource("5_x2yvf")]
 visible = false
 layout_mode = 1
+theme = null

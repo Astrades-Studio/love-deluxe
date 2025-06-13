@@ -55,5 +55,8 @@ func delay_func(callable: Callable, time: float, deferred: bool = true):
 ## Example of use: await GameGlobals.wait(1.5)
 func wait(seconds: float = 1.0):
 	return get_tree().create_timer(seconds).timeout
-	
+
+func add_fuel(amount: float):
+	level.add_fuel(amount)
+
 #endregion

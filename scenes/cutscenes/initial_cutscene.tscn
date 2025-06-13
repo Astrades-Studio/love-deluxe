@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://vvxfwyok47jp"]
+
+[ext_resource type="Script" uid="uid://c0o3twmbg1djt" path="res://scenes/cutscenes/initial_cutscene.gd" id="1_0hj4a"]
+[ext_resource type="PackedScene" uid="uid://bfqb614bysg2o" path="res://scenes/level_test.tscn" id="2_43ddl"]
+[ext_resource type="Resource" uid="uid://cgxcn7gev1g4l" path="res://resources/dialog/cutscenes.dialogue" id="3_6wkh3"]
+[ext_resource type="Texture2D" uid="uid://o13kif023xhc" path="res://assets/images/glorpina.jpg" id="4_imnlb"]
+
+[node name="InitialCutscene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0hj4a")
+next_scene = ExtResource("2_43ddl")
+dialog = ExtResource("3_6wkh3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.172549, 0.117647, 0.192157, 1)
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_imnlb")
+expand_mode = 1
+stretch_mode = 5

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://jtsrok2xct5h"]
+[gd_scene load_steps=34 format=3 uid="uid://jtsrok2xct5h"]
 
 [ext_resource type="Script" uid="uid://dl1xiar4exvqq" path="res://scenes/actors/player_spaceship.gd" id="1_fjeb7"]
 [ext_resource type="Texture2D" uid="uid://o3khl23lf05c" path="res://assets/sprites/UFO.png" id="2_kr3ia"]
@@ -11,12 +11,55 @@
 [ext_resource type="Script" uid="uid://dwbl1iluandce" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="9_fidux"]
 [ext_resource type="Script" uid="uid://djuud55wp3edh" path="res://addons/shaker/data/Vector2/ShakerTypeRandom2D.gd" id="10_5wces"]
 [ext_resource type="AudioStream" uid="uid://o12jfa0yy4jb" path="res://assets/audio/sfx/sfx_crash.wav" id="11_o3u73"]
+[ext_resource type="AudioStream" uid="uid://diftv6ld2fv8k" path="res://assets/audio/sfx/Portal 2.ogg" id="12_o3u73"]
 [ext_resource type="AudioStream" uid="uid://bqw35alforhih" path="res://assets/audio/sfx/Motor Loop.ogg" id="12_s8iik"]
 [ext_resource type="AudioStream" uid="uid://c42bcvl0ypgda" path="res://assets/audio/sfx/sfx_jump.wav" id="13_61r74"]
+[ext_resource type="AudioStream" uid="uid://di5xhatxyq0j6" path="res://assets/audio/sfx/sfx_pickup.wav" id="14_5wces"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3d216"]
 atlas = ExtResource("3_kr3ia")
 region = Rect2(375, 2, 189, 186)
+
+[sub_resource type="Gradient" id="Gradient_5wces"]
+interpolation_mode = 2
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0.0434783, 0.164251, 0.289855, 0.545894, 0.584541, 0.671498, 0.995169)
+colors = PackedColorArray(0.0022417, 0.00475602, 0.00600587, -0.0528302, 0, 0, 0, 0, 0.115742, 0.462684, 0.400554, 0.521692, 0.162689, 0.600953, 0.522587, 0.625342, 0.302701, 1, 0.875333, 0.874396, 0.0666667, 0.227451, 0.196078, 0, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_o3u73"]
+gradient = SubResource("Gradient_5wces")
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Curve" id="Curve_s8iik"]
+_data = [Vector2(0, 0.0194552), 0.0, 0.0, 0, 0, Vector2(0.118902, 0.22179), 0.0, 0.0, 0, 0, Vector2(0.338415, 0.0350194), 0.0, 0.0, 0, 0, Vector2(0.496951, 0.237354), 0.0, 0.0, 0, 0, Vector2(0.637195, 0.0194552), 0.0, 0.0, 0, 0, Vector2(0.722561, 0.377432), 0.0, 0.0, 0, 0, Vector2(0.801829, 0.0350194), 2.55253, 2.55253, 0, 0, Vector2(0.954268, 0.284047), 0.0, 0.0, 0, 0]
+point_count = 8
+
+[sub_resource type="Resource" id="Resource_3tcyd"]
+script = ExtResource("7_q76od")
+curve_x = SubResource("Curve_s8iik")
+curve_y = SubResource("Curve_s8iik")
+loop = true
+amplitude = Vector2(1, 1)
+offset = Vector2(0, 0)
+BlendingMode = 0
+fade_in = 0.0
+fade_out = 0.0
+start_percent = 0.0
+end_percent = 1.0
+_temp_graph = false
+bake_internal = 64
+metadata/_custom_type_script = "uid://t8yd1dwucj88"
+
+[sub_resource type="Resource" id="Resource_fijrf"]
+script = ExtResource("8_jgsdl")
+PositionShake = Array[ExtResource("5_n2dyr")]([])
+RotationShake = Array[ExtResource("6_w6mwj")]([])
+ScaleShake = Array[ExtResource("5_n2dyr")]([SubResource("Resource_3tcyd")])
+bake_internal = 64
+__follow_timeline = false
+metadata/_custom_type_script = "uid://ch4on6s5v0bgq"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fjeb7"]
 radius = 13.0
@@ -177,6 +220,19 @@ position = Vector2(-3, 16.66)
 scale = Vector2(0.545, 0.285)
 texture = SubResource("AtlasTexture_3d216")
 
+[node name="ShieldFX" type="Sprite2D" parent="Pivot"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, 17.525)
+scale = Vector2(1.18251, 1.18251)
+texture = SubResource("GradientTexture2D_o3u73")
+
+[node name="ShakerComponent2D" type="Node2D" parent="Pivot/ShieldFX"]
+script = ExtResource("9_fidux")
+is_playing = true
+shakerPreset = SubResource("Resource_fijrf")
+metadata/_custom_type_script = "uid://dwbl1iluandce"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_fjeb7")
@@ -213,6 +269,11 @@ metadata/_custom_type_script = "uid://dwbl1iluandce"
 [node name="CrashSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_o3u73")
 
+[node name="ShieldSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_o3u73")
+volume_db = -15.0
+pitch_scale = 0.5
+
 [node name="MotorSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_s8iik")
 volume_db = -10.0
@@ -220,5 +281,8 @@ bus = &"SFX"
 
 [node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("13_61r74")
+
+[node name="PickupSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_5wces")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

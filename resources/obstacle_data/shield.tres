@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ObstacleData" load_steps=3 format=3 uid="uid://cjfmvwjtm6n0j"]
+
+[ext_resource type="PackedScene" uid="uid://cda7vi63wunm3" path="res://scenes/actors/obstacles/shield_pickup.tscn" id="1_6harw"]
+[ext_resource type="Script" uid="uid://ca361caruj02a" path="res://resources/obstacle_data/obstacle_data.gd" id="2_3kcap"]
+
+[resource]
+script = ExtResource("2_3kcap")
+scene = ExtResource("1_6harw")
+weight = 3
+name = "Shield"
+lane = -1
+metadata/_custom_type_script = "uid://ca361caruj02a"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FuelTankData" load_steps=2 format=3 uid="uid://bjyyo4gsfvrv8"]
+
+[ext_resource type="Script" uid="uid://cnb26gn2uohrk" path="res://scripts/classes/fuel_tank_data.gd" id="1_o3hwy"]
+
+[resource]
+script = ExtResource("1_o3hwy")
+fuel_amount = 10.0
+duration = 0.0
+uses = 1
+metadata/_custom_type_script = "uid://cnb26gn2uohrk"

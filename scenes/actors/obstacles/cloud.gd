@@ -28,6 +28,7 @@ func _process(delta):
 	
 	if spawning_clouds:
 		delay_frame_count -= 1
+		var spawn_count :=1
 		if delay_frame_count <= 0:
 			delay_frame_count = DELAY_FRAMES
 			var cloud : Cloud = self.duplicate()
@@ -38,6 +39,8 @@ func _process(delta):
 			cloud.position = position - direction * DELAY_FRAMES
 			cloud.crash_type = 0
 			cloud.use_close_sprite()
+			spawn_count += 1
+			cloud.rotate(randf_range(0.0, TAU))
 	
 	var areas := get_overlapping_areas()
 	for area in areas:

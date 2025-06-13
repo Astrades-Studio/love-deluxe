@@ -10,7 +10,6 @@ radius = 5.38516
 script = ExtResource("1_nmcaw")
 deceleration_on_hit = 0.0
 crash_type = 0
-custom_cooldown = 15.0
 symmetrical = false
 
 [node name="ObstacleSmall" type="Sprite2D" parent="."]

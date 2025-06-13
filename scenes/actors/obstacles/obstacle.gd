@@ -6,23 +6,28 @@ var perspective_speed := 0.0
 
 @onready var current_level: Level = get_tree().get_first_node_in_group("Level")
 
+## How much speed accumulates towards the bottom of the screen
 @export var acceleration := 1.05
-@export var deceleration_on_hit := 50.
-#@export var serious_colission := true
-@export_enum("dust", "mild", "serious") var crash_type
-@export var custom_cooldown := 1.
 
+## How much speed the player loses when touching this
+@export var deceleration_on_hit := 50.
+
+@export_enum("none", "mild", "serious", "pickup") var crash_type
+
+## If the item should change behavior when appearing on either side of the road
 @export var symmetrical := true
+
+@export var power_up : PowerUp
 
 var initial_y_position := 0.0
 var final_y_position := 256.
 var final_scale := 1.3
 
-
+## Variables controlling how the item looks when it spawns over the horizon
 var time_far_away := 1.2
 var is_far := true
-@export var pixels_moved_far_away := 5
 var _pixels_moved_far_away_count := 5
+@export var pixels_moved_far_away := 5
 
 var obstacle_speed_multiplier := 0.3
 var subpixel_y := 0.0

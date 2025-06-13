@@ -12,7 +12,10 @@ class_name PlayerSpaceship
 @onready var crash_sfx: AudioStreamPlayer2D = $CrashSFX
 @onready var motor_sfx: AudioStreamPlayer2D = $MotorSFX
 @onready var jump_sfx: AudioStreamPlayer2D = $JumpSFX
-
+@onready var pickup_sfx: AudioStreamPlayer2D = $PickupSFX
+@onready var shield_sfx: AudioStreamPlayer2D = $ShieldSFX
+# VFX
+@onready var shield_fx: Sprite2D = %ShieldFX
 
 
 @onready var current_level : Level = get_tree().get_first_node_in_group("Level")
@@ -25,20 +28,30 @@ var last_movement := 0
 var tilt := 0.0
 var tilt_speed := 0.1
 var accumulated_x_movement := 0.0
-
+var dodging := false
+ 
 const TOP_TILT := 30.0 # Maximum tilt angle in degrees
+
 
 func _ready() -> void:
 	crash_sprite.hide()
 	current_level.speed_changed.connect(_on_speed_changed)
 	GlobalGameEvents.game_started.connect(func(): motor_sfx.play())
 
+
 func _process(_delta: float) -> void:
 	if !current_level.driving:
 		return
 	global_position.x = clamp(position.x, 0, 256)
+	
+	power_up_activation()
+	
 	var move_axis = Input.get_action_strength("move_left") - Input.get_action_strength("move_right")
-
+	
+	if dodging:
+		accumulated_x_movement = 0.0
+		return
+	
 	if move_axis > 0:
 		accumulated_x_movement -= horizontal_speed
 		position.x -= horizontal_speed
@@ -46,6 +59,7 @@ func _process(_delta: float) -> void:
 		if last_movement != -1:
 			accumulated_x_movement = 0.0 # Reset if changing direction
 			last_movement = -1 # Left, tracked for rolling
+	
 	elif move_axis < 0:
 		accumulated_x_movement += horizontal_speed
 		position.x += horizontal_speed
@@ -80,6 +94,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _dodge() -> void:
 	collision_shape_2d.disabled = true
+	dodging = true
 	if last_movement < 0:
 		animation_player.play("dodge")
 	else:
@@ -90,9 +105,21 @@ func _dodge() -> void:
 	
 	await animation_player.animation_finished
 	collision_shape_2d.disabled = false
+	dodging = false
 
 
+func power_up_activation():
+	for item : PowerUp in inventory:
+		item.use_power_up(self)
+		if !item.has_uses_left():
+			remove_powerup(item)
+
+
+var shielded := false
 func _on_area_entered(area: Area2D) -> void:
+	if shielded:
+		print("Blocked this crash: " + area.name)
+		return
 	if area is Obstacle:
 		_on_player_hit(area, area.deceleration_on_hit)
 
@@ -111,14 +138,40 @@ func _on_player_hit(obstacle: Obstacle, deceleration_on_hit: float = current_lev
 			shaker_component_2d.play_shake()
 			crash_sfx.play()
 			animation_player.play("crash")
+		3: # Pickup
+			add_powerup(obstacle.power_up)
+			obstacle.on_hit()
+			pickup_sfx.play()
 
 
-	#var tween := create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	#tween.tween_property(ship_sprite, "modulate", Color.RED, 0.1)
-	#await tween.finished
-	#tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	#tween.tween_property(ship_sprite, "modulate", Color.WHITE, 0.1)
-	#await tween.finished
+var inventory : Array[PowerUp]
+func add_powerup(item: PowerUp):
+	if item in inventory:
+		return
+	
+	inventory.append(item.duplicate())
+
+
+func remove_powerup(item: PowerUp):
+	if item not in inventory:
+		return
+	
+	inventory.erase(item)
+
+
+func start_shield(duration: float) -> void:
+	shielded = true
+	shield_fx.show()
+	shield_sfx.play()
+	motor_sfx.stop()
+	get_tree().create_timer(duration).timeout.connect(stop_shield)
+
+
+func stop_shield():
+	shielded = false
+	shield_fx.hide()
+	shield_sfx.stop()
+	motor_sfx.play()
 
 
 func _on_speed_changed(new_speed : float):
