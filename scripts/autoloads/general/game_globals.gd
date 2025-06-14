@@ -36,6 +36,11 @@ func load_next_level():
 	SceneTransitionManager.transition_to_scene(Preloader.LevelScene)
 
 
+func load_first_level():
+	current_level = LevelNumber.VENUS_EARTH
+	SceneTransitionManager.transition_to_scene(Preloader.LevelScene)
+
+
 func get_next_level_data() -> LevelData:
 	if current_level == LevelNumber.URANUS_KUIPER:
 		return get_first_level()

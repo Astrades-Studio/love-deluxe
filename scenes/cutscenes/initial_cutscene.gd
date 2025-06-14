@@ -1,6 +1,6 @@
 extends Control
 
-@export var next_scene : PackedScene = Preloader.LevelScene
+@export var _next_scene : PackedScene
 @export var title : String = "initial_cutscene"
 @export var dialog : DialogueResource
 
@@ -18,5 +18,6 @@ func start_dialog():
 	DialogueManager.dialogue_ended.connect(on_cutscene_ended)
 
 
-func on_cutscene_ended(resource: DialogueResource):
-	SceneTransitionManager.transition_to_scene(next_scene)
+func on_cutscene_ended(_resource: DialogueResource):
+	GameGlobals.new_game()
+	GameGlobals.load_first_level()
