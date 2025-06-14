@@ -7,9 +7,15 @@ extends Node
 #endregion
 
 #region Run
-var score := 0.0
-var cash := 0.0
-var bullet := 0.0
+var score : int = 0:
+	set(new_score):
+		score = new_score
+		GlobalGameEvents.score_changed.emit(score)
+
+var cash : int = 0
+var bullet : int = 0
+
+var score_at_start : int = 0
 
 #endregion
 
@@ -59,4 +65,19 @@ func wait(seconds: float = 1.0):
 func add_fuel(amount: float):
 	level.add_fuel(amount)
 
+func add_score(_score: int):
+	score += _score
+
+func set_score(_score: int):
+	score = _score
+
+func reset_score():
+	score = score_at_start
+
+func new_game():
+	score = 0
+	cash = 0
+	bullet = 0
+	score_at_start = 0
+	
 #endregion

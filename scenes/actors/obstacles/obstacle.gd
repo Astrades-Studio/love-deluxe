@@ -3,7 +3,9 @@ class_name Obstacle
 
 var direction := Vector2.ZERO
 var perspective_speed := 0.0
-var has_hit_player := false
+var will_give_score := true
+
+@export var score := 100
 
 @onready var current_level: Level = get_tree().get_first_node_in_group("Level")
 
@@ -98,7 +100,13 @@ func _process(delta):
 # If the obstacle is way below or above the screen, free it
 	if global_position.y > GameGlobals.BOTTOM_RIGHT.y + 100 or \
 	global_position.y < GameGlobals.BOTTOM_RIGHT.y - 400:
+		if will_give_score:
+			GameGlobals.add_score(score)
 		queue_free()
+
+func on_player_hit():
+	will_give_score = false
+
 
 var rotating := false
 # var bumped_towards : Vector2

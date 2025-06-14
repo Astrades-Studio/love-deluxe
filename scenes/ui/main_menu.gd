@@ -17,6 +17,7 @@ func _ready() -> void:
 
 
 func on_new_game_pressed() -> void:
+	GameGlobals.new_game()
 	SceneTransitionManager.transition_to_scene(
 		initial_game_scene, 
 		true,

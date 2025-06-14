@@ -14,6 +14,7 @@ class_name Level
 
 # Settings ----------------------------------------------------------------- #
 @export var target_distance := 120000
+
 class LevelSettings:
 	var target_distance := 120000
 	var obstacles : Array[ObstacleData]
@@ -55,7 +56,6 @@ signal fuel_changed(fuel: int)
 
 ## Flag that controls the process function
 var driving := false
-
 # Constants----------------------------------------------------------------- #
 
 const MIN_SPEED := 20.0
@@ -72,7 +72,7 @@ func _ready() -> void:
 	continue_button.pressed.connect(_go_to_shop_scene)
 	main_menu_button.pressed.connect(_back_to_main_menu)
 	main_menu_button_2.pressed.connect(_back_to_main_menu)
-	retry_button.pressed.connect(func(): get_tree().reload_current_scene())
+	retry_button.pressed.connect(restart_level)
 	GameGlobals.level = self
 	obstacle_spawner.level = self
 	start_driving()
@@ -174,6 +174,7 @@ func _go_to_shop_scene():
 func _back_to_main_menu():
 	SceneTransitionManager.transition_to_scene(Preloader.MainMenuScene)
 
+
 func add_fuel(amount : float):
 	fuel += amount
 	print(fuel)
@@ -181,15 +182,18 @@ func add_fuel(amount : float):
 
 
 func restart_level():
+	GameGlobals.reset_score()
 	get_tree().reload_current_scene()
 
 #endregion --------------------------------------------------------------
 
 func _on_destination_reached() -> void:
+	get_tree().paused = true
 	win_overlay.show()
 	fuel = FUEL_START
 
 
 func _on_fuel_depleted():
+	get_tree().paused = true
 	game_over_layer.show()
 	fuel = FUEL_START

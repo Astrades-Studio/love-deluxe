@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bet3dxv15wonf"]
+[gd_scene load_steps=38 format=3 uid="uid://bet3dxv15wonf"]
 
 [ext_resource type="Script" uid="uid://diufp0i5brd70" path="res://scenes/hud.gd" id="1_8qguk"]
 [ext_resource type="Theme" uid="uid://cn52mtnyoe77w" path="res://resources/hud_theme.tres" id="2_136eg"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://ctly2alkq8psk" path="res://assets/UI/UI_bullet_slot.png" id="8_qmm8d"]
 [ext_resource type="Texture2D" uid="uid://7p5xl0m21x4d" path="res://assets/UI/UI - Ammo Lights.png" id="9_t0png"]
 [ext_resource type="Texture2D" uid="uid://c61m4hcynlcqt" path="res://assets/UI/UI_speedometer.png" id="10_kicr4"]
+[ext_resource type="Script" uid="uid://d1uma25ylis4u" path="res://scenes/ui/score_label.gd" id="10_we3sy"]
 [ext_resource type="Texture2D" uid="uid://bvvj5kjtb1vbl" path="res://assets/UI/UI_distance_progress.png" id="11_erw67"]
 [ext_resource type="Texture2D" uid="uid://ssuqgt3y4pfv" path="res://assets/UI/UI - Progress panel.png" id="12_b6swc"]
 [ext_resource type="Texture2D" uid="uid://dgb8yjdcervnt" path="res://assets/UI/UI_marker.png" id="13_gonto"]
@@ -207,6 +208,7 @@ alignment = 1
 layout_mode = 2
 text = "Score: 0000"
 horizontal_alignment = 1
+script = ExtResource("10_we3sy")
 
 [node name="MessageLabel" type="Label" parent="Control/Contents/DestinationContainer/Top/MiddlePanel/VBoxContainer"]
 layout_mode = 2

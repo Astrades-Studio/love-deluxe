@@ -7,3 +7,4 @@ func use_power_up(player: PlayerSpaceship):
 		return
 	uses -= 1
 	player.start_shield(duration)
+		

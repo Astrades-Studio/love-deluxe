@@ -270,6 +270,11 @@ visible = false
 position = Vector2(5.785, 16.865)
 texture = ExtResource("3_o3u73")
 
+[node name="CrashSFX" type="AudioStreamPlayer2D" parent="Pivot/CrashSprite"]
+unique_name_in_owner = true
+position = Vector2(4, 8)
+stream = ExtResource("11_o3u73")
+
 [node name="ShieldFX" type="Sprite2D" parent="Pivot"]
 unique_name_in_owner = true
 visible = false
@@ -281,6 +286,19 @@ texture = SubResource("GradientTexture2D_o3u73")
 script = ExtResource("9_fidux")
 shakerPreset = SubResource("Resource_fijrf")
 metadata/_custom_type_script = "uid://dwbl1iluandce"
+
+[node name="ShieldTimer" type="Timer" parent="Pivot/ShieldFX"]
+unique_name_in_owner = true
+wait_time = 5.0
+one_shot = true
+
+[node name="ShieldSFX" type="AudioStreamPlayer2D" parent="Pivot/ShieldFX"]
+unique_name_in_owner = true
+position = Vector2(0, 2.09301)
+scale = Vector2(0.845659, 0.845659)
+stream = ExtResource("12_o3u73")
+volume_db = -15.0
+pitch_scale = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)
@@ -315,23 +333,18 @@ fade_out = 0.000523326
 shakerPreset = SubResource("Resource_bs78u")
 metadata/_custom_type_script = "uid://dwbl1iluandce"
 
-[node name="CrashSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("11_o3u73")
-
-[node name="ShieldSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("12_o3u73")
-volume_db = -15.0
-pitch_scale = 0.5
-
 [node name="MotorSFX" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("12_s8iik")
 volume_db = -10.0
 bus = &"SFX"
 
 [node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("13_61r74")
 
 [node name="PickupSFX" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("14_5wces")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
