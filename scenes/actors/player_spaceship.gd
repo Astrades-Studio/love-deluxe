@@ -96,6 +96,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _dodge() -> void:
+	if dodging:
+		return
 	collision_shape_2d.disabled = true
 	dodging = true
 	if last_movement < 0:

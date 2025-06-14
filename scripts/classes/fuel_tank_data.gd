@@ -3,7 +3,7 @@ class_name FuelTankData
 
 @export var fuel_amount : float = 10
 
-func use_power_up(player: PlayerSpaceship):
+func use_power_up(_player: PlayerSpaceship):
 	if uses <= 0:
 		return
 	uses -= 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=3 uid="uid://bfqb614bysg2o"]
+[gd_scene load_steps=106 format=3 uid="uid://bfqb614bysg2o"]
 
 [ext_resource type="Script" uid="uid://cq2c3o2650s8s" path="res://scenes/level.gd" id="1_yvmk3"]
 [ext_resource type="Texture2D" uid="uid://qxq1idrxyih3" path="res://assets/images/UntitledArtwork2.png" id="2_e0wnd"]
@@ -18,7 +18,8 @@
 [ext_resource type="Resource" uid="uid://b7qhgg1i55g0m" path="res://resources/obstacle_data/buoy.tres" id="14_blca8"]
 [ext_resource type="Resource" uid="uid://cjfmvwjtm6n0j" path="res://resources/obstacle_data/shield.tres" id="14_re6lg"]
 [ext_resource type="Resource" uid="uid://chpa77bpcl2xp" path="res://resources/obstacle_data/road_sign.tres" id="15_dsidl"]
-[ext_resource type="Script" uid="uid://d1uma25ylis4u" path="res://scenes/ui/score_label.gd" id="18_1pn8n"]
+[ext_resource type="PackedScene" uid="uid://5rv7evydk5ol" path="res://scenes/ui/win_overlay.tscn" id="18_4xcco"]
+[ext_resource type="PackedScene" uid="uid://cdpti7uoynbuk" path="res://scenes/ui/game_over_layer.tscn" id="19_6rn2f"]
 [ext_resource type="Script" uid="uid://dwbl1iluandce" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="20_vnuhc"]
 [ext_resource type="Script" uid="uid://bsb4m5gbj45yn" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="21_04equ"]
 [ext_resource type="Script" uid="uid://djuud55wp3edh" path="res://addons/shaker/data/Vector2/ShakerTypeRandom2D.gd" id="22_4xcco"]
@@ -655,134 +656,9 @@ unique_name_in_owner = true
 
 [node name="HUD" parent="." instance=ExtResource("11_tdoqa")]
 
-[node name="WinOverlay" type="CanvasLayer" parent="."]
-process_mode = 3
-visible = false
+[node name="WinOverlay" parent="." instance=ExtResource("18_4xcco")]
 
-[node name="ColorRect" type="ColorRect" parent="WinOverlay"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="Label" type="Label" parent="WinOverlay"]
-offset_left = 64.0
-offset_top = 30.0
-offset_right = 194.0
-offset_bottom = 53.0
-text = "YOU WINNER!!!1!"
-
-[node name="ScoreLabel" type="Label" parent="WinOverlay"]
-offset_left = 79.0
-offset_top = 55.0
-offset_right = 209.0
-offset_bottom = 78.0
-text = "Score: ?????"
-script = ExtResource("18_1pn8n")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="WinOverlay"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -46.5
-offset_top = 42.0
-offset_right = 46.5
-offset_bottom = 94.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ContinueButton" type="Button" parent="WinOverlay/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Next Level"
-
-[node name="MainMenuButton" type="Button" parent="WinOverlay/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Main Menu"
-
-[node name="MovingStars" type="GPUParticles2D" parent="WinOverlay"]
-position = Vector2(130, 117)
-amount = 40
-texture = ExtResource("11_n44uc")
-lifetime = 4.75
-preprocess = 5.0
-process_material = SubResource("ParticleProcessMaterial_dsidl")
-
-[node name="GameOverLayer" type="CanvasLayer" parent="."]
-process_mode = 3
-visible = false
-
-[node name="ColorRect" type="ColorRect" parent="GameOverLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="Label" type="Label" parent="GameOverLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -80.0
-offset_top = -91.0
-offset_right = 80.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Your spaceship 
-ran out of fuel :(
-
-You didn't make it 
-on time to the date"
-horizontal_alignment = 1
-
-[node name="ScoreLabel" type="Label" parent="GameOverLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -65.0
-offset_top = 14.0
-offset_right = 65.0
-offset_bottom = 37.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Final Score:"
-horizontal_alignment = 1
-script = ExtResource("18_1pn8n")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GameOverLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -46.5
-offset_top = 42.0
-offset_right = 46.5
-offset_bottom = 94.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="RetryButton" type="Button" parent="GameOverLayer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Retry Level
-"
-
-[node name="MainMenuButton2" type="Button" parent="GameOverLayer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Main Menu"
+[node name="GameOverLayer" parent="." instance=ExtResource("19_6rn2f")]
 
 [node name="PauseLayer" type="CanvasLayer" parent="."]
 

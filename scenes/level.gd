@@ -5,12 +5,8 @@ class_name Level
 @onready var win_overlay: CanvasLayer = $WinOverlay
 @onready var game_over_layer: CanvasLayer = $GameOverLayer
 
-@onready var continue_button: Button = %ContinueButton
-@onready var main_menu_button: Button = %MainMenuButton
 @onready var station_sprite: Sprite2D = %StationSprite
 @onready var obstacle_spawner: ObstacleSpawner = %ObstacleSpawner
-@onready var retry_button: Button = %RetryButton
-@onready var main_menu_button_2: Button = %MainMenuButton2
 
 # Settings ----------------------------------------------------------------- #
 @export var target_distance := 120000
@@ -69,10 +65,6 @@ func _ready() -> void:
 	GlobalGameEvents.fuel_depleted.connect(_on_fuel_depleted)
 	GlobalGameEvents.destination_reached.connect(_on_destination_reached)
 	GlobalGameEvents.game_started.connect(obstacle_spawner.start_spawning)
-	continue_button.pressed.connect(_go_to_shop_scene)
-	main_menu_button.pressed.connect(_back_to_main_menu)
-	main_menu_button_2.pressed.connect(_back_to_main_menu)
-	retry_button.pressed.connect(restart_level)
 	GameGlobals.level = self
 	obstacle_spawner.level = self
 	start_driving()
@@ -167,23 +159,10 @@ func _update_station_sprite(current_distance: int) -> void:
 	station_sprite.scale = Vector2(new_scale, new_scale)
 
 
-func _go_to_shop_scene():
-	SceneTransitionManager.transition_to_scene(Preloader.ShopMenuScene)
-
-
-func _back_to_main_menu():
-	SceneTransitionManager.transition_to_scene(Preloader.MainMenuScene)
-
-
 func add_fuel(amount : float):
 	fuel += amount
 	print(fuel)
 	fuel_changed.emit()
-
-
-func restart_level():
-	GameGlobals.reset_score()
-	get_tree().reload_current_scene()
 
 #endregion --------------------------------------------------------------
 
