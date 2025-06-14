@@ -1,10 +1,10 @@
-[gd_scene load_steps=38 format=3 uid="uid://bet3dxv15wonf"]
+[gd_scene load_steps=40 format=3 uid="uid://bet3dxv15wonf"]
 
 [ext_resource type="Script" uid="uid://diufp0i5brd70" path="res://scenes/hud.gd" id="1_8qguk"]
 [ext_resource type="Theme" uid="uid://cn52mtnyoe77w" path="res://resources/hud_theme.tres" id="2_136eg"]
 [ext_resource type="Texture2D" uid="uid://bh6yjngrfomjd" path="res://assets/UI/UI - Monitors.png" id="3_1e6lo"]
 [ext_resource type="Texture2D" uid="uid://c16bh0boongi4" path="res://assets/UI/UI - Fuel Panel.png" id="4_4mi7y"]
-[ext_resource type="Texture2D" uid="uid://bjhirk2cepwjr" path="res://assets/images/moon_pixel.png" id="4_o6xly"]
+[ext_resource type="Material" uid="uid://dunnl3l0tik32" path="res://resources/planets/earth_planet.tres" id="4_we3sy"]
 [ext_resource type="Texture2D" uid="uid://n2u3itbrbu1c" path="res://assets/UI/UI - Fuel frame.png" id="5_pkwgd"]
 [ext_resource type="FontFile" uid="uid://cwrq7hfhktuur" path="res://assets/UI/fonts/Tiny5-Regular.ttf" id="5_we3sy"]
 [ext_resource type="Texture2D" uid="uid://7gmpmmehqknr" path="res://assets/UI/UI - Fuel Mark.png" id="6_d5po8"]
@@ -31,13 +31,17 @@ content_margin_bottom = 2.0
 texture = SubResource("AtlasTexture_vuvg6")
 
 [sub_resource type="Gradient" id="Gradient_65nxt"]
-colors = PackedColorArray(0, 0, 0, 1, 0.219501, 0.219501, 0.219501, 1)
+interpolation_mode = 1
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.172549, 0.117647, 0.192157, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_el1dq"]
 gradient = SubResource("Gradient_65nxt")
 width = 32
 height = 32
 fill_to = Vector2(1, 1)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_65nxt"]
 
 [sub_resource type="FontVariation" id="FontVariation_gmc6u"]
 base_font = ExtResource("5_we3sy")
@@ -90,6 +94,45 @@ texture_margin_left = 4.0
 texture_margin_top = 5.0
 texture_margin_right = 4.0
 texture_margin_bottom = 4.0
+
+[sub_resource type="GDScript" id="GDScript_we3sy"]
+script/source = "extends PanelContainer
+
+@onready var top: TextureRect = %BulletTextureTop
+@onready var middle: TextureRect = %BulletTextureMiddle
+@onready var bottom: TextureRect = %BulletTextureBottom
+
+#var bullets_held : int = 0
+
+func _ready() -> void:
+	GlobalGameEvents.bullets_changed.connect(_on_bullet_amount_changed)
+	_on_bullet_amount_changed(GameGlobals.bullets)
+	
+
+func _on_bullet_amount_changed(_amount: int):
+	set_bullets_to(_amount)
+
+
+func set_bullets_to(_amount: int):
+	match _amount:
+		0:
+			bottom.hide()
+			middle.hide()
+			top.hide()
+		1:
+			bottom.show()
+			middle.hide()
+			top.hide()
+		2:
+			middle.show()
+			bottom.show()
+			top.hide()
+		3:
+			bottom.show()
+			middle.show()
+			top.show()
+	
+"
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4h7mh"]
 texture = ExtResource("8_qmm8d")
@@ -158,16 +201,19 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_emer0")
 layout_mode = 2
 texture = SubResource("GradientTexture2D_el1dq")
 
-[node name="TextureRect2" type="TextureRect" parent="Control/Contents/Destination"]
+[node name="PlanetTexture" type="TextureRect" parent="Control/Contents/Destination"]
+unique_name_in_owner = true
 modulate = Color(0.688595, 0.688595, 0.688595, 1)
+material = ExtResource("4_we3sy")
 layout_mode = 2
-texture = ExtResource("4_o6xly")
+texture = SubResource("PlaceholderTexture2D_65nxt")
 expand_mode = 5
 
-[node name="Label" type="Label" parent="Control/Contents/Destination"]
+[node name="PlanetLabel" type="Label" parent="Control/Contents/Destination"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
-text = "Moon"
+text = "Venus-Earth"
 label_settings = SubResource("LabelSettings_1e6lo")
 horizontal_alignment = 1
 
@@ -210,9 +256,11 @@ text = "Score: 0000"
 horizontal_alignment = 1
 script = ExtResource("10_we3sy")
 
-[node name="MessageLabel" type="Label" parent="Control/Contents/DestinationContainer/Top/MiddlePanel/VBoxContainer"]
+[node name="CashLabel" type="Label" parent="Control/Contents/DestinationContainer/Top/MiddlePanel/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
-text = "Message "
+text = "Cash: "
 horizontal_alignment = 1
 
 [node name="BulletContainer" type="PanelContainer" parent="Control/Contents/DestinationContainer/Top"]
@@ -220,6 +268,7 @@ custom_minimum_size = Vector2(16, 32)
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_styles/panel = SubResource("StyleBoxTexture_jpd3y")
+script = SubResource("GDScript_we3sy")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/Contents/DestinationContainer/Top/BulletContainer"]
 layout_mode = 2
@@ -231,7 +280,8 @@ custom_minimum_size = Vector2(8, 5)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_4h7mh")
 
-[node name="BulletTexture" type="TextureRect" parent="Control/Contents/DestinationContainer/Top/BulletContainer/VBoxContainer/BulletSlot"]
+[node name="BulletTextureTop" type="TextureRect" parent="Control/Contents/DestinationContainer/Top/BulletContainer/VBoxContainer/BulletSlot"]
+unique_name_in_owner = true
 layout_mode = 2
 texture = SubResource("AtlasTexture_4vegw")
 
@@ -240,7 +290,8 @@ custom_minimum_size = Vector2(8, 5)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_4h7mh")
 
-[node name="BulletTexture" type="TextureRect" parent="Control/Contents/DestinationContainer/Top/BulletContainer/VBoxContainer/BulletSlot2"]
+[node name="BulletTextureMiddle" type="TextureRect" parent="Control/Contents/DestinationContainer/Top/BulletContainer/VBoxContainer/BulletSlot2"]
+unique_name_in_owner = true
 layout_mode = 2
 texture = SubResource("AtlasTexture_4vegw")
 
@@ -249,7 +300,8 @@ custom_minimum_size = Vector2(8, 5)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_4h7mh")
 
-[node name="BulletTexture" type="TextureRect" parent="Control/Contents/DestinationContainer/Top/BulletContainer/VBoxContainer/BulletSlot3"]
+[node name="BulletTextureBottom" type="TextureRect" parent="Control/Contents/DestinationContainer/Top/BulletContainer/VBoxContainer/BulletSlot3"]
+unique_name_in_owner = true
 layout_mode = 2
 texture = SubResource("AtlasTexture_4vegw")
 
@@ -305,8 +357,13 @@ texture = ExtResource("15_gonto")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Control/Contents/Portrait"]
+[node name="NoAmmoLabel" type="Label" parent="Control/Contents/Portrait"]
 visible = false
 layout_mode = 2
-size_flags_vertical = 8
-text = "Destination"
+theme_override_colors/font_color = Color(0.92549, 0.152941, 0.247059, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+text = "OUT OF
+AMMO"
+horizontal_alignment = 1
+vertical_alignment = 1

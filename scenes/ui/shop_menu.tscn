@@ -101,7 +101,7 @@ draw_center = false
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_5315t"]
 noise_type = 5
-seed = 2
+seed = 5
 frequency = 1.0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kef68"]

@@ -12,13 +12,14 @@ func _ready() -> void:
 	main_menu_button.pressed.connect(_back_to_main_menu)
 
 
-func _on_visibility_changed(visible: bool) -> void:
+func _on_visibility_changed() -> void:
 	if visible:
 		continue_button.grab_focus()
 
 
 func _go_to_shop_scene():
-	SceneTransitionManager.transition_to_scene(Preloader.ShopMenuScene)
+	GameGlobals.load_next_level()
+	#SceneTransitionManager.transition_to_scene()
 
 
 func _back_to_main_menu():

@@ -1,0 +1,32 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://dunnl3l0tik32"]
+
+[ext_resource type="Shader" uid="uid://d17y0dhwyp2xx" path="res://scenes/planet.gdshader" id="1_nqkku"]
+
+[sub_resource type="Gradient" id="Gradient_r4uss"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.070922, 0.170213, 0.609929, 0.77305)
+colors = PackedColorArray(1, 0.94508, 0.906221, 1, 0, 0.243137, 0.788235, 1, 0.394698, 0.370835, 0.141271, 1, 1, 0.94508, 0.906221, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ddr63"]
+gradient = SubResource("Gradient_r4uss")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_630v2"]
+noise_type = 2
+frequency = 0.0167
+offset = Vector3(0, 307.69, 0)
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_w0l5l"]
+noise = SubResource("FastNoiseLite_630v2")
+
+[resource]
+shader = ExtResource("1_nqkku")
+shader_parameter/pixelation = 250.0
+shader_parameter/radius = 0.195
+shader_parameter/rotate_x = 67.25
+shader_parameter/rotate_y = 39.54
+shader_parameter/rotation_speed = 0.075
+shader_parameter/sun_direction = Vector3(1, 0.15, 0)
+shader_parameter/sun_strength = 2.7
+shader_parameter/terrain_map = SubResource("NoiseTexture3D_w0l5l")
+shader_parameter/terrain_colors = SubResource("GradientTexture2D_ddr63")

@@ -20,6 +20,6 @@ func _back_to_main_menu():
 	SceneTransitionManager.transition_to_scene(Preloader.MainMenuScene)
 
 
-func _on_visibility_changed(visible: bool) -> void:
+func _on_visibility_changed() -> void:
 	if visible:
 		retry_button.grab_focus()

@@ -5,9 +5,7 @@ var direction := Vector2.ZERO
 var perspective_speed := 0.0
 var will_give_score := true
 
-@export var score := 100
-
-@onready var current_level: Level = get_tree().get_first_node_in_group("Level")
+@export var score := 10
 
 ## How much speed accumulates towards the bottom of the screen
 @export var acceleration := 1.05
@@ -73,7 +71,7 @@ func use_close_sprite():
 func _process(delta):
 	if rotating:
 		rotate(delta * 30)
-	if is_zero_approx(current_level.speed):
+	if is_zero_approx(GameGlobals.get_current_speed()):
 		return
 	
 	# upon spawning, the obstacle moves up X pixels as the distance to the target keeps decreasing
@@ -94,7 +92,7 @@ func _process(delta):
 	# The current speed of the ship multiplied by acceleration to make things go faster closer to the screen
 	# Multiplied by the obstacle speed
 	# Multiplied by the target direction and delta
-	perspective_speed += current_level.speed * acceleration * obstacle_speed_multiplier
+	perspective_speed += GameGlobals.get_current_speed() * acceleration * obstacle_speed_multiplier
 	position += direction * perspective_speed * delta
 
 # If the obstacle is way below or above the screen, free it
@@ -109,7 +107,6 @@ func on_player_hit():
 
 
 var rotating := false
-# var bumped_towards : Vector2
 func bump_obstacle_towards(_direction: Vector2, _speed: float = 5):
 	direction = _direction
 	obstacle_speed_multiplier = _speed

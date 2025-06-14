@@ -76,6 +76,7 @@ layout_mode = 2
 size_flags_vertical = 4
 
 [node name="LoveDeluxeSticker" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(132, 85)
 scale = Vector2(0.0804922, 0.0804922)
 texture = ExtResource("2_wwrlf")

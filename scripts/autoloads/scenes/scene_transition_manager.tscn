@@ -127,6 +127,7 @@ _data = {
 }
 
 [node name="SceneTransitionManager" type="Node"]
+process_mode = 3
 script = ExtResource("1_kf75r")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

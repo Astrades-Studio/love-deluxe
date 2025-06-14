@@ -1,0 +1,36 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://ca63c1mkloern"]
+
+[ext_resource type="Shader" uid="uid://d17y0dhwyp2xx" path="res://scenes/planet.gdshader" id="1_hruro"]
+
+[sub_resource type="Gradient" id="Gradient_lpsvn"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.0569106, 0.1, 0.165385, 0.226923, 0.253846, 0.323077, 0.396154, 0.438462, 0.484615, 0.503846, 0.638462, 0.696154)
+colors = PackedColorArray(0.642929, 0.42725, 0.148894, 1, 0.961967, 0.742873, 0.497428, 1, 0.49664, 0.32522, 0.102799, 1, 0.961967, 0.742873, 0.497428, 1, 0.814803, 0.159919, 0.295533, 1, 0.642929, 0.42725, 0.148894, 1, 0.961967, 0.742873, 0.497428, 1, 0.49664, 0.32522, 0.102799, 1, 0.152864, 0.0880908, 0.0126533, 1, 0.961967, 0.742873, 0.497428, 1, 0.814803, 0.159919, 0.295533, 1, 0.961967, 0.742873, 0.497428, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xlyh1"]
+gradient = SubResource("Gradient_lpsvn")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yviqe"]
+noise_type = 4
+frequency = 0.0036
+fractal_type = 3
+fractal_octaves = 7
+fractal_weighted_strength = 0.53
+domain_warp_enabled = true
+domain_warp_type = 2
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_nt00q"]
+height = 304
+noise = SubResource("FastNoiseLite_yviqe")
+
+[resource]
+shader = ExtResource("1_hruro")
+shader_parameter/pixelation = 250.0
+shader_parameter/radius = 0.377
+shader_parameter/rotate_x = 89.2
+shader_parameter/rotate_y = 26.37
+shader_parameter/rotation_speed = 0.075
+shader_parameter/sun_direction = Vector3(1, 0.15, 0)
+shader_parameter/sun_strength = 1.995
+shader_parameter/terrain_map = SubResource("NoiseTexture3D_nt00q")
+shader_parameter/terrain_colors = SubResource("GradientTexture2D_xlyh1")

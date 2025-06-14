@@ -11,14 +11,19 @@ signal game_started
 signal game_paused
 signal game_resumed
 signal game_over
-# endregion
+signal game_finished
+#endregion
 
 #region Run
 signal score_changed(score: int)
 signal cash_changed(cash: int)
-signal bullet_changed(bullet: int)
-# endregion
+signal bullets_changed(bullet: int)
+#endregion
 
+#region Level
+signal speed_changed(speed: float)
+signal fuel_changed(fuel: int)
+#endregion
 
 #region Narrative
 #signal dialogues_requested(dialogue_blocks: Array[DialogueDisplayer.DialogueBlock])

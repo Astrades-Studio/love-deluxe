@@ -37,8 +37,9 @@ const TOP_TILT := 30.0 # Maximum tilt angle in degrees
 
 func _ready() -> void:
 	crash_sprite.hide()
-	current_level.speed_changed.connect(_on_speed_changed)
+	GlobalGameEvents.speed_changed.connect(_on_speed_changed)
 	GlobalGameEvents.game_started.connect(func(): motor_sfx.play())
+	GlobalGameEvents.destination_reached.connect(func(): motor_sfx.stop())
 	shield_timer.timeout.connect(stop_shield)
 
 
@@ -151,7 +152,7 @@ func _on_player_hit(obstacle: Obstacle, deceleration_on_hit: float = current_lev
 				return
 			animation_player.play("crash")
 			get_tree().paused = true
-			var duration := 10
+			var duration := 5
 			for frame in duration:
 				await get_tree().process_frame
 			get_tree().paused = false
