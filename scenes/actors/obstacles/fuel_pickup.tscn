@@ -1,24 +1,16 @@
 [gd_scene load_steps=6 format=3 uid="uid://c84kdy57j4if6"]
 
+[ext_resource type="Script" uid="uid://8rpfki20reck" path="res://scenes/actors/obstacles/pickup.gd" id="1_0h0gj"]
 [ext_resource type="Resource" uid="uid://bjyyo4gsfvrv8" path="res://resources/powerups/fuel_tank_data.tres" id="1_wfgg3"]
 [ext_resource type="Texture2D" uid="uid://cimprfgm7xt5r" path="res://addons/plenticons/icons/16x/3d/capsule-red.png" id="2_2cp2n"]
 [ext_resource type="AudioStream" uid="uid://di5xhatxyq0j6" path="res://assets/audio/sfx/sfx_pickup.wav" id="2_wfgg3"]
-
-[sub_resource type="GDScript" id="GDScript_76078"]
-resource_name = "FuelTank"
-script/source = "extends Obstacle
-class_name PickUp
-
-func on_hit():
-	queue_free()
-"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rbo2c"]
 radius = 5.0
 
 [node name="FuelTank" type="Area2D"]
 collision_layer = 6
-script = SubResource("GDScript_76078")
+script = ExtResource("1_0h0gj")
 deceleration_on_hit = 0.0
 crash_type = 3
 power_up = ExtResource("1_wfgg3")

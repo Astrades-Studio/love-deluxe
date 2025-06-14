@@ -1,19 +1,19 @@
 [gd_scene load_steps=16 format=3 uid="uid://g2lmd0sjdv3b"]
 
-[ext_resource type="Script" path="res://ui/menus/layouts/pixel_art/settings/display_settings_menu.gd" id="1_fhyvk"]
+[ext_resource type="Script" uid="uid://baduluwjjbl77" path="res://ui/menus/layouts/pixel_art/settings/display_settings_menu.gd" id="1_fhyvk"]
 [ext_resource type="FontFile" uid="uid://due85r8gmivst" path="res://ui/menus/layouts/pixel_art/theme/fonts/ark_pixel/ark-pixel-10px-monospaced-latin.otf" id="1_omb32"]
 [ext_resource type="Theme" uid="uid://c6o5sbust8emw" path="res://ui/menus/layouts/pixel_art/theme/ui_theme.tres" id="2_ljhdo"]
-[ext_resource type="Script" path="res://ui/menus/components/label/project_version.gd" id="3_dfytw"]
-[ext_resource type="Texture2D" uid="uid://1pdniev668cm" path="res://assets/geometry/arrows/medium_left.png" id="3_syby4"]
-[ext_resource type="Script" path="res://ui/menus/layouts/pixel_art/components/menu_back_button.gd" id="4_tb3nf"]
+[ext_resource type="Script" uid="uid://bljda4lqrjbc" path="res://ui/menus/components/label/project_version.gd" id="3_dfytw"]
+[ext_resource type="Texture2D" uid="uid://1pdniev668cm" path="res://assets/UI/arrows/medium_left.png" id="3_syby4"]
+[ext_resource type="Script" uid="uid://db0afhvu8b8wm" path="res://ui/menus/layouts/pixel_art/components/menu_back_button.gd" id="4_tb3nf"]
 [ext_resource type="PackedScene" uid="uid://c7x5g1yqaqlni" path="res://ui/menus/layouts/pixel_art/components/menu_display_panel.tscn" id="5_6ij2g"]
-[ext_resource type="Script" path="res://ui/menus/components/option_button/screen_mode_option_button.gd" id="6_3p10p"]
+[ext_resource type="Script" uid="uid://brmjlo1fgwggj" path="res://ui/menus/components/option_button/screen_mode_option_button.gd" id="6_3p10p"]
 [ext_resource type="LabelSettings" uid="uid://2eihg2k5xqp6" path="res://ui/menus/layouts/pixel_art/theme/label_configurations/menu_settings_label.tres" id="6_scfhe"]
-[ext_resource type="Script" path="res://ui/menus/components/option_button/screen_resolutions_option_button.gd" id="8_l4tbi"]
-[ext_resource type="Script" path="res://ui/menus/components/checkbox/screen_borderless_checkbox.gd" id="8_vxpu6"]
-[ext_resource type="Script" path="res://ui/menus/components/checkbox/integer_scaling_checkbox.gd" id="11_k3gvp"]
-[ext_resource type="Script" path="res://ui/menus/components/checkbox/vsync_checkbox.gd" id="12_1k40f"]
-[ext_resource type="Script" path="res://ui/menus/components/hbox/fps_limit_hbox_container.gd" id="13_wbw54"]
+[ext_resource type="Script" uid="uid://lbjiujaevnbx" path="res://ui/menus/components/option_button/screen_resolutions_option_button.gd" id="8_l4tbi"]
+[ext_resource type="Script" uid="uid://qncdrjqgx47c" path="res://ui/menus/components/checkbox/screen_borderless_checkbox.gd" id="8_vxpu6"]
+[ext_resource type="Script" uid="uid://ctrba5yeklb0c" path="res://ui/menus/components/checkbox/integer_scaling_checkbox.gd" id="11_k3gvp"]
+[ext_resource type="Script" uid="uid://cy4lt36gmwv0q" path="res://ui/menus/components/checkbox/vsync_checkbox.gd" id="12_1k40f"]
+[ext_resource type="Script" uid="uid://jcu403a6oj1v" path="res://ui/menus/components/hbox/fps_limit_hbox_container.gd" id="13_wbw54"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ws6oi"]
 font = ExtResource("1_omb32")
@@ -77,7 +77,6 @@ offset_left = -150.0
 offset_top = 20.0
 offset_right = 150.0
 offset_bottom = 70.0
-grow_horizontal = 2
 mouse_filter = 1
 
 [node name="Label" parent="MenuDisplayPanel" index="0"]

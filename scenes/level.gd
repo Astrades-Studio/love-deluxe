@@ -3,29 +3,37 @@ class_name Level
 
 @onready var hud: CanvasLayer = $HUD
 @onready var win_overlay: CanvasLayer = $WinOverlay
-@onready var continue_button: Button = %ContinueButton
-@onready var main_menu_button: Button = %MainMenuButton
-@onready var station_sprite: Sprite2D = %StationSprite
+@onready var game_over_layer: CanvasLayer = $GameOverLayer
+
+
+@onready var background_layer: BackgroundLayer = $BackgroundLayer
 @onready var obstacle_spawner: ObstacleSpawner = %ObstacleSpawner
 
-@export var target_distance := 120000
+# Settings ----------------------------------------------------------------- #
+
+@export var level_data : LevelData
 
 # -------------------------------------------------------------------------- #
 
 ## How far the ship is from the end of the level
-var current_distance : int:
-	set(new):
-		current_distance = new
-		_update_station_sprite(current_distance)
-		hud.update_distance_travelled(int(target_distance - current_distance))
+var distance_remaining : int:
+	set(new_distance):
+		distance_remaining = new_distance
+		var _percentage_travelled := get_percentage_travelled()
+		background_layer.update_background(_percentage_travelled)
+		hud.update_distance_travelled(_percentage_travelled)
 
 # -------------------------------------------------------------------------- #
+
 
 ## Controls how fast everything in the level moves.
 var speed := 20.:
 	set(new):
-		speed = clamp(new, 0, 99)
-		speed_changed.emit(int(speed))
+		if !using_nitro:
+			speed = clamp(new, 1, MAX_SPEED)
+		else:
+			speed = clamp(new, 1, MAX_NITRO_SPEED)
+		GlobalGameEvents.speed_changed.emit(int(speed))
 
 # -------------------------------------------------------------------------- #
 
@@ -33,57 +41,63 @@ var speed := 20.:
 var fuel := 100.0:
 	set(new):
 		fuel = new
-		fuel_changed.emit(int(fuel))
+		GlobalGameEvents.fuel_changed.emit(int(fuel))
 ## Fuel consumed per unit of distance
 var fuel_consumption_rate := 1.5
 
-# Signals ------------------------------------------------------------------ #
-
-signal speed_changed(speed: float)
-signal fuel_changed(fuel: int)
 
 # Flags--------------------------------------------------------------------- #
 
 ## Flag that controls the process function
 var driving := false
-
+var using_nitro := false
 # Constants----------------------------------------------------------------- #
 
 const MIN_SPEED := 20.0
 const MAX_SPEED := 50.0
+const MAX_NITRO_SPEED := 75.0
 const FUEL_START := 100.0
 
 # Built-in------------------------------------------------------------------ #
 
 func _ready() -> void:
-	hud.level = self
+	GlobalGameEvents.fuel_depleted.connect(_on_fuel_depleted)
 	GlobalGameEvents.destination_reached.connect(_on_destination_reached)
 	GlobalGameEvents.game_started.connect(obstacle_spawner.start_spawning)
-	continue_button.pressed.connect(_go_to_shop_scene)
-	main_menu_button.pressed.connect(_back_to_main_menu)
+	
 	GameGlobals.level = self
-	obstacle_spawner.level = self
+	set_up_level()
 	start_driving()
 
+
+func set_up_level() -> void:
+	level_data = GameGlobals.get_current_level_data()
+	obstacle_spawner.level_data = level_data
+	background_layer.initialize_background(level_data)
+	
 
 ## Increases distance travelled, spends fuel and stops driving when distance is 0
 func _process(delta: float) -> void:
 	if !driving:
 		return
-	current_distance -= speed
+
+# substract speed from distance remaining
+
+	distance_remaining -= int(speed * delta * 100.0)
+
 	_spend_fuel(delta)
 	
 	if speed < MIN_SPEED:
 		accelerate(0.1)
 	
-	if current_distance < 0:
-		stop_driving()
+	if distance_remaining < 0:
+		await stop_driving()
 		GlobalGameEvents.destination_reached.emit()
 
 #region Public ------------------------------------------------------------ #
 
 func start_driving():
-	current_distance = target_distance
+	distance_remaining = level_data.target_distance
 	driving = true
 	GlobalGameEvents.game_started.emit()
 	
@@ -97,6 +111,18 @@ func stop_driving():
 
 func get_speed() -> float:
 	return speed
+
+
+func get_percentage_travelled() -> float:
+	return (level_data.target_distance - distance_remaining) / float(level_data.target_distance)
+
+
+func get_distance_remaining() -> int:
+	return distance_remaining
+
+
+func get_distance_travelled() -> int:
+	return level_data.target_distance - distance_remaining
 
 #region Speed controls -------------------------------------------------------
 
@@ -119,7 +145,7 @@ var already_applied_slowdown_this_frame := false
 func apply_slowdown(amount : float):
 	if already_applied_slowdown_this_frame:
 		return
-	speed -= amount
+	speed = clamp(speed - amount, 5.0, MAX_SPEED)
 	already_applied_slowdown_this_frame = true
 	_reset_frame_applied_slowdown.call_deferred()
 
@@ -145,36 +171,23 @@ func _spend_fuel_per_second():
 	fuel -= fuel_consumption_rate
 	if fuel < 0:
 		fuel = 0
-		stop_driving()
+		await stop_driving()
 		GlobalGameEvents.fuel_depleted.emit()
 
-
-func _on_destination_reached() -> void:
-	win_overlay.visible = true
-	fuel = FUEL_START
-	stop_driving()
-
-
-## Makes the station in the distance bigger the closer we are
-func _update_station_sprite(current_distance: int) -> void:
-	var new_scale : float = remap(current_distance, target_distance, 0.0, 0.01, 0.4)
-	station_sprite.scale = Vector2(new_scale, new_scale)
-
-
-func _go_to_shop_scene():
-	SceneTransitionManager.transition_to_scene(Preloader.ShopMenuScene)
-
-
-func _back_to_main_menu():
-	SceneTransitionManager.transition_to_scene(Preloader.MainMenuScene)
 
 func add_fuel(amount : float):
 	fuel += amount
 	print(fuel)
-	fuel_changed.emit()
-
-
-func restart_level():
-	get_tree().reload_current_scene()
+	GlobalGameEvents.fuel_changed.emit(fuel)
 
 #endregion --------------------------------------------------------------
+
+
+func _on_destination_reached() -> void:
+	win_overlay.show()
+	fuel = FUEL_START
+
+
+func _on_fuel_depleted():
+	game_over_layer.show()
+	fuel = FUEL_START

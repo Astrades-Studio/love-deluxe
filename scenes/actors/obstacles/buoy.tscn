@@ -14,6 +14,7 @@ collision_layer = 6
 script = ExtResource("1_8ulr1")
 deceleration_on_hit = 5.0
 crash_type = 1
+bumpable = true
 
 [node name="ObstacleSmall" type="Sprite2D" parent="."]
 texture = ExtResource("1_5qnwb")

@@ -45,5 +45,5 @@ func _process(delta):
 	var areas := get_overlapping_areas()
 	for area in areas:
 		if area is PlayerSpaceship:
-			current_level.apply_slowdown(deceleration_on_hit)
+			GameGlobals.get_current_level().apply_slowdown(deceleration_on_hit)
 		

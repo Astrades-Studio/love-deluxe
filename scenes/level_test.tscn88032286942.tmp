@@ -1,0 +1,149 @@
+[gd_scene load_steps=26 format=3 uid="uid://bfqb614bysg2o"]
+
+[ext_resource type="Script" uid="uid://cq2c3o2650s8s" path="res://scenes/level.gd" id="1_yvmk3"]
+[ext_resource type="PackedScene" uid="uid://egpkxr1c4eiv" path="res://scenes/background_layer.tscn" id="2_blca8"]
+[ext_resource type="Resource" uid="uid://b6t1bcmjh3o8y" path="res://resources/levels/earth.tres" id="2_dsidl"]
+[ext_resource type="PackedScene" uid="uid://jtsrok2xct5h" path="res://scenes/actors/player_spaceship.tscn" id="5_vkcgd"]
+[ext_resource type="Texture2D" uid="uid://c7iq4cttq3wsd" path="res://addons/plenticons/icons/16x/2d/spark-full-gray.png" id="11_n44uc"]
+[ext_resource type="PackedScene" uid="uid://bet3dxv15wonf" path="res://scenes/ui/hud.tscn" id="11_tdoqa"]
+[ext_resource type="Script" uid="uid://dqcyxei45tdkm" path="res://scenes/obstacle_spawner.gd" id="12_ddr63"]
+[ext_resource type="PackedScene" uid="uid://j71ioyt8gglp" path="res://scenes/ui/pause_layer.tscn" id="13_0dj0t"]
+[ext_resource type="PackedScene" uid="uid://5rv7evydk5ol" path="res://scenes/ui/win_overlay.tscn" id="18_4xcco"]
+[ext_resource type="PackedScene" uid="uid://cdpti7uoynbuk" path="res://scenes/ui/game_over_layer.tscn" id="19_6rn2f"]
+[ext_resource type="Script" uid="uid://dwbl1iluandce" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="20_vnuhc"]
+[ext_resource type="Script" uid="uid://bsb4m5gbj45yn" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="21_04equ"]
+[ext_resource type="Script" uid="uid://djuud55wp3edh" path="res://addons/shaker/data/Vector2/ShakerTypeRandom2D.gd" id="22_4xcco"]
+[ext_resource type="Script" uid="uid://djrhwlo080js7" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="23_6rn2f"]
+[ext_resource type="Script" uid="uid://ch4on6s5v0bgq" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="24_plnnl"]
+
+[sub_resource type="Gradient" id="Gradient_nuslc"]
+colors = PackedColorArray(0.807843, 0, 0, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_re6lg"]
+gradient = SubResource("Gradient_nuslc")
+
+[sub_resource type="Curve" id="Curve_1pn8n"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.564202), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vnuhc"]
+curve = SubResource("Curve_1pn8n")
+
+[sub_resource type="Curve" id="Curve_sgyyf"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.284047), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_blca8"]
+curve = SubResource("Curve_sgyyf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dsidl"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 51.96
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 20.72
+radial_accel_max = 22.52
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_blca8")
+color_ramp = SubResource("GradientTexture1D_re6lg")
+emission_curve = SubResource("CurveTexture_vnuhc")
+
+[sub_resource type="GDScript" id="GDScript_e0wnd"]
+script/source = "extends GPUParticles2D
+
+
+func _ready() -> void:
+	if !GameGlobals.is_node_ready():
+		await GameGlobals.ready
+	# get_tree().process_frame
+	var callable : Callable = func(): GlobalGameEvents.speed_changed.connect(_on_speed_changed)
+	callable.call_deferred()
+	
+	
+func _on_speed_changed(value: float) -> void:
+	speed_scale = remap(value, 0, 50, 0, 4)
+"
+
+[sub_resource type="Resource" id="Resource_ow23l"]
+script = ExtResource("22_4xcco")
+seed = 0
+amplitude = Vector2(1, 1)
+offset = Vector2(0, 0)
+BlendingMode = 0
+fade_in = 0.0
+fade_out = 0.0
+start_percent = 0.0
+end_percent = 1.0
+_temp_graph = false
+bake_internal = 64
+metadata/_custom_type_script = "uid://djuud55wp3edh"
+
+[sub_resource type="Resource" id="Resource_3svvi"]
+script = ExtResource("24_plnnl")
+PositionShake = Array[ExtResource("21_04equ")]([SubResource("Resource_ow23l")])
+RotationShake = Array[ExtResource("23_6rn2f")]([])
+ScaleShake = Array[ExtResource("21_04equ")]([])
+bake_internal = 64
+__follow_timeline = false
+metadata/_custom_type_script = "uid://ch4on6s5v0bgq"
+
+[node name="LevelTest" type="Node2D" groups=["Level"]]
+position = Vector2(-0.00408237, -1.87302)
+script = ExtResource("1_yvmk3")
+level_data = ExtResource("2_dsidl")
+
+[node name="BackgroundLayer" parent="." instance=ExtResource("2_blca8")]
+
+[node name="MovingStars" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(133, 119)
+amount = 40
+texture = ExtResource("11_n44uc")
+lifetime = 4.75
+preprocess = 5.0
+speed_scale = 4.0
+fixed_fps = 10
+interpolate = false
+fract_delta = false
+process_material = SubResource("ParticleProcessMaterial_dsidl")
+script = SubResource("GDScript_e0wnd")
+
+[node name="PlayerSpaceship" parent="." instance=ExtResource("5_vkcgd")]
+position = Vector2(128, 199)
+
+[node name="ObstacleSpawner" type="Marker2D" parent="." node_paths=PackedStringArray("obstacle_container")]
+unique_name_in_owner = true
+y_sort_enabled = true
+position = Vector2(130, 119)
+script = ExtResource("12_ddr63")
+obstacle_container = NodePath("ObstacleContainer")
+debug_draw = false
+delay_between_signage = 1500.0
+metadata/_edit_group_ = true
+
+[node name="TopLeft" type="Marker2D" parent="ObstacleSpawner"]
+position = Vector2(-40, 0)
+
+[node name="TopRight" type="Marker2D" parent="ObstacleSpawner"]
+position = Vector2(47, 1)
+
+[node name="ObstacleContainer" type="Node2D" parent="ObstacleSpawner"]
+unique_name_in_owner = true
+
+[node name="HUD" parent="." instance=ExtResource("11_tdoqa")]
+
+[node name="WinOverlay" parent="." instance=ExtResource("18_4xcco")]
+
+[node name="GameOverLayer" parent="." instance=ExtResource("19_6rn2f")]
+
+[node name="PauseLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseLayer" parent="PauseLayer" instance=ExtResource("13_0dj0t")]
+visible = false
+
+[node name="ShakerComponent2D" type="Node2D" parent="." node_paths=PackedStringArray("Targets")]
+script = ExtResource("20_vnuhc")
+custom_target = true
+Targets = [NodePath("..")]
+shakerPreset = SubResource("Resource_3svvi")
+metadata/_custom_type_script = "uid://dwbl1iluandce"

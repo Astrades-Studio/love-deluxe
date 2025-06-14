@@ -17,7 +17,7 @@ const bbcode_end_flag: String = ']'
 @export var space_time: float = 0.06
 @export var punctuation_time: float = 0.2
 @export_category("Sound")
-@export var type_sound_queue: SoundQueue
+var type_sound_queue
 @export var use_type_sounds: bool = false
 @export var min_pitch_range: float = 1.0
 @export var max_pitch_range: float = 1.2

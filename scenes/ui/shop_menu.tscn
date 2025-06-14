@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://beikff07mbo6f"]
+[gd_scene load_steps=27 format=3 uid="uid://beikff07mbo6f"]
 
 [ext_resource type="Script" uid="uid://cfcwfjgqxgqjt" path="res://scenes/ui/shop_menu.gd" id="1_idpb1"]
 [ext_resource type="Texture2D" uid="uid://droxhii1v5kuq" path="res://assets/UI/t_shop_mockup_small.png" id="1_krthd"]
@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://86ixq8uxh6fh" path="res://addons/plenticons/icons/64x-hidpi/objects/gun-blue.png" id="8_8ulhc"]
 [ext_resource type="Texture2D" uid="uid://dh8d1jebkawtq" path="res://addons/plenticons/icons/64x-hidpi/3d/capsule-red.png" id="9_3d6mk"]
 [ext_resource type="Texture2D" uid="uid://cuvftq1ism70s" path="res://addons/plenticons/icons/64x-hidpi/3d/capsule-blue.png" id="10_sah6i"]
-[ext_resource type="Theme" uid="uid://2jjo8bo40ctc" path="res://resources/dialog_box_theme.tres" id="12_1sbf6"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wgqcq"]
 texture = ExtResource("1_krthd")
@@ -102,7 +101,7 @@ draw_center = false
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_5315t"]
 noise_type = 5
-seed = 6
+seed = 5
 frequency = 1.0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kef68"]
@@ -228,38 +227,8 @@ alignment = 1
 
 [node name="DialogBox" parent="ShopMenu/BottomPanel" instance=ExtResource("3_khejc")]
 unique_name_in_owner = true
-layout_mode = 2
-
-[node name="DialogBox2" type="Control" parent="ShopMenu/BottomPanel"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(208, 0)
-layout_mode = 2
-theme = ExtResource("12_1sbf6")
-
-[node name="DialogContainer" type="PanelContainer" parent="ShopMenu/BottomPanel/DialogBox2"]
-texture_filter = 1
-layout_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_stretch_ratio = 5.24
-
-[node name="NinePatchRect" type="NinePatchRect" parent="ShopMenu/BottomPanel/DialogBox2/DialogContainer"]
 visible = false
 layout_mode = 2
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
-
-[node name="Balloon" type="MarginContainer" parent="ShopMenu/BottomPanel/DialogBox2/DialogContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
 
 [node name="PortraitPanel" type="PanelContainer" parent="ShopMenu/BottomPanel"]
 z_index = -1
@@ -276,5 +245,3 @@ texture = SubResource("NoiseTexture2D_kef68")
 expand_mode = 1
 stretch_mode = 1
 script = ExtResource("4_p856s")
-
-[connection signal="gui_input" from="ShopMenu/BottomPanel/DialogBox2/DialogContainer/Balloon" to="ShopMenu/BottomPanel/DialogBox2" method="_on_balloon_gui_input"]

@@ -3,8 +3,9 @@ class_name Obstacle
 
 var direction := Vector2.ZERO
 var perspective_speed := 0.0
+var will_give_score := true
 
-@onready var current_level: Level = get_tree().get_first_node_in_group("Level")
+@export var score := 10
 
 ## How much speed accumulates towards the bottom of the screen
 @export var acceleration := 1.05
@@ -16,7 +17,7 @@ var perspective_speed := 0.0
 
 ## If the item should change behavior when appearing on either side of the road
 @export var symmetrical := true
-
+@export var bumpable := false # Will this fly off when hit?
 @export var power_up : PowerUp
 
 var initial_y_position := 0.0
@@ -68,9 +69,11 @@ func use_close_sprite():
 
 
 func _process(delta):
-	if is_zero_approx(current_level.speed):
+	if rotating:
+		rotate(delta * 30)
+	if is_zero_approx(GameGlobals.get_current_speed()):
 		return
-
+	
 	# upon spawning, the obstacle moves up X pixels as the distance to the target keeps decreasing
 	if is_far:
 		# time_far_away -= delta * (current_level.speed / default_speed)
@@ -84,15 +87,27 @@ func _process(delta):
 			_pixels_moved_far_away_count = pixels_moved_far_away
 			is_far = false
 			use_close_sprite()
-
 		return
-
 
 	# The current speed of the ship multiplied by acceleration to make things go faster closer to the screen
 	# Multiplied by the obstacle speed
 	# Multiplied by the target direction and delta
-	perspective_speed += current_level.speed * acceleration * obstacle_speed_multiplier
+	perspective_speed += GameGlobals.get_current_speed() * acceleration * obstacle_speed_multiplier
 	position += direction * perspective_speed * delta
 
-	if global_position.y > GameGlobals.BOTTOM_RIGHT.y + 100:
+# If the obstacle is way below or above the screen, free it
+	if global_position.y > GameGlobals.BOTTOM_RIGHT.y + 100 or \
+	global_position.y < GameGlobals.BOTTOM_RIGHT.y - 400:
+		if will_give_score:
+			GameGlobals.add_score(score)
 		queue_free()
+
+func on_player_hit():
+	will_give_score = false
+
+
+var rotating := false
+func bump_obstacle_towards(_direction: Vector2, _speed: float = 5):
+	direction = _direction
+	obstacle_speed_multiplier = _speed
+	rotating = true

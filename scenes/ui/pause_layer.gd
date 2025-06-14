@@ -44,6 +44,7 @@ func on_pause_menu_visibility_changed() -> void:
 
 func on_restart_pressed() -> void:
 	get_tree().paused = false
+	GameGlobals.reset_score()
 	get_tree().reload_current_scene()
 
 

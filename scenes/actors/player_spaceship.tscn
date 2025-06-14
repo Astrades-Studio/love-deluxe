@@ -1,8 +1,8 @@
-[gd_scene load_steps=34 format=3 uid="uid://jtsrok2xct5h"]
+[gd_scene load_steps=33 format=3 uid="uid://jtsrok2xct5h"]
 
 [ext_resource type="Script" uid="uid://dl1xiar4exvqq" path="res://scenes/actors/player_spaceship.gd" id="1_fjeb7"]
 [ext_resource type="Texture2D" uid="uid://o3khl23lf05c" path="res://assets/sprites/UFO.png" id="2_kr3ia"]
-[ext_resource type="Texture2D" uid="uid://bf4lk54wk2e7b" path="res://assets/sprites/spritesheet_lasers.png" id="3_kr3ia"]
+[ext_resource type="Texture2D" uid="uid://c6es1ppan7hjl" path="res://assets/sprites/s_nube.png" id="3_o3u73"]
 [ext_resource type="Script" uid="uid://drymhnogh5gkr" path="res://addons/shaker/src/Vector2/ShakerEmitter2D.gd" id="4_iko5p"]
 [ext_resource type="Script" uid="uid://bsb4m5gbj45yn" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="5_n2dyr"]
 [ext_resource type="Script" uid="uid://djrhwlo080js7" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="6_w6mwj"]
@@ -15,10 +15,6 @@
 [ext_resource type="AudioStream" uid="uid://bqw35alforhih" path="res://assets/audio/sfx/Motor Loop.ogg" id="12_s8iik"]
 [ext_resource type="AudioStream" uid="uid://c42bcvl0ypgda" path="res://assets/audio/sfx/sfx_jump.wav" id="13_61r74"]
 [ext_resource type="AudioStream" uid="uid://di5xhatxyq0j6" path="res://assets/audio/sfx/sfx_pickup.wav" id="14_5wces"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3d216"]
-atlas = ExtResource("3_kr3ia")
-region = Rect2(375, 2, 189, 186)
 
 [sub_resource type="Gradient" id="Gradient_5wces"]
 interpolation_mode = 2
@@ -90,9 +86,34 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/CrashSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-4, 12)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pivot/CrashSprite/CrashSprite2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_5bdv4"]
 resource_name = "crash"
+length = 0.6045
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -100,10 +121,34 @@ tracks/0/path = NodePath("Pivot/CrashSprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.33),
+"times": PackedFloat32Array(0, 0.533333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/CrashSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.533333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-4, 12), Vector2(-14, -3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/CrashSprite/CrashSprite2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_fjeb7"]
@@ -215,10 +260,20 @@ texture = ExtResource("2_kr3ia")
 [node name="CrashSprite" type="Sprite2D" parent="Pivot"]
 unique_name_in_owner = true
 visible = false
-modulate = Color(0.74902, 0.454902, 0.239216, 0.462745)
-position = Vector2(-3, 16.66)
-scale = Vector2(0.545, 0.285)
-texture = SubResource("AtlasTexture_3d216")
+modulate = Color(0.232584, 0.318111, 0.159876, 1)
+position = Vector2(-4, 12)
+texture = ExtResource("3_o3u73")
+
+[node name="CrashSprite2" type="Sprite2D" parent="Pivot/CrashSprite"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(5.785, 16.865)
+texture = ExtResource("3_o3u73")
+
+[node name="CrashSFX" type="AudioStreamPlayer2D" parent="Pivot/CrashSprite"]
+unique_name_in_owner = true
+position = Vector2(4, 8)
+stream = ExtResource("11_o3u73")
 
 [node name="ShieldFX" type="Sprite2D" parent="Pivot"]
 unique_name_in_owner = true
@@ -229,9 +284,21 @@ texture = SubResource("GradientTexture2D_o3u73")
 
 [node name="ShakerComponent2D" type="Node2D" parent="Pivot/ShieldFX"]
 script = ExtResource("9_fidux")
-is_playing = true
 shakerPreset = SubResource("Resource_fijrf")
 metadata/_custom_type_script = "uid://dwbl1iluandce"
+
+[node name="ShieldTimer" type="Timer" parent="Pivot/ShieldFX"]
+unique_name_in_owner = true
+wait_time = 5.0
+one_shot = true
+
+[node name="ShieldSFX" type="AudioStreamPlayer2D" parent="Pivot/ShieldFX"]
+unique_name_in_owner = true
+position = Vector2(0, 2.09301)
+scale = Vector2(0.845659, 0.845659)
+stream = ExtResource("12_o3u73")
+volume_db = -15.0
+pitch_scale = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)
@@ -266,23 +333,18 @@ fade_out = 0.000523326
 shakerPreset = SubResource("Resource_bs78u")
 metadata/_custom_type_script = "uid://dwbl1iluandce"
 
-[node name="CrashSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("11_o3u73")
-
-[node name="ShieldSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("12_o3u73")
-volume_db = -15.0
-pitch_scale = 0.5
-
 [node name="MotorSFX" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("12_s8iik")
 volume_db = -10.0
 bus = &"SFX"
 
 [node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("13_61r74")
 
 [node name="PickupSFX" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("14_5wces")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

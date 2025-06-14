@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=10 format=3 uid="uid://ccb52chsmn77m"]
+
+[ext_resource type="Script" uid="uid://ca361caruj02a" path="res://resources/obstacle_data/obstacle_data.gd" id="1_eovjd"]
+[ext_resource type="Resource" uid="uid://8fgd7lr36yvu" path="res://resources/obstacle_data/asteroid.tres" id="2_eomqs"]
+[ext_resource type="Resource" uid="uid://dt27xskbecnju" path="res://resources/obstacle_data/cloud.tres" id="3_qbqgu"]
+[ext_resource type="Resource" uid="uid://poqt83sl3pbr" path="res://resources/obstacle_data/traffic.tres" id="4_gbhoq"]
+[ext_resource type="Resource" uid="uid://bg6jvilmmbb23" path="res://resources/obstacle_data/fuel_tank.tres" id="5_hq53d"]
+[ext_resource type="Resource" uid="uid://cjfmvwjtm6n0j" path="res://resources/obstacle_data/shield.tres" id="6_3fpcg"]
+[ext_resource type="Script" uid="uid://dacgwax10g8xk" path="res://resources/levels/level_data.gd" id="7_78y25"]
+[ext_resource type="Material" uid="uid://dunnl3l0tik32" path="res://resources/planets/earth_planet.tres" id="7_jtw43"]
+[ext_resource type="Resource" uid="uid://b7qhgg1i55g0m" path="res://resources/obstacle_data/buoy.tres" id="8_4n5cr"]
+
+[resource]
+script = ExtResource("7_78y25")
+level_no = 1
+level_name = &"Venus-Earth"
+target_distance = 120000
+target_planet_name = "Earth"
+planet_shader = ExtResource("7_jtw43")
+obstacle_list = Dictionary[ExtResource("1_eovjd"), int]({
+ExtResource("2_eomqs"): 12,
+ExtResource("3_qbqgu"): 3,
+ExtResource("4_gbhoq"): 2
+})
+distance_between_obstacles = 1400
+pickup_list = Dictionary[ExtResource("1_eovjd"), int]({
+ExtResource("5_hq53d"): 2,
+ExtResource("6_3fpcg"): 2
+})
+distance_between_pickups = 7000
+signage_list = Dictionary[ExtResource("1_eovjd"), int]({
+ExtResource("8_4n5cr"): 19
+})
+distance_between_signage = 1600
+metadata/_custom_type_script = "uid://dacgwax10g8xk"
