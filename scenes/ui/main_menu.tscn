@@ -105,13 +105,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 140
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 15
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 17
+alignment = 1
 
 [node name="NewGameButton" type="Button" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -152,6 +154,7 @@ text = "Continue"
 
 [node name="SettingsButton" type="Button" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(0, 14.63)
 layout_mode = 2
 size_flags_vertical = 3
@@ -170,6 +173,7 @@ text = "Settings"
 
 [node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(0, 14.63)
 layout_mode = 2
 size_flags_vertical = 3

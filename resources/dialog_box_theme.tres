@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://2jjo8bo40ctc"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://2jjo8bo40ctc"]
 
 [ext_resource type="Texture2D" uid="uid://d0ugt5eslubh4" path="res://assets/UI/t_dialog_panel_9patch.png" id="1_st5vj"]
+[ext_resource type="FontFile" uid="uid://cxbe1vdxshbyv" path="res://assets/UI/fonts/pixolletta_8px.ttf" id="2_jjihm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjihm"]
 
@@ -21,6 +22,7 @@ expand_margin_top = 1.0
 region_rect = Rect2(0, 0, 16, 16)
 
 [resource]
+default_font = ExtResource("2_jjihm")
 Button/constants/h_separation = 0
 Button/constants/icon_max_width = 8
 Button/font_sizes/font_size = 10

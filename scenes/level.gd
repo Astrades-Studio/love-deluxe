@@ -91,6 +91,7 @@ func _process(delta: float) -> void:
 		accelerate(0.1)
 	
 	if distance_remaining < 0:
+		obstacle_spawner.stop_spawning()
 		await stop_driving()
 		GlobalGameEvents.destination_reached.emit()
 

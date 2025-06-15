@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_o3hwy")
-fuel_amount = 10.0
+fuel_amount = 5.0
 duration = 0.0
 uses = 1
 metadata/_custom_type_script = "uid://cnb26gn2uohrk"

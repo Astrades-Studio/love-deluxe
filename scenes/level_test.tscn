@@ -88,7 +88,6 @@ __follow_timeline = false
 metadata/_custom_type_script = "uid://ch4on6s5v0bgq"
 
 [node name="LevelTest" type="Node2D" groups=["Level"]]
-position = Vector2(-0.00408237, -1.87302)
 script = ExtResource("1_yvmk3")
 level_data = ExtResource("2_e0wnd")
 
@@ -146,3 +145,5 @@ custom_target = true
 Targets = [NodePath("..")]
 shakerPreset = SubResource("Resource_3svvi")
 metadata/_custom_type_script = "uid://dwbl1iluandce"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

@@ -53,6 +53,7 @@ class Lane:
 	var curve: Curve2D
 	var obstacles: Array[Obstacle] = []
 	var speed: float = 0.0
+	var frame_cooldown : bool
 
 
 func _ready() -> void:
@@ -117,11 +118,17 @@ func _spawn_obstacle_on_lane(lane: Lane, obstacle_scene: PackedScene) -> void:
 	if !obstacle_scene:
 		push_warning("No obstacle scene provided to spawn.")
 		return
-
+	while lane.frame_cooldown:
+		_spawn_obstacle_on_lane(obstacle_lanes[randi() % obstacle_lanes.size()], obstacle_scene)
+		return
 	var obstacle : Obstacle = obstacle_scene.instantiate() as Obstacle
 	obstacle.global_position = (lane.start)
 	obstacle.direction = (lane.end - lane.start).normalized()
 	obstacle_container.add_child(obstacle)
+	lane.frame_cooldown = true
+	await get_tree().process_frame
+	lane.frame_cooldown = false
+	
 
 
 ## Sets which lanes are for obstacles and which for SIGNAGE
@@ -210,3 +217,6 @@ func start_spawning() -> void:
 func stop_spawning() -> void:
 	spawn_obstacles = false
 	spawn_signage = false
+	for obstacle in obstacle_container.get_children():
+		if obstacle is Obstacle:
+			obstacle.queue_free()
