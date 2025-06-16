@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://boyoax177wkys"
+path="res://.godot/imported/Chiptune Vol2 Fun Work Intensity 1.ogg-f6568d97b0d855d62727961d2d092df7.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/fun_work/Chiptune Vol2 Fun Work Intensity 1.ogg"
+dest_files=["res://.godot/imported/Chiptune Vol2 Fun Work Intensity 1.ogg-f6568d97b0d855d62727961d2d092df7.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

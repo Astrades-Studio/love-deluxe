@@ -1,6 +1,6 @@
 extends Label
 
-var _text := "Score: "
+@export var _text := "Score: "
 
 func _ready() -> void:
 	GlobalGameEvents.score_changed.connect(_on_score_changed)

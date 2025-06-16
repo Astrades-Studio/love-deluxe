@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dmhoitsmfqp4c"
+path="res://.godot/imported/Chiptune Vol3 Summer Intensity 2.ogg-f42782231a40d51316086492b3998ee4.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/summer/Chiptune Vol3 Summer Intensity 2.ogg"
+dest_files=["res://.godot/imported/Chiptune Vol3 Summer Intensity 2.ogg-f42782231a40d51316086492b3998ee4.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

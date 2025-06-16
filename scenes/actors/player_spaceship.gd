@@ -92,8 +92,33 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if !current_level.driving:
 		return
+	if event is InputEventScreenTouch or event is InputEventScreenDrag:
+		_handle_touch_input(event)
 	if event.is_action_pressed("action_dodge"):
 		_dodge()
+
+
+func _handle_touch_input(event: InputEvent) -> void:
+	var screen_width = get_viewport().size.x
+	var touch_position = event.position.x
+	
+	if touch_position < screen_width / 2:
+		# Touch on the left side of the screen
+		accumulated_x_movement -= horizontal_speed
+		position.x -= horizontal_speed
+		
+		if last_movement != -1:
+			accumulated_x_movement = 0.0 # Reset if changing direction
+			last_movement = -1 # Left, tracked for rolling
+	
+	elif touch_position >= screen_width / 2:
+		# Touch on the right side of the screen
+		accumulated_x_movement += horizontal_speed
+		position.x += horizontal_speed
+		
+		if last_movement != 1:
+			accumulated_x_movement = 0.0 # Reset if changing direction
+			last_movement = 1 # Right, tracked for rolling
 
 
 func _dodge() -> void:
@@ -169,9 +194,6 @@ func _on_player_hit(obstacle: Obstacle, deceleration_on_hit: float = current_lev
 
 var inventory : Array[PowerUp]
 func add_powerup(item: PowerUp):
-	#if item in inventory:
-		#return
-	
 	inventory.append(item.duplicate())
 
 

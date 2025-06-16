@@ -1,9 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://vvxfwyok47jp"]
+[gd_scene load_steps=17 format=3 uid="uid://vvxfwyok47jp"]
 
 [ext_resource type="Script" uid="uid://c0o3twmbg1djt" path="res://scenes/cutscenes/initial_cutscene.gd" id="1_0hj4a"]
-[ext_resource type="PackedScene" uid="uid://bfqb614bysg2o" path="res://scenes/level_test.tscn" id="2_imnlb"]
+[ext_resource type="PackedScene" uid="uid://jc67h1eovcbl" path="res://scenes/ui/tutorial.tscn" id="2_27d1w"]
 [ext_resource type="Resource" uid="uid://cgxcn7gev1g4l" path="res://resources/dialog/cutscenes.dialogue" id="3_6wkh3"]
 [ext_resource type="Texture2D" uid="uid://o13kif023xhc" path="res://assets/images/glorpina.jpg" id="4_imnlb"]
+[ext_resource type="FontFile" uid="uid://cxbe1vdxshbyv" path="res://assets/UI/fonts/pixolletta_8px.ttf" id="5_27d1w"]
+[ext_resource type="Texture2D" uid="uid://bpjrm0kcpqgxq" path="res://assets/sprites/heart_1.png" id="5_q2ole"]
+[ext_resource type="Texture2D" uid="uid://5ww6688r5jmd" path="res://assets/sprites/heart_2.png" id="6_ctnxc"]
+[ext_resource type="FontFile" uid="uid://cwrq7hfhktuur" path="res://assets/UI/fonts/Tiny5-Regular.ttf" id="6_n44ij"]
+[ext_resource type="Texture2D" uid="uid://kmnn8thwm1m2" path="res://assets/sprites/heart_3.png" id="7_72hn5"]
+[ext_resource type="FontFile" uid="uid://bxbpiqgykmlkc" path="res://assets/UI/fonts/Pixolde.ttf" id="7_pyrxp"]
+[ext_resource type="FontFile" uid="uid://h5ox8j6flgn1" path="res://assets/UI/fonts/monogram/ttf/monogram.ttf" id="8_q2ole"]
+[ext_resource type="AudioStream" uid="uid://bk6d1j2w4vq46" path="res://assets/audio/music/summer/Chiptune Vol3 Summer Cut 60.ogg" id="12_ctnxc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ctnxc"]
+font = ExtResource("5_27d1w")
+
+[sub_resource type="LabelSettings" id="LabelSettings_72hn5"]
+font = ExtResource("6_n44ij")
+
+[sub_resource type="LabelSettings" id="LabelSettings_yt8ph"]
+font = ExtResource("7_pyrxp")
+
+[sub_resource type="LabelSettings" id="LabelSettings_cuufp"]
+font = ExtResource("8_q2ole")
 
 [node name="InitialCutscene" type="Control"]
 layout_mode = 3
@@ -13,7 +33,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0hj4a")
-_next_scene = ExtResource("2_imnlb")
+_next_scene = ExtResource("2_27d1w")
 dialog = ExtResource("3_6wkh3")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -36,4 +56,52 @@ texture = ExtResource("4_imnlb")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="Heart1" type="Sprite2D" parent="ColorRect"]
+position = Vector2(204, 33)
+texture = ExtResource("5_q2ole")
+
+[node name="Heart2" type="Sprite2D" parent="ColorRect"]
+position = Vector2(180, 90)
+texture = ExtResource("6_ctnxc")
+
+[node name="Heart3" type="Sprite2D" parent="ColorRect"]
+position = Vector2(56, 29)
+texture = ExtResource("7_72hn5")
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Default: /()=?!\"¿¡'0412"
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Pixoletta: /()=?!\"¿¡'0412"
+label_settings = SubResource("LabelSettings_ctnxc")
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Tiny5: /()=?!\"¿¡'0412"
+label_settings = SubResource("LabelSettings_72hn5")
+
+[node name="Label4" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Pixolde: /()=?!\"¿¡'0412"
+label_settings = SubResource("LabelSettings_yt8ph")
+
+[node name="Label5" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Monogram: /()=?!\"¿¡'0412"
+label_settings = SubResource("LabelSettings_cuufp")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_ctnxc")
+volume_db = -15.0
+autoplay = true
+bus = &"Music"

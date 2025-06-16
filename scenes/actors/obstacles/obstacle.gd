@@ -16,7 +16,7 @@ var will_give_score := true
 @export_enum("none", "mild", "serious", "pickup") var crash_type
 
 ## If the item should change behavior when appearing on either side of the road
-@export var symmetrical := true
+@export var flip_sprite := true
 @export var bumpable := false # Will this fly off when hit?
 @export var power_up : PowerUp
 
@@ -50,16 +50,10 @@ func use_far_away_sprite():
 	obstacle_small.show()
 
 # Flip the sprites depending on the side of the screen
-	if global_position.x > GameGlobals.BOTTOM_RIGHT.x / 2.0:
-		obstacle_large.flip_h = true
-		obstacle_small.flip_h = true
-	
-# In case of the road sign and other non-symmetrical assets, center them
-		if !symmetrical:
-			global_position.x - 100
-	else:
-		if !symmetrical:
-			global_position.x + 100
+	if flip_sprite:
+		if global_position.x > GameGlobals.BOTTOM_RIGHT.x / 2.0:
+			obstacle_large.flip_h = true
+			obstacle_small.flip_h = true
 
 
 func use_close_sprite():

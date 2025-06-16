@@ -1,9 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://dm3mfwda0mp06"]
+[gd_scene load_steps=10 format=3 uid="uid://dm3mfwda0mp06"]
 
 [ext_resource type="Theme" uid="uid://2jjo8bo40ctc" path="res://resources/dialog_box_theme.tres" id="1_xovei"]
 [ext_resource type="Script" uid="uid://chmkkd8anaamf" path="res://scenes/ui/dialog_box.gd" id="2_rm1mb"]
 [ext_resource type="Script" uid="uid://g32um0mltv5d" path="res://addons/dialogue_manager/dialogue_label.gd" id="3_hhmjc"]
+[ext_resource type="FontFile" uid="uid://cxbe1vdxshbyv" path="res://assets/UI/fonts/pixolletta_8px.ttf" id="3_xovei"]
+[ext_resource type="FontFile" uid="uid://h5ox8j6flgn1" path="res://assets/UI/fonts/monogram/ttf/monogram.ttf" id="4_1gu0v"]
+[ext_resource type="FontFile" uid="uid://bxbpiqgykmlkc" path="res://assets/UI/fonts/Pixolde.ttf" id="5_en7oe"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="5_xovei"]
+
+[sub_resource type="FontVariation" id="FontVariation_1gu0v"]
+fallbacks = Array[Font]([ExtResource("4_1gu0v"), ExtResource("5_en7oe")])
+base_font = ExtResource("3_xovei")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rm1mb"]
 bg_color = Color(1, 1, 1, 0)
@@ -54,6 +61,7 @@ modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("1_xovei")
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "Character"
 fit_content = true
@@ -64,11 +72,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
-theme_override_font_sizes/bold_italics_font_size = 10
-theme_override_font_sizes/italics_font_size = 10
-theme_override_font_sizes/mono_font_size = 10
-theme_override_font_sizes/normal_font_size = 10
-theme_override_font_sizes/bold_font_size = 10
 text = "This is a pixel font."
 script = ExtResource("3_hhmjc")
 skip_pause_at_abbreviations = PackedStringArray("Mr", "Mrs", "Ms", "Dr", "etc", "eg", "ex")
@@ -93,6 +96,7 @@ response_template = NodePath("ResponseTemplate")
 
 [node name="ResponseTemplate" type="Button" parent="ResponseContainer/ResponsesMenu"]
 layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_1gu0v")
 theme_override_styles/focus = SubResource("StyleBoxFlat_rm1mb")
 text = "Yes"
 

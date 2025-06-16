@@ -1,6 +1,6 @@
 [gd_scene load_steps=74 format=3 uid="uid://egpkxr1c4eiv"]
 
-[ext_resource type="Texture2D" uid="uid://qxq1idrxyih3" path="res://assets/images/UntitledArtwork2.png" id="1_81jil"]
+[ext_resource type="Texture2D" uid="uid://qxq1idrxyih3" path="res://assets/images/t_background_hole.png" id="1_81jil"]
 [ext_resource type="Script" uid="uid://c4xm8v1mr0w6l" path="res://scenes/background_layer.gd" id="1_tc8ov"]
 [ext_resource type="Texture2D" uid="uid://5o241fms1qw4" path="res://assets/sprites/spaceShooter2_spritesheet.png" id="2_qgrx8"]
 [ext_resource type="Script" uid="uid://bcs5rk520bxx7" path="res://scenes/kuiper_belt.gd" id="3_630v2"]
@@ -480,9 +480,11 @@ rotation = -0.42586
 script = ExtResource("3_630v2")
 
 [node name="AsteroidBig" type="Sprite2D" parent="KuiperBelt"]
+visible = false
 texture = ExtResource("4_hus22")
 
 [node name="AsteroidSmall" type="Sprite2D" parent="KuiperBelt"]
+visible = false
 position = Vector2(-17, 12)
 texture = ExtResource("5_p1w5t")
 

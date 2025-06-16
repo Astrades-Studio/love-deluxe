@@ -7,6 +7,7 @@ extends Control
 const CUTSCENE_DIALOG_BOX = preload("res://scenes/ui/cutscene_dialog_box.tscn")
 
 func _ready() -> void:
+	MusicManager.play_music_from_bank("Summer")
 	if is_instance_valid(dialog):
 		get_tree().create_timer(1.5).timeout.connect(start_dialog)
 	else:
@@ -19,5 +20,4 @@ func start_dialog():
 
 
 func on_cutscene_ended(_resource: DialogueResource):
-	GameGlobals.new_game()
-	GameGlobals.load_first_level()
+	SceneTransitionManager.transition_to_scene(_next_scene)

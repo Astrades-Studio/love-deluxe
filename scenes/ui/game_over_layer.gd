@@ -15,9 +15,9 @@ func restart_level():
 	GameGlobals.reset_score()
 	get_tree().reload_current_scene()
 
-
+const MAIN_MENU = preload("res://scenes/ui/main_menu.tscn")
 func _back_to_main_menu():
-	SceneTransitionManager.transition_to_scene(Preloader.MainMenuScene)
+	SceneTransitionManager.transition_to_scene(MAIN_MENU)
 
 
 func _on_visibility_changed() -> void:

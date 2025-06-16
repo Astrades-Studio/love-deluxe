@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="MusicTrack" load_steps=3 format=3 uid="uid://bbl1hxlad36nf"]
+
+[ext_resource type="Script" uid="uid://ymcbwfrtwr18" path="res://scripts/autoloads/audio/resources/music_track.gd" id="1_bdtxk"]
+[ext_resource type="AudioStream" uid="uid://c84jogsqvrvip" path="res://assets/audio/music/fun_work/Chiptune Vol2 Fun Work Cut 60.ogg" id="2_imvvw"]
+
+[resource]
+script = ExtResource("1_bdtxk")
+track_name = &"FunWork"
+artist = &""
+stream = ExtResource("2_imvvw")
+bus = &"Music"
+metadata/_custom_type_script = "uid://ymcbwfrtwr18"

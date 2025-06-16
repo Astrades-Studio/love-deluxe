@@ -46,4 +46,4 @@ const PauseGame: StringName = &"pause"
 #
 #const StopDrivingBoat: StringName = &"stop_driving_boat"
 #
-#const PerformanceMetrics: StringName = &"performance_metrics"
+const PerformanceMetrics: StringName = &"performance_metrics"

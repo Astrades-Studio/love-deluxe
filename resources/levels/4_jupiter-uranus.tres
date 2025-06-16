@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelData" load_steps=10 format=3 uid="uid://bgbftxl5d2ydn"]
+[gd_resource type="Resource" script_class="LevelData" load_steps=11 format=3 uid="uid://bgbftxl5d2ydn"]
 
 [ext_resource type="Script" uid="uid://ca361caruj02a" path="res://resources/obstacle_data/obstacle_data.gd" id="1_g7gci"]
 [ext_resource type="Resource" uid="uid://8fgd7lr36yvu" path="res://resources/obstacle_data/asteroid.tres" id="2_kmbqv"]
@@ -9,6 +9,7 @@
 [ext_resource type="Material" uid="uid://cqhxijv70e7c7" path="res://resources/planets/uranus_planet.tres" id="7_kmbqv"]
 [ext_resource type="Script" uid="uid://dacgwax10g8xk" path="res://resources/levels/level_data.gd" id="7_n3k7y"]
 [ext_resource type="Resource" uid="uid://b7qhgg1i55g0m" path="res://resources/obstacle_data/buoy.tres" id="8_sw240"]
+[ext_resource type="Resource" uid="uid://chpa77bpcl2xp" path="res://resources/obstacle_data/road_sign.tres" id="10_ugrpc"]
 
 [resource]
 script = ExtResource("7_n3k7y")
@@ -29,7 +30,8 @@ ExtResource("6_cmtyd"): 2
 })
 distance_between_pickups = 7000
 signage_list = Dictionary[ExtResource("1_g7gci"), int]({
-ExtResource("8_sw240"): 19
+ExtResource("8_sw240"): 19,
+ExtResource("10_ugrpc"): 1
 })
 distance_between_signage = 1600
 metadata/_custom_type_script = "uid://dacgwax10g8xk"

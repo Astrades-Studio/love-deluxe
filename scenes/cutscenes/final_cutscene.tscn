@@ -1,12 +1,32 @@
-[gd_scene load_steps=6 format=3 uid="uid://wd6mb4yfou7i"]
+[gd_scene load_steps=16 format=3 uid="uid://wd6mb4yfou7i"]
 
+[ext_resource type="Theme" uid="uid://b7d8lxjqrtui0" path="res://resources/score_screen_theme.tres" id="1_go6mo"]
 [ext_resource type="Script" uid="uid://cdryxxugh33ol" path="res://scenes/cutscenes/final_cutscene.gd" id="1_tvj2i"]
-[ext_resource type="Texture2D" uid="uid://cy28r2wusaobg" path="res://assets/images/cover.jpg" id="3_1kp5g"]
 [ext_resource type="Resource" uid="uid://cgxcn7gev1g4l" path="res://resources/dialog/cutscenes.dialogue" id="3_oof62"]
 [ext_resource type="Texture2D" uid="uid://o13kif023xhc" path="res://assets/images/glorpina.jpg" id="4_4u1h1"]
+[ext_resource type="Texture2D" uid="uid://15i5s3jbesad" path="res://assets/images/t_cover_banner.png" id="4_go6mo"]
+[ext_resource type="Texture2D" uid="uid://bpjrm0kcpqgxq" path="res://assets/sprites/heart_1.png" id="5_br41n"]
+[ext_resource type="Texture2D" uid="uid://5ww6688r5jmd" path="res://assets/sprites/heart_2.png" id="6_j5qy7"]
+[ext_resource type="Texture2D" uid="uid://bclq0m0c3h0fo" path="res://assets/sprites/sandwhich_1.png" id="6_oof62"]
+[ext_resource type="Texture2D" uid="uid://kmnn8thwm1m2" path="res://assets/sprites/heart_3.png" id="7_xgtyj"]
+[ext_resource type="Texture2D" uid="uid://bsfjcyaq4gdfg" path="res://assets/sprites/flurries_1.png" id="8_j5qy7"]
+[ext_resource type="Texture2D" uid="uid://d0ugt5eslubh4" path="res://assets/UI/t_dialog_panel_9patch.png" id="11_mjf6j"]
+[ext_resource type="AudioStream" uid="uid://bk6d1j2w4vq46" path="res://assets/audio/music/summer/Chiptune Vol3 Summer Cut 60.ogg" id="11_xgtyj"]
+[ext_resource type="Script" uid="uid://d1uma25ylis4u" path="res://scenes/ui/score_label.gd" id="12_7lseo"]
+[ext_resource type="AudioStream" uid="uid://bkcdv80w5xdlk" path="res://assets/audio/music/Chiptune Vol4 Start Cut 60.ogg" id="12_wv82b"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_go6mo"]
-font_size = 10
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6dlcr"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+texture = ExtResource("11_mjf6j")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+expand_margin_top = 1.0
+region_rect = Rect2(0, 0, 16, 16)
 
 [node name="FinalCutscene" type="Control"]
 layout_mode = 3
@@ -15,6 +35,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_go6mo")
 script = ExtResource("1_tvj2i")
 title = "ending_cutscene"
 dialog = ExtResource("3_oof62")
@@ -28,7 +49,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.172549, 0.117647, 0.192157, 1)
 
-[node name="TextureRect" type="TextureRect" parent="ColorRect"]
+[node name="Glorpina" type="TextureRect" parent="ColorRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,6 +59,28 @@ grow_vertical = 2
 texture = ExtResource("4_4u1h1")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="Heart1" type="Sprite2D" parent="ColorRect/Glorpina"]
+position = Vector2(216, 33)
+texture = ExtResource("5_br41n")
+
+[node name="Heart2" type="Sprite2D" parent="ColorRect/Glorpina"]
+position = Vector2(168, 83)
+texture = ExtResource("6_j5qy7")
+
+[node name="Heart3" type="Sprite2D" parent="ColorRect/Glorpina"]
+position = Vector2(53, 30)
+texture = ExtResource("7_xgtyj")
+
+[node name="Flurries2" type="Sprite2D" parent="ColorRect/Glorpina"]
+position = Vector2(193, 123)
+scale = Vector2(1.595, 1.595)
+texture = ExtResource("8_j5qy7")
+
+[node name="Sandwhich1" type="Sprite2D" parent="ColorRect/Glorpina"]
+position = Vector2(62, 75)
+scale = Vector2(2.29254, 1.53511)
+texture = ExtResource("6_oof62")
 
 [node name="EndCard" type="Control" parent="."]
 visible = false
@@ -58,37 +101,110 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect2" type="TextureRect" parent="EndCard"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 108.225
+layout_mode = 2
+offset_right = 256.0
+offset_bottom = 106.667
 grow_horizontal = 2
-texture = ExtResource("3_1kp5g")
+texture = ExtResource("4_go6mo")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="EndCard"]
+[node name="CreditsScroll" type="ScrollContainer" parent="EndCard"]
+unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -74.5
-offset_top = -1.0
-offset_right = 74.5
-offset_bottom = 100.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "CONGRATULATIONS!
+size_flags_vertical = 3
+follow_focus = true
+vertical_scroll_mode = 3
+
+[node name="Credits" type="Label" parent="EndCard/CreditsScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+text = "
+
+
+
+
+
+
+
+
+CONGRATULATIONS!
 
 You made it to 
 your date on time!
-Enjoy some 
-well-deserved snacks
 
-Thanks for playing!"
-label_settings = SubResource("LabelSettings_go6mo")
+Enjoy some 
+well-deserved snacks.
+
+
+
+
+Made by Astrades Studio
+
+In collaboration with 
+Nanashi's Atelier
+
+Concept & Art
+Tsunamori Nanashi 
+
+Art Support
+Kylie Von Klenze
+
+Programming & Designer
+Ignacio Parentella
+
+Music by 
+Ovani
+
+Other Art & Sounds
+Kenney
+
+Made with Godot
+for the NES JAM 2025
+
+
+
+
+
+
+Thanks for playing!
+
+
+
+
+
+"
 horizontal_alignment = 1
 
+[node name="PanelContainer" type="PanelContainer" parent="EndCard"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -162.0
+offset_bottom = 28.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_6dlcr")
+
+[node name="ScoreLabel" type="Label" parent="EndCard/PanelContainer"]
+layout_mode = 2
+text = "Final Score: ?????"
+script = ExtResource("12_7lseo")
+_text = "Final Score: "
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_xgtyj")
+volume_db = -15.0
+autoplay = true
+bus = &"Music"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_wv82b")
+volume_db = -15.0
+bus = &"Music"

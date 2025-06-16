@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dkx8ha5d5lxyp"
+path="res://.godot/imported/Chiptune Vol3 Cherries Intensity 1.ogg-0e88ebedca06e63a2b30b2b3ea7d6423.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/cherries/Chiptune Vol3 Cherries Intensity 1.ogg"
+dest_files=["res://.godot/imported/Chiptune Vol3 Cherries Intensity 1.ogg-0e88ebedca06e63a2b30b2b3ea7d6423.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -3,6 +3,7 @@ extends Obstacle
 
 
 func _ready() -> void:
+	super._ready()
 	will_give_score = false
 
 

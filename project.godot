@@ -13,8 +13,10 @@ config_version=5
 config/name="Love Deluxe"
 run/main_scene="uid://75ohsv3f0df6"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/image="uid://bsd5su1ln666a"
 config/icon="uid://04156mor5kmo"
 config/windows_native_icon="res://assets/images/glorp_portrait.ico"
+boot_splash/minimum_display_time=200
 
 [autoload]
 
@@ -37,6 +39,12 @@ GlobalEffects="*res://scripts/autoloads/effects/global_effects.tscn"
 GlobalDayNightClock="*res://scripts/autoloads/general/global_day_night_clock.tscn"
 LimboConsole="*res://addons/limbo_console/limbo_console.gd"
 
+[dialogue_manager]
+
+editor/translations/include_character_in_translation_exports=true
+editor/translations/include_notes_in_translation_exports=true
+editor/advanced/custom_test_scene_path="uid://ugd552efvil0"
+
 [display]
 
 window/size/viewport_width=256
@@ -44,6 +52,7 @@ window/size/viewport_height=240
 window/size/window_width_override=768
 window/size/window_height_override=720
 window/stretch/mode="viewport"
+mouse_cursor/custom_image="uid://bv8h7bhgoys1q"
 
 [dotnet]
 
@@ -73,6 +82,7 @@ folder_colors={
 [gui]
 
 theme/custom_font="uid://cxbe1vdxshbyv"
+theme/default_font_subpixel_positioning=0
 
 [input]
 

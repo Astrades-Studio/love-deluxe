@@ -24,7 +24,7 @@ enum LevelNumber {
 	URANUS_KUIPER = 5
 }
 
-var current_level : LevelNumber = LevelNumber.VENUS_EARTH
+var current_level : LevelNumber = LevelNumber.URANUS_KUIPER
 
 
 func load_next_level():
@@ -111,7 +111,7 @@ func get_current_level() -> Level:
 	
 func get_current_speed() -> float:
 	if !level:
-		return 0.0
+		return 20. # Min speed at start
 	return level.speed
 
 func get_current_fuel() -> float:

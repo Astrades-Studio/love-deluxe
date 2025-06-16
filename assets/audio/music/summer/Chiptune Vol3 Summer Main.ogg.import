@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d0u45vhyvlpmg"
+path="res://.godot/imported/Chiptune Vol3 Summer Main.ogg-4de1701516d42da3a9349e8d139efe18.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/summer/Chiptune Vol3 Summer Main.ogg"
+dest_files=["res://.godot/imported/Chiptune Vol3 Summer Main.ogg-4de1701516d42da3a9349e8d139efe18.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

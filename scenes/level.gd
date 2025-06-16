@@ -8,6 +8,11 @@ class_name Level
 
 @onready var background_layer: BackgroundLayer = $BackgroundLayer
 @onready var obstacle_spawner: ObstacleSpawner = %ObstacleSpawner
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+
+const CHERRIES_TRACK = preload("res://assets/audio/music/cherries/Chiptune Vol3 Cherries Cut 60.ogg")
+const FUN_WORK_TRACK = preload("res://assets/audio/music/fun_work/Chiptune Vol2 Fun Work Cut 60.ogg")
+const VISION_TRACK = preload("res://assets/audio/music/vision/Chiptune Vol3 Vision Cut 60.ogg")
 
 # Settings ----------------------------------------------------------------- #
 
@@ -68,6 +73,16 @@ func _ready() -> void:
 	GameGlobals.level = self
 	set_up_level()
 	start_driving()
+
+	# CHOOSE OF THE 3 TRACKS
+	var track := FUN_WORK_TRACK
+	if GameGlobals.current_level == GameGlobals.LevelNumber.VENUS_EARTH:
+		track = CHERRIES_TRACK
+	elif GameGlobals.current_level == GameGlobals.LevelNumber.URANUS_KUIPER:
+		track = VISION_TRACK
+	audio_stream_player.stream = track
+	audio_stream_player.play()
+
 
 
 func set_up_level() -> void:

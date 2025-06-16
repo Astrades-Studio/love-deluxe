@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bjmqn2dey0636"
+path="res://.godot/imported/Chiptune Vol3 Vision Cut 30.ogg-f6c92c82671dfa259e33bb0ced1ce718.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/vision/Chiptune Vol3 Vision Cut 30.ogg"
+dest_files=["res://.godot/imported/Chiptune Vol3 Vision Cut 30.ogg-f6c92c82671dfa259e33bb0ced1ce718.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

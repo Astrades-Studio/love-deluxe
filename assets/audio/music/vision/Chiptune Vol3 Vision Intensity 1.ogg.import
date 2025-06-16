@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://by8nwphy2jeg6"
+path="res://.godot/imported/Chiptune Vol3 Vision Intensity 1.ogg-5f639d76fc8665a6ea8546bb01b345d3.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/vision/Chiptune Vol3 Vision Intensity 1.ogg"
+dest_files=["res://.godot/imported/Chiptune Vol3 Vision Intensity 1.ogg-5f639d76fc8665a6ea8546bb01b345d3.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

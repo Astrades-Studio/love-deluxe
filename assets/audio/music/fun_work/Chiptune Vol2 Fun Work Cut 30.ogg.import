@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ck0u51wjib2hc"
+path="res://.godot/imported/Chiptune Vol2 Fun Work Cut 30.ogg-bb3eb604512a561262880e148860cfdd.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/fun_work/Chiptune Vol2 Fun Work Cut 30.ogg"
+dest_files=["res://.godot/imported/Chiptune Vol2 Fun Work Cut 30.ogg-bb3eb604512a561262880e148860cfdd.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

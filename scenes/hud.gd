@@ -37,8 +37,14 @@ func update_labels():
 	@warning_ignore_restore("narrowing_conversion")
 
 func update_planet(_level_data: LevelData):
+	if _level_data.planet_shader:
+		planet_texture.texture = PlaceholderTexture2D.new()
+		planet_texture.material = _level_data.planet_shader
+	else:
+		planet_texture.texture = preload("res://scenes/actors/obstacles/t_obstacle_asteroid_large.png")
+		planet_texture.material = null
 	planet_label.text = _level_data.target_planet_name
-	planet_texture.material = _level_data.planet_shader
+
 
 
 func update_fuel(fuel: int):

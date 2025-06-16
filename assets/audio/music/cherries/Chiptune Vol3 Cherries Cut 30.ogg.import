@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c8mg20p7iumfl"
+path="res://.godot/imported/Chiptune Vol3 Cherries Cut 30.ogg-4a640142765f7d4fd3f10af33bf70e2b.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/cherries/Chiptune Vol3 Cherries Cut 30.ogg"
+dest_files=["res://.godot/imported/Chiptune Vol3 Cherries Cut 30.ogg-4a640142765f7d4fd3f10af33bf70e2b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

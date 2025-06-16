@@ -1,47 +1,25 @@
-[gd_scene load_steps=11 format=3 uid="uid://5rv7evydk5ol"]
+[gd_scene load_steps=5 format=3 uid="uid://5rv7evydk5ol"]
 
 [ext_resource type="Script" uid="uid://cll7xomk558iu" path="res://scenes/ui/win_overlay.gd" id="1_5tc8l"]
 [ext_resource type="Script" uid="uid://d1uma25ylis4u" path="res://scenes/ui/score_label.gd" id="1_l44p0"]
-[ext_resource type="Texture2D" uid="uid://c7iq4cttq3wsd" path="res://addons/plenticons/icons/16x/2d/spark-full-gray.png" id="2_5tc8l"]
-
-[sub_resource type="Gradient" id="Gradient_nuslc"]
-colors = PackedColorArray(0.807843, 0, 0, 1, 1, 1, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_re6lg"]
-gradient = SubResource("Gradient_nuslc")
-
-[sub_resource type="Curve" id="Curve_1pn8n"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.564202), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_vnuhc"]
-curve = SubResource("Curve_1pn8n")
-
-[sub_resource type="Curve" id="Curve_sgyyf"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.284047), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_blca8"]
-curve = SubResource("Curve_sgyyf")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dsidl"]
-particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 51.96
-gravity = Vector3(0, 0, 0)
-radial_accel_min = 20.72
-radial_accel_max = 22.52
-scale_min = 0.0
-scale_curve = SubResource("CurveTexture_blca8")
-color_ramp = SubResource("GradientTexture1D_re6lg")
-emission_curve = SubResource("CurveTexture_vnuhc")
+[ext_resource type="Texture2D" uid="uid://d1lc0wyxiyomk" path="res://assets/images/t_background_winning.png" id="2_33hss"]
+[ext_resource type="Theme" uid="uid://b7d8lxjqrtui0" path="res://resources/score_screen_theme.tres" id="3_6ol8u"]
 
 [node name="WinOverlay" type="CanvasLayer"]
 process_mode = 3
-visible = false
 script = ExtResource("1_5tc8l")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_6ol8u")
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -49,48 +27,61 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Label" type="Label" parent="."]
-offset_left = 64.0
-offset_top = 30.0
-offset_right = 194.0
-offset_bottom = 53.0
-text = "YOU WINNER!!!1!"
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_33hss")
+expand_mode = 5
+stretch_mode = 5
 
-[node name="ScoreLabel" type="Label" parent="."]
-offset_left = 79.0
-offset_top = 55.0
-offset_right = 209.0
-offset_bottom = 78.0
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+offset_left = 12.0
+offset_top = 30.4
+offset_right = 97.0
+offset_bottom = 46.4
+theme_override_colors/font_color = Color(0.615686, 0.901961, 0.305882, 1)
+theme_override_colors/font_outline_color = Color(0.211765, 0.00784314, 0.282353, 1)
+theme_override_constants/outline_size = 8
+text = "Well Done!"
+
+[node name="ScoreLabel" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -118.0
+offset_top = 30.4
+offset_right = -12.0
+offset_bottom = 46.4
+grow_horizontal = 0
 text = "Score: ?????"
 script = ExtResource("1_l44p0")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -46.5
-offset_top = 42.0
-offset_right = 46.5
-offset_bottom = 94.0
+offset_left = 14.0
+offset_top = 31.0
+offset_right = 110.0
+offset_bottom = 83.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ContinueButton" type="Button" parent="VBoxContainer"]
+[node name="ContinueButton" type="Button" parent="Control/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Next Level"
 
-[node name="MainMenuButton" type="Button" parent="VBoxContainer"]
+[node name="MainMenuButton" type="Button" parent="Control/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Main Menu"
-
-[node name="MovingStars" type="GPUParticles2D" parent="."]
-position = Vector2(130, 117)
-amount = 40
-texture = ExtResource("2_5tc8l")
-lifetime = 4.75
-preprocess = 5.0
-process_material = SubResource("ParticleProcessMaterial_dsidl")

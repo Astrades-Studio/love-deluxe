@@ -7,6 +7,9 @@ extends Control
 @onready var game_settings_ui: Control = $GameSettingsUI
 
 @export var initial_game_scene : PackedScene
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+
+var SUMMER_TRACK : MusicTrack = preload("res://assets/audio/music/summer/summer_track.tres") as MusicTrack
 
 func _ready() -> void:
 	new_game_button.pressed.connect(on_new_game_pressed)
@@ -14,7 +17,12 @@ func _ready() -> void:
 	settings_button.pressed.connect(on_settings_pressed)
 	quit_button.pressed.connect(on_quit_pressed)
 	new_game_button.grab_focus()
+	await GameGlobals.wait(1)
+	audio_stream_player.play()
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		on_new_game_pressed()
 
 func on_new_game_pressed() -> void:
 	GameGlobals.new_game()

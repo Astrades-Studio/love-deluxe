@@ -1,0 +1,838 @@
+[gd_scene load_steps=27 format=3 uid="uid://jc67h1eovcbl"]
+
+[ext_resource type="Theme" uid="uid://c6o5sbust8emw" path="res://resources/ui_theme.tres" id="1_xlqdv"]
+[ext_resource type="Script" uid="uid://dxf008d5tj64r" path="res://scenes/ui/tutorial.gd" id="2_4xe7e"]
+[ext_resource type="PackedScene" uid="uid://bet3dxv15wonf" path="res://scenes/ui/hud.tscn" id="2_6e533"]
+[ext_resource type="Texture2D" uid="uid://b8s0nhequgi0x" path="res://assets/UI/input/Switch_Dpad_Up.png" id="3_4de72"]
+[ext_resource type="Texture2D" uid="uid://bswjfr0pv0aw6" path="res://assets/UI/input/Switch_Dpad_Down.png" id="4_gcvyo"]
+[ext_resource type="Texture2D" uid="uid://chsfjy47wgbkg" path="res://assets/sprites/t_fuel_pickup_border.png" id="5_suxr8"]
+[ext_resource type="Texture2D" uid="uid://clekxgj2i56s0" path="res://assets/UI/input/W_Key_Light.png" id="5_uquod"]
+[ext_resource type="Texture2D" uid="uid://ebh2643augqq" path="res://assets/UI/input/Switch_Dpad_Left.png" id="6_wlew2"]
+[ext_resource type="Texture2D" uid="uid://rbsxpuskl7w4" path="res://assets/UI/input/Switch_Dpad_Right.png" id="7_2cweq"]
+[ext_resource type="Texture2D" uid="uid://drm6vu6y0ugq8" path="res://assets/UI/input/S_Key_Light.png" id="7_nmdvm"]
+[ext_resource type="Texture2D" uid="uid://b387ir20tngta" path="res://assets/UI/input/Switch_A.png" id="8_vic77"]
+[ext_resource type="Texture2D" uid="uid://bv6d41n5q118e" path="res://assets/sprites/t_shield_pickup.png" id="9_2adkx"]
+[ext_resource type="Texture2D" uid="uid://brjn5qgrdvl6x" path="res://scenes/actors/obstacles/t_obstacle_asteroid_large.png" id="10_2adkx"]
+[ext_resource type="Texture2D" uid="uid://b1ix6qif2gscy" path="res://assets/sprites/incoming_traffic.png" id="11_4xe7e"]
+[ext_resource type="Texture2D" uid="uid://dbd08hq2h2esc" path="res://assets/UI/input/A_Key_Light.png" id="12_7gg0y"]
+[ext_resource type="Texture2D" uid="uid://bpytbjdv2bobq" path="res://assets/UI/input/D_Key_Light.png" id="13_0ik06"]
+[ext_resource type="Texture2D" uid="uid://gchi4ryinn30" path="res://assets/sprites/t_buoy_large.png" id="13_av8bs"]
+[ext_resource type="Texture2D" uid="uid://dru0uopuxe2lb" path="res://assets/UI/input/Steam_Start.png" id="14_qndl6"]
+[ext_resource type="Texture2D" uid="uid://7isiy1jetfyn" path="res://assets/UI/input/Esc_Key_Light.png" id="17_7gg0y"]
+[ext_resource type="Texture2D" uid="uid://cvddq4khbumei" path="res://assets/UI/input/Space_Key_Light.png" id="18_0ik06"]
+[ext_resource type="AudioStream" uid="uid://bk6d1j2w4vq46" path="res://assets/audio/music/summer/Chiptune Vol3 Summer Cut 60.ogg" id="21_0ik06"]
+
+[sub_resource type="Gradient" id="Gradient_4de72"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.146067, 0.269663, 0.40824, 0.558052, 0.794007)
+colors = PackedColorArray(0.952866, 0.79095, 0.897628, 1, 0.888275, 0.5135, 0.778666, 1, 0.808099, 0.348028, 0.687153, 1, 0.524744, 0.164558, 0.437005, 1, 0.211765, 0.00784314, 0.282353, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gcvyo"]
+gradient = SubResource("Gradient_4de72")
+fill_to = Vector2(0.860399, 0.868946)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xe7e"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0, 0, 1)
+expand_margin_right = 5.0
+shadow_color = Color(0, 0, 0, 0.894118)
+shadow_size = 500
+anti_aliasing = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_nrihu"]
+font_size = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_rrqj4"]
+font_size = 24
+
+[node name="Tutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_xlqdv")
+script = ExtResource("2_4xe7e")
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -2
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+z_index = -4096
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_gcvyo")
+
+[node name="HUD" parent="." instance=ExtResource("2_6e533")]
+layer = -1
+
+[node name="Speed" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 21.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Highlight" type="Panel" parent="Speed"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.87
+offset_top = -114.35
+offset_right = -14.87
+offset_bottom = -89.775
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4xe7e")
+
+[node name="PanelContainer" type="PanelContainer" parent="Speed"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.5
+offset_top = -37.0
+offset_right = 72.5
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Speed/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Speed/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "This is your speed. 
+
+Your ship accelerates to 
+a minimum automatically.
+
+Crashing into obstacles 
+will reduce your speed."
+label_settings = SubResource("LabelSettings_nrihu")
+horizontal_alignment = 1
+
+[node name="Control" type="HBoxContainer" parent="Speed/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Speed/PanelContainer/VBoxContainer/Control"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_4de72")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Speed/PanelContainer/VBoxContainer/Control"]
+layout_mode = 2
+text = "/"
+label_settings = SubResource("LabelSettings_nrihu")
+
+[node name="TextureRect2" type="TextureRect" parent="Speed/PanelContainer/VBoxContainer/Control"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_uquod")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="Speed/PanelContainer/VBoxContainer/Control"]
+layout_mode = 2
+text = "to accelerate."
+label_settings = SubResource("LabelSettings_nrihu")
+
+[node name="Control2" type="HBoxContainer" parent="Speed/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Speed/PanelContainer/VBoxContainer/Control2"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_gcvyo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="Speed/PanelContainer/VBoxContainer/Control2"]
+layout_mode = 2
+text = "/"
+label_settings = SubResource("LabelSettings_nrihu")
+
+[node name="TextureRect3" type="TextureRect" parent="Speed/PanelContainer/VBoxContainer/Control2"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("7_nmdvm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label3" type="Label" parent="Speed/PanelContainer/VBoxContainer/Control2"]
+layout_mode = 2
+text = "to decelerate"
+label_settings = SubResource("LabelSettings_nrihu")
+
+[node name="Distance" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Highlight" type="Panel" parent="Distance"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.92
+offset_top = -91.59
+offset_right = 80.08
+offset_bottom = -68.455
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4xe7e")
+
+[node name="PanelContainer" type="PanelContainer" parent="Distance"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -37.0
+offset_right = 115.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Distance/PanelContainer"]
+layout_mode = 2
+text = "This is the total distance 
+to your goal.
+The red marker is your 
+current progress.
+You win when it reaches the right side."
+label_settings = SubResource("LabelSettings_nrihu")
+horizontal_alignment = 1
+
+[node name="Fuel" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Highlight" type="Panel" parent="Fuel"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = -123.0
+offset_right = -62.59
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4xe7e")
+
+[node name="PanelContainer" type="PanelContainer" parent="Fuel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -37.0
+offset_right = 115.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Fuel/PanelContainer"]
+layout_mode = 2
+text = "This is your fuel meter.
+It decreases with time.
+
+Pick up fuel 
+canisters to restore it
+
+Don't let it run out or 
+it's game over!
+"
+label_settings = SubResource("LabelSettings_nrihu")
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="Fuel/PanelContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Fuel/PanelContainer/Control"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+offset_left = 7.0
+offset_top = 38.0
+offset_right = 39.0
+offset_bottom = 70.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_suxr8")
+expand_mode = 1
+
+[node name="Score" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Highlight2" type="Panel" parent="Score"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = -119.955
+offset_right = 45.0
+offset_bottom = -88.51
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4xe7e")
+
+[node name="PanelContainer" type="PanelContainer" parent="Score"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -37.0
+offset_right = 115.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Score/PanelContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="Score/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Your score tracks
+how well you dodge!
+"
+label_settings = SubResource("LabelSettings_nrihu")
+horizontal_alignment = 1
+
+[node name="Shields" type="HBoxContainer" parent="Score/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Score/PanelContainer/VBoxContainer/Shields"]
+layout_mode = 2
+text = "Pick up shields for
+invulnerability for a time"
+label_settings = SubResource("LabelSettings_nrihu")
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="Score/PanelContainer/VBoxContainer/Shields"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Score/PanelContainer/VBoxContainer/Shields/Control"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+offset_left = -168.0
+offset_top = -9.5
+offset_right = -136.0
+offset_bottom = 22.5
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("9_2adkx")
+expand_mode = 1
+
+[node name="Controls" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Highlight" type="Panel" parent="Controls"]
+visible = false
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = -123.0
+offset_right = -62.59
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4xe7e")
+
+[node name="PanelContainer" type="PanelContainer" parent="Controls"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -37.0
+offset_right = 115.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Controls/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Controls"
+label_settings = SubResource("LabelSettings_nrihu")
+horizontal_alignment = 1
+
+[node name="Control3" type="HBoxContainer" parent="Controls/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Controls/PanelContainer/VBoxContainer/Control3"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_wlew2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="Controls/PanelContainer/VBoxContainer/Control3"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("7_2cweq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Controls/PanelContainer/VBoxContainer/Control3"]
+layout_mode = 2
+text = "/"
+label_settings = SubResource("LabelSettings_nrihu")
+
+[node name="TextureRect3" type="TextureRect" parent="Controls/PanelContainer/VBoxContainer/Control3"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("12_7gg0y")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect4" type="TextureRect" parent="Controls/PanelContainer/VBoxContainer/Control3"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("13_0ik06")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="Controls/PanelContainer/VBoxContainer/Control3"]
+layout_mode = 2
+text = "to move sideways."
+label_settings = SubResource("LabelSettings_nrihu")
+
+[node name="Control4" type="HBoxContainer" parent="Controls/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Controls/PanelContainer/VBoxContainer/Control4"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_4de72")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="Controls/PanelContainer/VBoxContainer/Control4"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_gcvyo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Controls/PanelContainer/VBoxContainer/Control4"]
+layout_mode = 2
+text = "/"
+label_settings = SubResource("LabelSettings_nrihu")
+
+[node name="TextureRect3" type="TextureRect" parent="Controls/PanelContainer/VBoxContainer/Control4"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_uquod")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect4" type="TextureRect" parent="Controls/PanelContainer/VBoxContainer/Control4"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("7_nmdvm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="Controls/PanelContainer/VBoxContainer/Control4"]
+layout_mode = 2
+text = "to change speed."
+label_settings = SubResource("LabelSettings_nrihu")
+
+[node name="Control2" type="HBoxContainer" parent="Controls/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Controls/PanelContainer/VBoxContainer/Control2"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("8_vic77")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Controls/PanelContainer/VBoxContainer/Control2"]
+layout_mode = 2
+text = "/"
+label_settings = SubResource("LabelSettings_nrihu")
+
+[node name="TextureRect2" type="TextureRect" parent="Controls/PanelContainer/VBoxContainer/Control2"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("18_0ik06")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="Controls/PanelContainer/VBoxContainer/Control2"]
+layout_mode = 2
+text = "to dodge."
+label_settings = SubResource("LabelSettings_nrihu")
+
+[node name="Obstacles" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Highlight" type="Panel" parent="Obstacles"]
+visible = false
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = -123.0
+offset_right = -62.59
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4xe7e")
+
+[node name="PanelContainer" type="PanelContainer" parent="Obstacles"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -37.0
+offset_right = 115.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Obstacles/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Obstacles/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Obstacles"
+label_settings = SubResource("LabelSettings_nrihu")
+horizontal_alignment = 1
+
+[node name="Control3" type="HBoxContainer" parent="Obstacles/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Obstacles/PanelContainer/VBoxContainer/Control3"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("10_2adkx")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Obstacles/PanelContainer/VBoxContainer/Control3"]
+layout_mode = 2
+text = "Avoid Asteroids
+and space trucks!"
+label_settings = SubResource("LabelSettings_nrihu")
+horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Obstacles/PanelContainer/VBoxContainer/Control3"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("11_4xe7e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Control2" type="HBoxContainer" parent="Obstacles/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Obstacles/PanelContainer/VBoxContainer/Control2"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("13_av8bs")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Obstacles/PanelContainer/VBoxContainer/Control2"]
+layout_mode = 2
+text = "Buoys show the road,
+don't smash them!"
+label_settings = SubResource("LabelSettings_nrihu")
+horizontal_alignment = 1
+
+[node name="GoodLuck" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Highlight" type="Panel" parent="GoodLuck"]
+visible = false
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = -123.0
+offset_right = -62.59
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4xe7e")
+
+[node name="PanelContainer" type="PanelContainer" parent="GoodLuck"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -37.0
+offset_right = 115.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GoodLuck/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="GoodLuck/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Good Luck!!"
+label_settings = SubResource("LabelSettings_rrqj4")
+horizontal_alignment = 1
+
+[node name="Skip" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -121.0
+offset_top = -28.0
+grow_horizontal = 0
+grow_vertical = 0
+metadata/_edit_group_ = true
+
+[node name="Control4" type="HBoxContainer" parent="Skip"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Skip/Control4"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("14_qndl6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Skip/Control4"]
+layout_mode = 2
+text = "/"
+label_settings = SubResource("LabelSettings_nrihu")
+
+[node name="TextureRect2" type="TextureRect" parent="Skip/Control4"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("17_7gg0y")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="Skip/Control4"]
+layout_mode = 2
+text = " to skip."
+label_settings = SubResource("LabelSettings_nrihu")
+
+[node name="Next" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -28.0
+offset_right = 102.0
+grow_vertical = 0
+metadata/_edit_group_ = true
+
+[node name="Control4" type="HBoxContainer" parent="Next"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Next/Control4"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("8_vic77")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Next/Control4"]
+layout_mode = 2
+text = "/"
+label_settings = SubResource("LabelSettings_nrihu")
+
+[node name="TextureRect2" type="TextureRect" parent="Next/Control4"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("18_0ik06")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="Next/Control4"]
+layout_mode = 2
+text = "next"
+label_settings = SubResource("LabelSettings_nrihu")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_0ik06")
+volume_db = -15.0
+bus = &"Music"

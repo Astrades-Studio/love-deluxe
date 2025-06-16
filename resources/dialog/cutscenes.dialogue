@@ -1,15 +1,33 @@
 
 ~ initial_cutscene
-It’s been a long week of work, but the weekend is finally here!
-Glorp has been looking forward to his date with Glorpina tonight.
-She has invited him to a picnic at Kuiper Garden.
-The drive there takes several hours, but it’s always worth it to see lovely Glorpina.
+#It’s been a long week of work, but the weekend is finally here!
+#Glorp has been looking forward to his date with Glorpina tonight.
+#She has invited him to a picnic at Kuiper Garden.
+#The drive there takes several hours, but it’s always worth it to see lovely Glorpina.
+#
+RINNG, RINNNG
+Glorp: Hello?
+Glorpina: Hi Glorp! You said we could hang out today >_<
+Glorp: I know! I really want to... Work has kept me busy.
+Glorpina: You have to give yourself a break sometimes, it's the weekend!
+Glorpina: Come over to the Kuiper Belt, there's a great deal on smoothies today.
+Glorp: Ok, you are right. Besides, I really miss you.
+Glorpina: Great! See you there tonight :)
+Glorp: Yay. It's gonna be awesome.
 => END
 
 
 ~ ending_cutscene
 Glorpina: Glorpy my love, you made it. 
-Glop: Traffic was dreadful today. (n_n;)
+Glorp: Traffic was dreadful today. (n_n;)
+Glorpina: Yeah, I figured.
+Glorp: But also, there were too many asteroids floating around...
+Glorpina: That sounds dangerous.
+Glorp: And the space dust was out of control too.
+Glorpina: Well I'm glad you made it here in one piece.
+Glorpina: Here, I went ahead and got us some snacks already.
+Glorp: My favorite, blue olives! You read my mind.
+
 => END!
 
 

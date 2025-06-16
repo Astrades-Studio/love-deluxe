@@ -12,6 +12,13 @@ func use_close_sprite():
 	if first_cloud:
 		start_spawning_trailing_clouds()
 
+
+func use_far_away_sprite():
+	obstacle_large.z_index = 2
+	obstacle_small.z_index = -1
+	obstacle_large.hide()
+	obstacle_small.show()
+
 const DELAY_FRAMES := 5.0 
 
 var delay_frame_count := DELAY_FRAMES

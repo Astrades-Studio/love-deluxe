@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://8rpfki20reck" path="res://scenes/actors/obstacles/pickup.gd" id="1_k2a84"]
 [ext_resource type="Resource" uid="uid://cyno82s2d6dw6" path="res://resources/powerups/shield_data.tres" id="1_rnwel"]
-[ext_resource type="Texture2D" uid="uid://bhp33rcd6qc0e" path="res://addons/plenticons/icons/16x/objects/shield-red.png" id="2_rnwel"]
+[ext_resource type="Texture2D" uid="uid://bv6d41n5q118e" path="res://assets/sprites/t_shield_pickup.png" id="3_k2a84"]
 [ext_resource type="AudioStream" uid="uid://di5xhatxyq0j6" path="res://assets/audio/sfx/sfx_pickup.wav" id="3_pbbvf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rbo2c"]
-radius = 12.0
+radius = 8.06226
 
 [node name="ShieldPickup" type="Area2D"]
 collision_layer = 6
@@ -16,11 +16,11 @@ crash_type = 3
 power_up = ExtResource("1_rnwel")
 
 [node name="ObstacleSmall" type="Sprite2D" parent="."]
-texture = ExtResource("2_rnwel")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_k2a84")
 
 [node name="ObstacleLarge" type="Sprite2D" parent="."]
-scale = Vector2(1.93, 1.93)
-texture = ExtResource("2_rnwel")
+texture = ExtResource("3_k2a84")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_rbo2c")

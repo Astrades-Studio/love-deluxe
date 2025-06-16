@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bk6d1j2w4vq46"
+path="res://.godot/imported/Chiptune Vol3 Summer Cut 60.ogg-5c4402f5ebae95abc952d4bcd13db99f.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/summer/Chiptune Vol3 Summer Cut 60.ogg"
+dest_files=["res://.godot/imported/Chiptune Vol3 Summer Cut 60.ogg-5c4402f5ebae95abc952d4bcd13db99f.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

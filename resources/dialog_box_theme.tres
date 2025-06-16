@@ -1,7 +1,9 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://2jjo8bo40ctc"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://2jjo8bo40ctc"]
 
 [ext_resource type="Texture2D" uid="uid://d0ugt5eslubh4" path="res://assets/UI/t_dialog_panel_9patch.png" id="1_st5vj"]
-[ext_resource type="FontFile" uid="uid://cxbe1vdxshbyv" path="res://assets/UI/fonts/pixolletta_8px.ttf" id="2_jjihm"]
+[ext_resource type="FontFile" uid="uid://cxbe1vdxshbyv" path="res://assets/UI/fonts/pixolletta_8px.ttf" id="2_covad"]
+[ext_resource type="FontFile" uid="uid://bxbpiqgykmlkc" path="res://assets/UI/fonts/Pixolde.ttf" id="2_jjihm"]
+[ext_resource type="FontFile" uid="uid://h5ox8j6flgn1" path="res://assets/UI/fonts/monogram/ttf/monogram.ttf" id="4_0ulnj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjihm"]
 
@@ -21,17 +23,22 @@ texture_margin_bottom = 5.0
 expand_margin_top = 1.0
 region_rect = Rect2(0, 0, 16, 16)
 
+[sub_resource type="FontVariation" id="FontVariation_q4muy"]
+fallbacks = Array[Font]([ExtResource("2_jjihm"), ExtResource("4_0ulnj")])
+base_font = ExtResource("2_covad")
+
 [resource]
-default_font = ExtResource("2_jjihm")
 Button/constants/h_separation = 0
 Button/constants/icon_max_width = 8
-Button/font_sizes/font_size = 10
-Button/styles/focus = SubResource("StyleBoxFlat_jjihm")
+Button/font_sizes/font_size = 16
+Button/styles/hover = SubResource("StyleBoxFlat_jjihm")
 Button/styles/normal = SubResource("StyleBoxFlat_st5vj")
-Label/font_sizes/font_size = 10
+Button/styles/pressed = SubResource("StyleBoxFlat_st5vj")
+Label/font_sizes/font_size = 16
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_5315t")
 RichTextLabel/font_sizes/bold_font_size = 10
 RichTextLabel/font_sizes/bold_italics_font_size = 10
 RichTextLabel/font_sizes/italics_font_size = 10
 RichTextLabel/font_sizes/mono_font_size = 10
 RichTextLabel/font_sizes/normal_font_size = 10
+RichTextLabel/fonts/normal_font = SubResource("FontVariation_q4muy")

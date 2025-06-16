@@ -244,6 +244,7 @@ __follow_timeline = false
 metadata/_custom_type_script = "uid://ch4on6s5v0bgq"
 
 [node name="PlayerSpaceship" type="Area2D"]
+z_index = 2
 position = Vector2(1.19209e-06, 2.38419e-07)
 collision_mask = 2
 script = ExtResource("1_fjeb7")

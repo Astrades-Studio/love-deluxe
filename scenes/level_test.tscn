@@ -1,13 +1,15 @@
-[gd_scene load_steps=26 format=3 uid="uid://bfqb614bysg2o"]
+[gd_scene load_steps=29 format=3 uid="uid://bfqb614bysg2o"]
 
 [ext_resource type="Script" uid="uid://cq2c3o2650s8s" path="res://scenes/level.gd" id="1_yvmk3"]
 [ext_resource type="PackedScene" uid="uid://egpkxr1c4eiv" path="res://scenes/background_layer.tscn" id="2_blca8"]
 [ext_resource type="Resource" uid="uid://qm7v10an3vlb" path="res://resources/levels/5_uranus_kuiper.tres" id="2_e0wnd"]
+[ext_resource type="Texture2D" uid="uid://bfny3ygk7m5on" path="res://scenes/actors/obstacles/t_obstacle_asteroid_small.png" id="5_n44uc"]
 [ext_resource type="PackedScene" uid="uid://jtsrok2xct5h" path="res://scenes/actors/player_spaceship.tscn" id="5_vkcgd"]
 [ext_resource type="Texture2D" uid="uid://c7iq4cttq3wsd" path="res://addons/plenticons/icons/16x/2d/spark-full-gray.png" id="11_n44uc"]
 [ext_resource type="PackedScene" uid="uid://bet3dxv15wonf" path="res://scenes/ui/hud.tscn" id="11_tdoqa"]
 [ext_resource type="Script" uid="uid://dqcyxei45tdkm" path="res://scenes/obstacle_spawner.gd" id="12_ddr63"]
 [ext_resource type="PackedScene" uid="uid://j71ioyt8gglp" path="res://scenes/ui/pause_layer.tscn" id="13_0dj0t"]
+[ext_resource type="AudioStream" uid="uid://c84jogsqvrvip" path="res://assets/audio/music/fun_work/Chiptune Vol2 Fun Work Cut 60.ogg" id="17_nuslc"]
 [ext_resource type="PackedScene" uid="uid://5rv7evydk5ol" path="res://scenes/ui/win_overlay.tscn" id="18_4xcco"]
 [ext_resource type="PackedScene" uid="uid://cdpti7uoynbuk" path="res://scenes/ui/game_over_layer.tscn" id="19_6rn2f"]
 [ext_resource type="Script" uid="uid://dwbl1iluandce" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="20_vnuhc"]
@@ -61,8 +63,19 @@ func _ready() -> void:
 	
 	
 func _on_speed_changed(value: float) -> void:
-	speed_scale = remap(value, 0, 50, 0, 4)
+	speed_scale = remap(value, 0, 50, 0, 3)
 "
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nuslc"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 51.96
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 20.72
+radial_accel_max = 22.52
+scale_min = 7.09
+scale_max = 8.09
+scale_curve = SubResource("CurveTexture_blca8")
 
 [sub_resource type="Resource" id="Resource_ow23l"]
 script = ExtResource("22_4xcco")
@@ -107,6 +120,19 @@ fract_delta = false
 process_material = SubResource("ParticleProcessMaterial_dsidl")
 script = SubResource("GDScript_e0wnd")
 
+[node name="MovingRocks" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(133, 119)
+texture = ExtResource("5_n44uc")
+lifetime = 4.75
+preprocess = 5.0
+speed_scale = 4.0
+fixed_fps = 10
+interpolate = false
+fract_delta = false
+process_material = SubResource("ParticleProcessMaterial_nuslc")
+script = SubResource("GDScript_e0wnd")
+
 [node name="PlayerSpaceship" parent="." instance=ExtResource("5_vkcgd")]
 position = Vector2(128, 199)
 
@@ -131,8 +157,10 @@ unique_name_in_owner = true
 [node name="HUD" parent="." instance=ExtResource("11_tdoqa")]
 
 [node name="WinOverlay" parent="." instance=ExtResource("18_4xcco")]
+visible = false
 
 [node name="GameOverLayer" parent="." instance=ExtResource("19_6rn2f")]
+visible = false
 
 [node name="PauseLayer" type="CanvasLayer" parent="."]
 
@@ -147,3 +175,7 @@ shakerPreset = SubResource("Resource_3svvi")
 metadata/_custom_type_script = "uid://dwbl1iluandce"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_nuslc")
+volume_db = -15.0
+autoplay = true
+bus = &"Music"
