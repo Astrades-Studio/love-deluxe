@@ -69,6 +69,8 @@ func _ready() -> void:
 	GlobalGameEvents.fuel_depleted.connect(_on_fuel_depleted)
 	GlobalGameEvents.destination_reached.connect(_on_destination_reached)
 	GlobalGameEvents.game_started.connect(obstacle_spawner.start_spawning)
+	#Input.emulate_mouse_from_touch = true
+	Input.emulate_touch_from_mouse = true
 	
 	GameGlobals.level = self
 	set_up_level()

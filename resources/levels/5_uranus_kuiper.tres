@@ -14,7 +14,7 @@
 script = ExtResource("7_1c5iv")
 level_no = 5
 level_name = &"Uranus-Kuiper"
-target_distance = 120000
+target_distance = 160000
 target_planet_name = "Kuiper"
 obstacle_list = Dictionary[ExtResource("1_cgu1c"), int]({
 ExtResource("2_goi13"): 12,

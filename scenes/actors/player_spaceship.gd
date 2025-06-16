@@ -49,32 +49,18 @@ func _process(_delta: float) -> void:
 	global_position.x = clamp(position.x, 40, 216)
 	
 	power_up_activation()
-	
-	var move_axis = Input.get_action_strength("move_left") - Input.get_action_strength("move_right")
-	
+
 	if dodging:
 		accumulated_x_movement = 0.0
 		return
 	
-	if move_axis > 0:
-		accumulated_x_movement -= horizontal_speed
-		position.x -= horizontal_speed
-		
-		if last_movement != -1:
-			accumulated_x_movement = 0.0 # Reset if changing direction
-			last_movement = -1 # Left, tracked for rolling
+	var move_axis := Input.get_action_strength("move_left") - Input.get_action_strength("move_right")
 	
-	elif move_axis < 0:
-		accumulated_x_movement += horizontal_speed
-		position.x += horizontal_speed
-		
-		if last_movement != 1:
-			accumulated_x_movement = 0.0 # Reset if changing direction
-			last_movement = 1 # Right, tracked for rolling
+	if !is_zero_approx(move_axis):
+		_handle_horizontal_movement(move_axis)
 	else:
-		# If no horizontal movement, reset accumulated movement
-		accumulated_x_movement = 0.0
-	
+		_handle_horizontal_movement(move_direction)
+
 	# Track how long the player has been moving horizontally
 	# Apply a tilt effect based on the last movement
 	# Rotate the sprite to a maximum of 30 degrees
@@ -89,36 +75,62 @@ func _process(_delta: float) -> void:
 		current_level.decelerate()
 
 
+var move_direction : float = 0.0
 func _unhandled_input(event: InputEvent) -> void:
 	if !current_level.driving:
 		return
-	if event is InputEventScreenTouch or event is InputEventScreenDrag:
-		_handle_touch_input(event)
+
+	if event is InputEventKey or event is InputEventJoypadButton:
+		move_direction = event.get_action_strength("move_left") - event.get_action_strength("move_right")
+	
+	elif event is InputEventScreenTouch or event is InputEventScreenDrag:
+		move_direction = _handle_touch_input(event)
+
+	if event is InputEventMouseButton or event is InputEventMouseMotion:
+		move_direction = _handle_touch_input(event)
+
 	if event.is_action_pressed("action_dodge"):
 		_dodge()
 
 
-func _handle_touch_input(event: InputEvent) -> void:
-	var screen_width = get_viewport().size.x
-	var touch_position = event.position.x
-	
-	if touch_position < screen_width / 2:
-		# Touch on the left side of the screen
+func _handle_horizontal_movement(move_axis: float) -> float:
+	if move_axis > 0:
 		accumulated_x_movement -= horizontal_speed
 		position.x -= horizontal_speed
-		
-		if last_movement != -1:
-			accumulated_x_movement = 0.0 # Reset if changing direction
-			last_movement = -1 # Left, tracked for rolling
-	
-	elif touch_position >= screen_width / 2:
-		# Touch on the right side of the screen
-		accumulated_x_movement += horizontal_speed
-		position.x += horizontal_speed
 		
 		if last_movement != 1:
 			accumulated_x_movement = 0.0 # Reset if changing direction
 			last_movement = 1 # Right, tracked for rolling
+	
+	elif move_axis < 0:
+		accumulated_x_movement += horizontal_speed
+		position.x += horizontal_speed
+		
+		if last_movement != -1:
+			accumulated_x_movement = 0.0 # Reset if changing direction
+			last_movement = -1 # Left, tracked for rolling
+	else:
+		# If no horizontal movement, reset accumulated movement
+		accumulated_x_movement = 0.0
+	
+	return accumulated_x_movement
+
+
+func _handle_touch_input(event: InputEvent) -> float:
+	var screen_width = GameGlobals.BOTTOM_RIGHT.x
+	var touch_position = event.position.x
+	
+	var move_axis := 0.0
+	
+	if touch_position < screen_width / 2:
+		move_axis = -1.0  # Left side of the screen
+	elif touch_position > screen_width / 2:
+		move_axis = 1.0   # Right side of the screen
+	
+	if event.is_released():
+		move_axis = 0.0   # No movement when touch is released
+
+	return _handle_horizontal_movement(move_axis)
 
 
 func _dodge() -> void:

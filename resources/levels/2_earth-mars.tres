@@ -15,7 +15,7 @@
 script = ExtResource("8_xkmha")
 level_no = 2
 level_name = &"Earth-Mars"
-target_distance = 120000
+target_distance = 130000
 target_planet_name = "Mars"
 planet_shader = ExtResource("7_80xkk")
 obstacle_list = Dictionary[ExtResource("1_pwa3r"), int]({

@@ -24,7 +24,7 @@ enum LevelNumber {
 	URANUS_KUIPER = 5
 }
 
-var current_level : LevelNumber = LevelNumber.URANUS_KUIPER
+var current_level : LevelNumber = LevelNumber.VENUS_EARTH
 
 
 func load_next_level():

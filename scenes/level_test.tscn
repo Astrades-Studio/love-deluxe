@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cq2c3o2650s8s" path="res://scenes/level.gd" id="1_yvmk3"]
 [ext_resource type="PackedScene" uid="uid://egpkxr1c4eiv" path="res://scenes/background_layer.tscn" id="2_blca8"]
-[ext_resource type="Resource" uid="uid://qm7v10an3vlb" path="res://resources/levels/5_uranus_kuiper.tres" id="2_e0wnd"]
+[ext_resource type="Resource" uid="uid://ccb52chsmn77m" path="res://resources/levels/1_venus-earth.tres" id="2_nuslc"]
 [ext_resource type="Texture2D" uid="uid://bfny3ygk7m5on" path="res://scenes/actors/obstacles/t_obstacle_asteroid_small.png" id="5_n44uc"]
 [ext_resource type="PackedScene" uid="uid://jtsrok2xct5h" path="res://scenes/actors/player_spaceship.tscn" id="5_vkcgd"]
 [ext_resource type="Texture2D" uid="uid://c7iq4cttq3wsd" path="res://addons/plenticons/icons/16x/2d/spark-full-gray.png" id="11_n44uc"]
@@ -102,7 +102,7 @@ metadata/_custom_type_script = "uid://ch4on6s5v0bgq"
 
 [node name="LevelTest" type="Node2D" groups=["Level"]]
 script = ExtResource("1_yvmk3")
-level_data = ExtResource("2_e0wnd")
+level_data = ExtResource("2_nuslc")
 
 [node name="BackgroundLayer" parent="." instance=ExtResource("2_blca8")]
 
