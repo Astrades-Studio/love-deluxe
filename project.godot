@@ -51,7 +51,8 @@ window/size/viewport_width=256
 window/size/viewport_height=240
 window/size/window_width_override=768
 window/size/window_height_override=720
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
+window/stretch/scale_mode="integer"
 mouse_cursor/custom_image="uid://bv8h7bhgoys1q"
 
 [dotnet]
@@ -60,7 +61,7 @@ project/assembly_name="New Template"
 
 [editor]
 
-movie_writer/movie_file="E:/Gamedev/Projects/Love_Deluxe_Video.avi"
+movie_writer/movie_file="E:/Gamedev/Projects/Love Deluxe/Love_Deluxe_Video.avi"
 movie_writer/disable_vsync=true
 
 [editor_plugins]

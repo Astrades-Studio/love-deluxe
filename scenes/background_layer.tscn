@@ -1,13 +1,18 @@
-[gd_scene load_steps=74 format=3 uid="uid://egpkxr1c4eiv"]
+[gd_scene load_steps=76 format=3 uid="uid://egpkxr1c4eiv"]
 
 [ext_resource type="Texture2D" uid="uid://qxq1idrxyih3" path="res://assets/images/t_background_hole.png" id="1_81jil"]
 [ext_resource type="Script" uid="uid://c4xm8v1mr0w6l" path="res://scenes/background_layer.gd" id="1_tc8ov"]
+[ext_resource type="Shader" uid="uid://djc5a1nkok7n2" path="res://scenes/background_layer.gdshader" id="2_hus22"]
 [ext_resource type="Texture2D" uid="uid://5o241fms1qw4" path="res://assets/sprites/spaceShooter2_spritesheet.png" id="2_qgrx8"]
 [ext_resource type="Script" uid="uid://bcs5rk520bxx7" path="res://scenes/kuiper_belt.gd" id="3_630v2"]
 [ext_resource type="Texture2D" uid="uid://dwj5fcylywix0" path="res://assets/sprites/sun_spritesheet.png" id="3_ghj2a"]
 [ext_resource type="Texture2D" uid="uid://brjn5qgrdvl6x" path="res://scenes/actors/obstacles/t_obstacle_asteroid_large.png" id="4_hus22"]
 [ext_resource type="Texture2D" uid="uid://bfny3ygk7m5on" path="res://scenes/actors/obstacles/t_obstacle_asteroid_small.png" id="5_p1w5t"]
 [ext_resource type="Material" uid="uid://cqhxijv70e7c7" path="res://resources/planets/uranus_planet.tres" id="5_r4uss"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p1w5t"]
+shader = ExtResource("2_hus22")
+shader_parameter/VIEWPORT_SIZE = Vector2(1280, 720)
 
 [sub_resource type="Gradient" id="Gradient_vbogn"]
 interpolation_mode = 2
@@ -459,12 +464,14 @@ script = ExtResource("1_tc8ov")
 
 [node name="Background" type="Sprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_p1w5t")
 position = Vector2(128, 114)
 scale = Vector2(13.6809, 10.6585)
 texture = SubResource("GradientTexture2D_d5kir")
 metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
